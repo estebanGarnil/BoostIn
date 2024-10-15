@@ -161,10 +161,10 @@ def suivi_campagne(request, id_campagne):
     pro_exe = automatisation.prochaine_execution('C'+str(id_campagne))
 
     #test
-    if pro_exe != None:
-        LDManager._execute_task('C'+str(id_campagne))
-    else:
-        print('pas lancé')
+    # if pro_exe != None:
+    #     LDManager._execute_task('C'+str(id_campagne))
+    # else:
+    #     print('pas lancé')
 
     return render(request, 'campagnes/suivi.html', {'con' : con, 'campagne' : campagne, 'prospect' : prospect_item, 'stat_con' : nb_acc, 'stat_mes' : nb_mes, "error" : err, "pro" : pro_exe, 'date_creation' : date_creation})
 
