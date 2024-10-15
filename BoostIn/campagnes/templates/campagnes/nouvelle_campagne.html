@@ -1,0 +1,21 @@
+{% extends "campagnes/base.html" %}
+
+{% block title %} nouvelle campagne {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="container-form">
+
+        <h1>{{ titre }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{{ validation }}</button>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

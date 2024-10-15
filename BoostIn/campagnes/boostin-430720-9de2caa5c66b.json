@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "boostin-430720",
+  "private_key_id": "9de2caa5c66b1661218fc1556ebc0bc3a0d7750c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDd1s0WAJ5DwkuR\nd2embSvaFFKorrV/jc187y+3oQKuGN3Pjr8Yvy9HDoN0H7WlXv6ZT8BfLFcyG5Sl\nnaYvHKYrp0OXtw5D70s9D2RiSksTf4qhZTfpx4Swyd0TAvM36TcP4aG2n3HvN/43\nG1mBK7eSXUCPOhZhWeIj3+gqe0kXrfAqiJLJm+fPtb/Waqeln42kBsmnUNWf8Avc\nzSNfBQghtAzhl0HVut9ZhSRS3WvqVnKC4HSLiYL5e1GLcx3PBIuWIFJ9i5Xse5EH\nBX8hEgLmRjK6s67Wl4QW+RRH+06yEanFE62llcK0ZNp6yXngimPpFiilqKHTxUNT\npslZ1QDRAgMBAAECggEAIDRQrYMFdry8D7AP4f8zQIN2xHooaw4A6MQoXzYGl5OQ\nj9MfNs56ZIxc1PzNd+Zke4kyWh6rweBzId/TAj/cd7XegCXY8k/I0mJrpkE2yOvZ\nCjkRduS6BJgpedsRx+oZTjrpKQPYnGu6gfF8et4H1j2nY6OBIDzWMXMN1yzynXcj\ncpqtMrwLWe39mOdpk4xMwjxS6cIZcCY39MtejWkkhfXsyzurRtpyGanjwZf71BUG\ngUa0s/hN8iDPFaoAoolAa/56nyltwVUzm2xlNNapDHBjwJsO8PCEha43iABwWId9\nA+P3w/0pFej91/cMU6DxZD1nVTuLivoFeoQm8o/nYQKBgQD+LH5rQMGuigv8Du/M\nF/NcWNpWqiZg/n18MsYyHW0XUuRUm3n6OAB4yNWeT2MxfeWYkC90FalVR7WHN80j\na8rkKss4VON4BJ7iDFyTJb4ULqB42B5fjLE8s086k36+QZzg7fQ9x5vSvUn6pFkX\n9i4GQVbNjYOHF3882TPY8ASe9QKBgQDfbtVd520w/DkIvxyBmht5f+I08AH0Ri+O\n4iy9CMXLDbWnISF2sMlIKBGXP5imRJgstUFjn8VTrS2RUs/Wo8DCPVmNYycYuAxW\ntHwF1XIEssPpUtIGlYZXJuLO76FrHn/vw/3rUiOPxK2HLYrMSlVXpmF1m7M1ymKJ\nBSQq8f947QKBgQCJ+qtyG8hIsOYKoi0pFUNmOVHlxB5rfxut5X5UTEchZz1OdMyF\nugr/hr74Xs5RWq/d3z/ze6LeCbyQuAkjlmug615AqUyGpbN+sQk8VDvYhutUTrZG\nVoEMm6aB/PnL3KCGNoblVsvPXjSf3MIE0P5xJN0zXwQsvOO0q5CKztkjVQKBgQDF\nw7xn2af0a8uvyjjZHiajbGY0pRuVs2n09ozS5Sjtibz3qYONIv2GOLEZRtk+kgh/\nyg+OtqRaZDapIruEKH09cEALvW+lmYKSXD5Ki5rYPcLaiswLt92o1mp67+/YeK6U\n8s2VtKZ1YoiV1eG84S6Y3lP1XVNKkVCWJ07UFE8kIQKBgQDe94bFaGkXndBkFylf\nOPjoYKMvgDFPzLdHksInU7lGH8ZFUinVs/b1xRbwApmb5LbctGY7AqFcmF0k+G5O\n+zRxqdveyVQK3NTR3QKDw/Z6xM9yAbTBfV+U1o6Svn/cMp0kpFygPj6E9deCagaC\nZsvtcHuFcKIx0tOc/tHNXBYDkQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "boostin@boostin-430720.iam.gserviceaccount.com",
+  "client_id": "116246699414686528043",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/boostin%40boostin-430720.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

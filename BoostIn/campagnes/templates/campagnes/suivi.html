@@ -1,0 +1,79 @@
+{% extends 'campagnes/navbar.html' %}
+
+{% block title %} suivi {% endblock %}
+{% load filtre %}
+{% load static %}
+
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'campagnes/css/suivi.css' %}">
+{% endblock %}
+
+{% block content-container %}
+<div class='container'>
+    <div class="titre-suivi">
+        <div class="info-suivi">
+            <h1>{{ con.name }}</h1>
+            <h2>{{ campagne.name }}</h2>
+            <p id="h-exe">prochaine execution le : {{ pro }}</p>
+        </div>
+
+        
+        <label class="switch">
+            <input type="checkbox" id="startbutton">
+            <span class="slider round"></span>
+        </label>
+        <div id="loader" class="loader hidden"></div>
+
+    </div>
+
+    {% for err in error %}
+    <div class="error-container">
+        <p>{{ err }}</p>
+    </div>
+    {% endfor %}
+
+    <div class="stat-container">
+        <div class="graph-container">
+            <canvas id="nombre-connexion"></canvas>
+            <canvas id="nombre-message"></canvas>    
+        </div>
+
+        <div class="slider-container">
+            <input type="range" id="dateSlider" min="0" max="0" step="1" value="0">
+            <p>Date sélectionnée : <span id="selectedDate"></span></p>
+        </div>
+    
+    </div>
+
+    <div class="list-prospect">
+        <table>
+            <tr>
+                <th class="p-name">nom</th>
+                <th class="p-link">profil linkedin</th>
+                <th class="p-statutes">statut</th>
+                <th class="delete">effacer</th>
+            </tr>
+            {% for p_item in prospect %}
+            <tr>
+                <td class="p-name">{{p_item.name}}</td>
+                <td class="p-link">{{p_item.linkedin_profile}}</td>
+                <td class="p-statutes">{{p_item.statutes.statutes}}</td>
+                <td class="delete"><a href="{% url 'delete_prospect' p_item.id %}" class="i4"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+</div>
+
+<script type="text/javascript">var donnees_stat_con = {{ stat_con|safe }};</script>
+<script type="text/javascript">var donnees_stat_mes = {{ stat_mes|safe }};</script>
+<script type="text/javascript">
+    // Récupération de la date passée par Django au format ISO 8601
+    const startDate = new Date("{{ date_creation }}");
+</script>
+<script src="{% static 'campagnes/js/script.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% endblock %}

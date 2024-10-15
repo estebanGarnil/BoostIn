@@ -1,0 +1,297 @@
+/* BOUTON ON OFF */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+.switch input { 
+opacity: 0;
+width: 0;
+height: 0;
+}
+
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+.slider:before {
+position: absolute;
+content: "";
+height: 26px;
+width: 26px;
+left: 4px;
+bottom: 4px;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+input:checked + .slider {
+background-color: #2196F3;
+}
+
+input:focus + .slider {
+box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+-webkit-transform: translateX(26px);
+-ms-transform: translateX(26px);
+transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+border-radius: 34px;
+}
+
+.slider.round:before {
+border-radius: 50%;
+}
+
+#h-exe {
+    display: block;
+}
+
+
+
+.titre-suivi, .stat-container, .list-prospect, .error-container {
+    background-color: #fff; /* Fond blanc pour chaque élément */
+    border-radius: 12px; /* Coins arrondis */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Ombre légère pour un effet de relief */
+    box-sizing: border-box;
+
+    margin-top: 2%;
+    width: 80%;
+}
+
+.error-container p{
+    color: #ff3030;
+} 
+
+.titre-suivi, .error-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding: 2%;
+}
+
+#nombre-connexion, #nombre-message {
+    width: 40% !important;
+    height: 40% !important;
+}
+
+.graph-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2%;
+}
+
+.stat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-prospect {
+    margin-bottom: 2%;
+    border-collapse: collapse;
+}
+
+.list-prospect th, .list-prospect td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle; /* Aligner le contenu verticalement au centre */
+}
+
+.p-name {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    width: 20%; /* Chaque colonne prend 25% de la largeur (4 colonnes) */
+    vertical-align: middle; /* Aligner le contenu verticalement au centre */
+
+    /* width: 20%; */
+}
+.p-link {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    width: 60%; /* Chaque colonne prend 25% de la largeur (4 colonnes) */
+    vertical-align: middle; /* Aligner le contenu verticalement au centre */
+
+    /* width: 50%; */
+}
+.p-statutes {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    width: 20%; /* Chaque colonne prend 25% de la largeur (4 colonnes) */
+    vertical-align: middle; /* Aligner le contenu verticalement au centre */
+
+    /* width: 20%; */
+}
+.p-delete {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    justify-content: center;
+    width: 20%; /* Chaque colonne prend 25% de la largeur (4 colonnes) */
+    vertical-align: middle; /* Aligner le contenu verticalement au centre */
+
+    /* width: 10%; */
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-campagne {
+    width: 100%; /* Prendre toute la largeur pour aligner les éléments */
+    margin-top: 0.2%;
+    display: flex;
+    justify-content: center; /* Centrer les éléments horizontalement */
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px; /* Espace entre les éléments */
+}
+
+
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.nav-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    padding-bottom: 1%;
+}
+
+.nav-item svg {
+    margin-top: 5px;
+}
+
+.message-item {
+    width: 80%;
+    margin: 20px 0; /* Espacement vertical entre les éléments */
+    padding: 20px;
+    background-color: #fff; /* Fond blanc pour chaque élément */
+    border-radius: 12px; /* Coins arrondis */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Ombre légère pour un effet de relief */
+    display: flex;
+    flex-direction: column; /* Affiche les éléments en colonne */
+    text-decoration: none;
+    overflow: hidden; /* Empêche le dépassement du contenu */
+}
+
+
+
+
+/* Style each message item */
+.message-item {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Add hover effect to each message item */
+.message-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Style the message title */
+.message-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+/* Style the message paragraph */
+.message-item p {
+    margin: 0 0 15px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Style the link */
+.message-item a {
+    font-size: 0.9rem;
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Add hover effect to the link */
+.message-item a:hover {
+    text-decoration: underline;
+}
+
+.slider-container {
+    text-align: center;
+    width: 90%;
+}
+
+input[type=range] {
+    width: 100%;
+    margin: 20px 0;
+}
+
+
+/* Loader styling */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    animation: spin 2s linear infinite;
+    display: inline-block;
+    margin-left: 12px; /* Just for positioning beside the switch */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .hidden {
+    display: none;
+  }

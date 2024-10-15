@@ -1,0 +1,70 @@
+{% extends 'campagnes/base.html' %}
+
+{% block title %} detail {% endblock %}
+{% load filtre %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'campagnes/css/detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<style>
+    </style>
+
+<div class="container">
+    <div class="left-container">
+        <div class="stat-container">
+          <canvas id="nombre-connexion"></canvas>
+          <canvas id="nombre-message"></canvas>
+        </div>
+    </div>
+    <div class="right-container">
+      <div class="container-form">
+
+          <h1>{{ con.name }}</h1>
+          <h2>{{ campagne.name }}</h2>
+
+          <label class="switch">
+              <input type="checkbox" id="startbutton">
+              <span class="slider round"></span>
+          </label>
+            
+          <h4>Token de connexion</h4>
+          <div class="scrollable-text">{{ con.token|remove_first }}</h4></div>
+
+          <h4>Jour d'activité : {{ j1 }} à {{ j2 }}</h4><h4>Heure d'activité : {{ h1 }}h - {{ h2 }}h</h4>
+
+          {% for m_item in message_item %}
+              <div class="message-item">
+                  {% if m_item.0 is not None %}
+                  <h3>Message n°{{ m_item.1 }}</h3>
+                  <p>{{ m_item.0.corp }}</p>
+                  <a href="{% url 'update_message' m_item.0.id m_item.1 m_item.2 %}">Modifier ce message</a>
+                  {% else %}
+                  <h3>Message n°{{ m_item.1 }}</h3>
+                  <p>Ce message n'existe pas encore</p>
+                  <a href="message/{{m_item.2.id_campagne}}/{{m_item.2.id_con}}/{{m_item.2.step_message}}/{{m_item.2.nombre_message}}">Creer le message</a>
+                  {% endif %}
+                  </div>
+          {% endfor %}
+
+          <div class="liens"><a href="{% url 'update' con.id %}">modifier les informations</a><a href="{% url 'delete_campagne' con.id %}">Supprimer la campagne</a></div>
+      </div>
+      <div class="p-container">
+          {% for p_item in prospect %}
+          <div class="p-item">
+              <h4 class="i1">{{p_item.name}}</h4>
+              <p class="i2">{{p_item.linkedin_profile}}</p>
+              <h4 class="i3">{{p_item.statutes.statutes}}</h4>
+              <a href="{% url 'delete_prospect' p_item.id %}" class="i4"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></a>
+          </div>
+          {% endfor %}
+      </div>
+      
+    </div>
+</div>
+
+
+
+{% endblock %}

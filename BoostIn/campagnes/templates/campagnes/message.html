@@ -1,0 +1,30 @@
+{% extends "campagnes/navbar.html" %}
+
+{% block title %} reglages {% endblock %}
+{% load filtre %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'campagnes/css/suivi.css' %}">
+{% endblock %}
+
+{% block content-container %}
+
+{% for m_item in message_item %}
+<div class="content-container">
+    <div class="message-item">
+        {% if m_item.0 is not None %}
+        <h3>Message n°{{ m_item.1 }}</h3>
+        <p>{{ m_item.0.corp }}</p>
+        <a href="{% url 'maj_message_edit' step=m_item.1 id_campagne=m_item.0.idcon.id id_message=m_item.0.id%}">Modifier ce message</a>
+        {% else %}
+        <h3>Message n°{{ m_item.1 }}</h3>
+        <p>Ce message n'existe pas encore</p>
+        <a href="{% url 'maj_campagne_edit' step=m_item.2.step_message id_campagne=m_item.2.id_con %}">Creer le message</a>
+        {% endif %}
+        </div>
+    {% endfor %}
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,267 @@
+/* Style de la barre de navigation */
+nav {
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+/* Liste des éléments de navigation */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+/* Style des éléments de la liste */
+nav ul li {
+    display: inline;
+    margin-right: 40px; 
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+
+/* Style des liens */
+nav ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #000; /* Couleur noire */
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+/* Style pour le lien actif */
+nav ul li a:hover, nav ul li a:focus {
+    color: #333; /* Couleur noire légèrement plus claire au survol */
+    border-bottom: 2px solid #333; /* Ligne de soulignement au survol */
+}
+
+body {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.campagneitem {
+    width: 80%;
+    margin: 20px 0; /* Espacement vertical entre les éléments */
+    padding: 20px;
+    background-color: #fff; /* Fond blanc pour chaque élément */
+    border-radius: 12px; /* Coins arrondis */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Ombre légère pour un effet de relief */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center; /* Centre verticalement le contenu */
+    justify-content: space-between; /* Espace entre les éléments */
+    text-decoration: none;
+}
+
+.campagneitem h2, .campagneitem h3 {
+    margin: 0;
+}
+
+.campagneitem h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.campagneitem h3 {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.campagneitem a {
+    text-decoration: none;
+    color: #000; /* Couleur bleue pour les liens */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.campagneitem.new a {
+    margin-top: 0px;
+    justify-content: space-between; /* Assure la distribution des éléments avec espace entre */
+}
+
+.campagneitem a:hover h2 {
+    color: #4a148c; /* Couleur du texte au survol */
+}
+
+.campagneitem svg {
+    fill: #3f51b5; /* Couleur de l'icône */
+    width: 40px; /* Largeur de l'icône */
+    height: 40px; /* Hauteur de l'icône */
+}
+
+
+.container-form, .container-form .message-item, .p-container {
+    width: 80%;
+    margin: 20px 0; /* Espacement vertical entre les éléments */
+    padding: 20px;
+    background-color: #fff; /* Fond blanc pour chaque élément */
+    border-radius: 12px; /* Coins arrondis */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Ombre légère pour un effet de relief */
+    display: flex;
+    flex-direction: column; /* Affiche les éléments en colonne */
+    text-decoration: none;
+    overflow: hidden; /* Empêche le dépassement du contenu */
+}
+
+
+.container-form .message-item {
+    width: 95%;
+    margin-bottom: 0px;
+}
+
+h1, h2, h3, h4, p {
+    margin: 0px;
+}
+
+.container-form > div, .p-container > div{
+    display: flex; /* Assurez-vous que les div enfants utilisent aussi flex */
+    flex-direction: row; /* Les éléments dans chaque div seront alignés en ligne */
+}
+
+.scrollable-text {
+    white-space: nowrap;       /* Empêche le texte de se casser en plusieurs lignes */
+    overflow-x: auto;          /* Ajoute une barre de défilement horizontale si nécessaire */
+    text-overflow: ellipsis;   /* Affiche '...' si le texte dépasse et overflow est 'hidden' */
+    max-width: 100%;           /* Fixe une largeur maximale, par exemple 100% du parent */
+    box-sizing: border-box;    /* Inclut le padding dans la largeur totale */
+}
+
+.container-form h2, .container-form h4, .container-form p{
+    margin-top: 25px;
+}
+
+.container-form a {
+    text-decoration: none;
+    color: #000; /* Couleur bleue pour les liens */
+    margin-top: 25px;
+}
+
+.container-form .liens, .p-container{
+    margin-top: 25px;
+    display: flex;                 /* Active Flexbox */
+    justify-content: space-between; /* Espace les éléments de manière égale */
+    align-items: center;           /* Aligne verticalement les éléments au centre */
+}
+
+.scrollable-text::-webkit-scrollbar {
+    height: 4px; /* Réduit la hauteur de la barre de défilement */
+    background-color: transparent; /* Couleur de fond transparente */
+}
+
+/* Style de la "thumb" (la partie que l'on déplace) */
+.scrollable-text::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Couleur de la thumb avec transparence */
+    border-radius: 2px; /* Arrondi pour une apparence plus douce */
+}
+
+
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+select, input[type="submit"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+select {
+    background-color: #f9f9f9;
+    color: #333;
+    appearance: none; /* Enlève l'apparence par défaut */
+    -webkit-appearance: none; /* Pour Safari */
+    -moz-appearance: none; /* Pour Firefox */
+}
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+/* Flèche personnalisée pour les sélecteurs */
+select::-ms-expand {
+    display: none; /* Pour IE10+ et Edge */
+}
+.container-form::after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: calc(50% + 20px);
+    margin-top: -10px;
+    pointer-events: none;
+    border-width: 10px 5px 0;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.container-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+}
+
+.container-form button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.container-form button:active {
+    background-color: #004494;
+    transform: translateY(0);
+}
+
+
+/* The switch - the box around the slider */

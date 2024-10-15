@@ -1,0 +1,29 @@
+{% extends "campagnes/navbar.html" %}
+
+{% block title %} reglages {% endblock %}
+{% load filtre %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'campagnes/css/suivi.css' %}">
+{% endblock %}
+
+
+{% block content-container %}
+
+<div class="container">
+    <div class="container-form">
+
+        <h1>{{ titre }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{{ validation }}</button>
+            <a href="{% url 'delete_campagne' con.id %}">Supprimer la campagne</a>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

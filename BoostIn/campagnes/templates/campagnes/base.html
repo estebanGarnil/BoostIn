@@ -1,0 +1,28 @@
+<!-- base.html -->
+{% load static %}
+
+
+<html>
+<head>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Application{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'campagnes/css/style.css' %}">
+    {% block header %}
+    {% endblock %} 
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'campagnes' %}">Campagnes</a></li>
+            <li><a href="#param">Parametrage</a></li>
+            <li><a href="#apropos">Teams</a></li>
+        </ul>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
