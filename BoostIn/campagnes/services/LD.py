@@ -75,6 +75,10 @@ class LDManager:
         return cls._instance 
 
     def attribution_horaire(self, h1 : int, h2 : int, j1:str, j2:str, _id : str, nb_exec : int=None):
+        """
+        _id[0] == 'C' : correspond a LDC
+        _id[1:4] == 'CON' : correspond a LDCon
+        """
         JOUR = {'1' : 'mon', '2' : 'tue', '3' : 'wed', '4' : 'thu', '5' : 'fri', '6' : 'sat', '7' : 'sun'}
         day = JOUR[j1]+'-'+JOUR[j2]
         if _id[0] == 'C':            
@@ -281,7 +285,6 @@ class LDC:
 
         p = Prospects.objects.filter(idcon__id=self.con.ID, statutes__statutes='not sent').first()
         if self.__navigateur.start(p.linkedin_profile):
-            print('essai')
             ## cas de base -> le prospect à été ajouté
             etat : Etat = self.__navigateur.connexion()
             print(p.statutes.statutes)
