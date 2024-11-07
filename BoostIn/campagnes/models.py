@@ -57,7 +57,7 @@ class Statutes(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
     statutes = models.CharField(db_column='statutes', max_length=8)  # Field name made lowercase.
     changedate = models.DateField(db_column='changeDate', auto_now_add=True)  # Field name made lowercase.
-    id_prospect = models.IntegerField(db_column='id_prospect')  # Field name made lowercase.
+    id_prospect = models.IntegerField(db_column='id_prospect', null=True, blank=True)  # Field name made lowercase.
 
     class Meta:
         db_table = 'statutes'

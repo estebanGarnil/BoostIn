@@ -1,0 +1,17 @@
+Metadata-Version: 2.0
+Name: bigO
+Version: 0.2
+Summary: Symbolic representation of big-O notation.
+Home-page: http://github.com/perimosocordiae/bigO
+Author: CJ Carey
+Author-email: perimosocordiae@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Requires-Dist: sympy (>=0.7.5)
+
+UNKNOWN
+
+

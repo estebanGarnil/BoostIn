@@ -12,7 +12,7 @@ def fetch_google_sheet_data(sheet_id):
              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 
     # Charger les credentials
-    creds = ServiceAccountCredentials.from_json_keyfile_name('campagnes/boostin-430720-9de2caa5c66b.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('campagnes/boostin-430720-5e3a7e10c049.json', scope)
 
     # Autoriser et accéder à la feuille
     client = gspread.authorize(creds)

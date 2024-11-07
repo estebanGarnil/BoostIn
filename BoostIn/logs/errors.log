@@ -1,0 +1,1098 @@
+[2024-11-06 10:04:13,041] ERROR [django.request:241] Internal Server Error: /campagnes/nouvelle_campagne/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 207, in nouvelle_campagne
+    id_campagne = f.insert_con(request)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 68, in insert_con
+    idcampagne=Campagne.objects.get(id=self.form.cleaned_data['type']),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+campagnes.models.Campagne.DoesNotExist: Campagne matching query does not exist.
+[2024-11-06 10:25:30,972] ERROR [django.request:241] Internal Server Error: /campagnes/nouvelle_campagne/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 208, in nouvelle_campagne
+    f.insert_prospect()
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 105, in insert_prospect
+    prospect_data = fetch_google_sheet_data(id_sheet)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 19, in fetch_google_sheet_data
+    sheet = client.open_by_key(sheet_id).sheet1
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/client.py", line 155, in open_by_key
+    spreadsheet = Spreadsheet(self.http_client, {"id": key})
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/http_client.py", line 114, in request
+    response = self.session.request(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/auth/transport/requests.py", line 533, in request
+    self.credentials.before_request(auth_request, method, url, request_headers)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/auth/credentials.py", line 230, in before_request
+    self._blocking_refresh(request)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/auth/credentials.py", line 193, in _blocking_refresh
+    self.refresh(request)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/oauth2/service_account.py", line 446, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/oauth2/_client.py", line 304, in jwt_grant
+    response_data = _token_endpoint_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/oauth2/_client.py", line 275, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/oauth2/_client.py", line 68, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+[2024-11-06 10:25:35,404] ERROR [django.request:241] Internal Server Error: /campagnes/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 73, in callproc
+    return self.cursor.callproc(procname, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 322, in callproc
+    self._query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1305, 'PROCEDURE LDDB.VerifierErreur does not exist')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 100, in campagnes
+    cursor.callproc('VerifierErreur', [c.id])
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 69, in callproc
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 73, in callproc
+    return self.cursor.callproc(procname, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 322, in callproc
+    self._query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1305, 'PROCEDURE LDDB.VerifierErreur does not exist')
+[2024-11-06 10:28:58,952] ERROR [django.request:241] Internal Server Error: /campagnes/nouvelle_campagne/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 208, in nouvelle_campagne
+    f.insert_prospect()
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 105, in insert_prospect
+    prospect_data = fetch_google_sheet_data(id_sheet)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 19, in fetch_google_sheet_data
+    sheet = client.open_by_key(sheet_id).sheet1
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/client.py", line 155, in open_by_key
+    spreadsheet = Spreadsheet(self.http_client, {"id": key})
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/gspread/http_client.py", line 114, in request
+    response = self.session.request(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/auth/transport/requests.py", line 533, in request
+    self.credentials.before_request(auth_request, method, url, request_headers)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/auth/credentials.py", line 230, in before_request
+    self._blocking_refresh(request)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/auth/credentials.py", line 193, in _blocking_refresh
+    self.refresh(request)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/oauth2/service_account.py", line 446, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+                              ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/oauth2/_client.py", line 304, in jwt_grant
+    response_data = _token_endpoint_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/oauth2/_client.py", line 275, in _token_endpoint_request
+    _handle_error_response(response_data, retryable_error)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/google/oauth2/_client.py", line 68, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'})
+[2024-11-06 11:01:44,040] ERROR [django.request:241] Internal Server Error: /campagnes/nouvelle_campagne/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 208, in nouvelle_campagne
+    f.insert_prospect()
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 105, in insert_prospect
+    prospect_data = fetch_google_sheet_data(id_sheet)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 15, in fetch_google_sheet_data
+    creds = ServiceAccountCredentials.from_json_keyfile_name('campagnes/boostin-430720-9de2caa5c66b.json', scope)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/oauth2client/service_account.py", line 219, in from_json_keyfile_name
+    with open(filename, 'r') as file_obj:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'campagnes/boostin-430720-9de2caa5c66b.json'
+[2024-11-06 11:02:45,342] ERROR [django.request:241] Internal Server Error: /campagnes/nouvelle_campagne/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.IntegrityError: (1048, "Column 'id_prospect' cannot be null")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 208, in nouvelle_campagne
+    f.insert_prospect()
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 123, in insert_prospect
+    statut_prospect.save()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/base.py", line 822, in save
+    self.save_base(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/base.py", line 909, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/base.py", line 1071, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/base.py", line 1112, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1823, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1048, "Column 'id_prospect' cannot be null")
+[2024-11-06 11:45:49,472] ERROR [django.request:241] Internal Server Error: /campagnes/c/5
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.IntegrityError: (1048, "Column 'idcon' cannot be null")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 144, in suivi_campagne
+    e.save()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/base.py", line 822, in save
+    self.save_base(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/base.py", line 909, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/base.py", line 1071, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/base.py", line 1112, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1823, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1048, "Column 'idcon' cannot be null")
+[2024-11-06 15:11:36,172] ERROR [django.request:241] Internal Server Error: /campagnes/a/stop
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 337, in arret_campagne
+    automatisation.stop(id_con)
+  File "/home/esteban/boostIn/BoostIn/campagnes/services/LD.py", line 159, in stop
+    self.objets[str(_id)].stop()
+    ~~~~~~~~~~~^^^^^^^^^^
+KeyError: '5'
+[2024-11-07 09:59:50,639] ERROR [django.request:241] Internal Server Error: /campagnes/c/6
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 161, in suivi_campagne
+    pro_exe = automatisation.prochaine_execution('C'+str(id_campagne))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/services/LD.py", line 122, in prochaine_execution
+    job = self.taches.get_job(_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 600, in get_job
+    return self._lookup_job(job_id, jobstore)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 826, in _lookup_job
+    job = store.lookup_job(job_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/jobstores/sqlalchemy.py", line 73, in lookup_job
+    job_state = connection.execute(selectable).scalar()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+[SQL: SELECT apscheduler_jobs.job_state 
+FROM apscheduler_jobs 
+WHERE apscheduler_jobs.id = %(id_1)s]
+[parameters: {'id_1': 'C6'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[2024-11-07 10:03:16,076] ERROR [django.request:241] Internal Server Error: /campagnes/c/6
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 161, in suivi_campagne
+    pro_exe = automatisation.prochaine_execution('C'+str(id_campagne))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/services/LD.py", line 122, in prochaine_execution
+    job = self.taches.get_job(_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 600, in get_job
+    return self._lookup_job(job_id, jobstore)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 826, in _lookup_job
+    job = store.lookup_job(job_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/jobstores/sqlalchemy.py", line 73, in lookup_job
+    job_state = connection.execute(selectable).scalar()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+[SQL: SELECT apscheduler_jobs.job_state 
+FROM apscheduler_jobs 
+WHERE apscheduler_jobs.id = %(id_1)s]
+[parameters: {'id_1': 'C6'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[2024-11-07 10:08:01,017] ERROR [django.request:241] Internal Server Error: /campagnes/c/6
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 806, in _write_bytes
+    self._sock.sendall(data)
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 161, in suivi_campagne
+    pro_exe = automatisation.prochaine_execution('C'+str(id_campagne))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/services/LD.py", line 122, in prochaine_execution
+    job = self.taches.get_job(_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 600, in get_job
+    return self._lookup_job(job_id, jobstore)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 826, in _lookup_job
+    job = store.lookup_job(job_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/jobstores/sqlalchemy.py", line 73, in lookup_job
+    job_state = connection.execute(selectable).scalar()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 562, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 864, in _execute_command
+    self._write_bytes(packet)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 809, in _write_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+[SQL: SELECT apscheduler_jobs.job_state 
+FROM apscheduler_jobs 
+WHERE apscheduler_jobs.id = %(id_1)s]
+[parameters: {'id_1': 'C6'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[2024-11-07 10:45:15,614] ERROR [django.request:241] Internal Server Error: /auth/connexion/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 649, in connect
+    sock = socket.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 865, in create_connection
+    raise exceptions[0]
+  File "/usr/lib/python3.12/socket.py", line 850, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 146, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3302, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 621, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 716, in connect
+    raise exc
+pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on 'localhost' ([Errno 111] Connection refused)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/urls/resolvers.py", line 686, in resolve
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/urls/resolvers.py", line 738, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/urls/resolvers.py", line 731, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/esteban/boostIn/BoostIn/BoostIn/urls.py", line 27, in <module>
+    path('campagnes/', include('campagnes.urls')),
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/esteban/boostIn/BoostIn/campagnes/urls.py", line 2, in <module>
+    from . import views
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 17, in <module>
+    from .utilitaire import fetch_google_sheet_data, clean_lien, InsertionForm
+  File "/home/esteban/boostIn/BoostIn/campagnes/utilitaire.py", line 6, in <module>
+    from .utils import automatisation
+  File "/home/esteban/boostIn/BoostIn/campagnes/utils.py", line 3, in <module>
+    automatisation = LDManager()
+                     ^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/services/LD.py", line 70, in __new__
+    cls._instance.taches.start()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/background.py", line 35, in start
+    BaseScheduler.start(self, *args, **kwargs)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 173, in start
+    store.start(self, alias)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/jobstores/sqlalchemy.py", line 68, in start
+    self.jobs_t.create(self.engine, True)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/sql/schema.py", line 1284, in create
+    bind._run_ddl_visitor(ddl.SchemaGenerator, self, checkfirst=checkfirst)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3252, in _run_ddl_visitor
+    with self.begin() as conn:
+         ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3242, in begin
+    with self.connect() as conn:
+         ^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3278, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 148, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2442, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 146, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 3302, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 621, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 716, in connect
+    raise exc
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, "Can't connect to MySQL server on 'localhost' ([Errno 111] Connection refused)")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[2024-11-07 10:48:44,369] ERROR [django.request:241] Internal Server Error: /campagnes/c/10
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/views.py", line 161, in suivi_campagne
+    pro_exe = automatisation.prochaine_execution('C'+str(id_campagne))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/campagnes/services/LD.py", line 122, in prochaine_execution
+    job = self.taches.get_job(_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 600, in get_job
+    return self._lookup_job(job_id, jobstore)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/schedulers/base.py", line 826, in _lookup_job
+    job = store.lookup_job(job_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/apscheduler/jobstores/sqlalchemy.py", line 73, in lookup_job
+    job_state = connection.execute(selectable).scalar()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2013, 'Lost connection to MySQL server during query')
+[SQL: SELECT apscheduler_jobs.job_state 
+FROM apscheduler_jobs 
+WHERE apscheduler_jobs.id = %(id_1)s]
+[parameters: {'id_1': 'C10'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+[2024-11-07 10:51:44,319] ERROR [django.request:241] Internal Server Error: /auth/connexion/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (2013, 'Lost connection to MySQL server during query')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/authentication/views.py", line 41, in connexion
+    user = authenticate(request, username=login_input, password=password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/views/decorators/debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 79, in authenticate
+    user = backend.authenticate(request, **credentials)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/backends.py", line 42, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 56, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 645, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (2013, 'Lost connection to MySQL server during query')
+[2024-11-07 10:58:26,135] ERROR [django.request:241] Internal Server Error: /auth/connexion/
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (2013, 'Lost connection to MySQL server during query')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/BoostIn/authentication/views.py", line 41, in connexion
+    user = authenticate(request, username=login_input, password=password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/views/decorators/debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/__init__.py", line 79, in authenticate
+    user = backend.authenticate(request, **credentials)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/backends.py", line 42, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 56, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 645, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 382, in __len__
+    self._fetch_all()
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/django/db/backends/mysql/base.py", line 76, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/esteban/boostIn/envboostin/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (2013, 'Lost connection to MySQL server during query')

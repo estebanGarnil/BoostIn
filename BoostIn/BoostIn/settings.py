@@ -14,10 +14,13 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+dotenv_path = Path(__file__).resolve().parent / ".env"
+load_dotenv(dotenv_path)
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,9 +30,10 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = ['boostin.scrooge.finance', 'localhost', '127.0.0.1', '46.101.19.31']
 
 LOGIN_URL = 'connexion'
 
@@ -84,11 +88,12 @@ WSGI_APPLICATION = 'BoostIn.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lddb',
-        'USER': 'root',
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'NAME': 'LDDB',
+        'USER': 'pybotlddb',
+        'PASSWORD': os.getenv("DATABASE_PASSWORD"),
         'HOST': 'localhost',   # Ou l'adresse IP du serveur MySQL
         'PORT': '3306',        # Le port MySQL, 3306 est le port par défaut
+	'CONN_MAX_AGE': 600,
         'OPTIONS': {
             'charset': 'utf8mb4',
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -133,9 +138,78 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+LOG_FILE = os.path.join(LOG_DIR, 'django.log')
+
+# Créez le dossier et le fichier de log si nécessaire
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+if not os.path.exists(LOG_FILE):
+    with open(LOG_FILE, 'w'):  # Crée un fichier vide
+        pass
+
+import os
+import logging
+from pathlib import Path
+
+# Définir le répertoire de base de votre projet
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+LOGGING = {
+    'version': 1,  # Version du système de logging
+    'disable_existing_loggers': False,  # Ne pas désactiver les loggers existants
+    'formatters': {
+        'verbose': {
+            'format': '[{asctime}] {levelname} [{name}:{lineno}] {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+	'error_file': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'errors.log'),
+            'maxBytes': 1024*1024*5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'verbose',
+        },
+        'info_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'info.log'),
+            'formatter': 'simple',
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        # Logger pour les erreurs
+        'django': {
+            'handlers': ['error_file', 'console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        # Logger pour les informations générales
+        'campagnes': { 
+            'handlers': ['info_file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+

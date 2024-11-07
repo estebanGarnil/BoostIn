@@ -136,12 +136,12 @@ def suivi_campagne(request, id_campagne):
         except ObjectDoesNotExist:
             pass
         i+=1
-    if message_reel == nb_message and 1 in [e.code_err.id for e in Erreur.objects.filter(idcon=con, etat=0)]:
-        e = Erreur.objects.get(idcon=con, code_err=codeerreur.objects.get(id=1))
-        e.delete()
-    else:
-        e = Erreur()
-        e.save()
+    #if message_reel == nb_message and 1 in [e.code_err.id for e in Erreur.objects.filter(idcon=con, etat=0)]:
+        #e = Erreur.objects.get(idcon=con, code_err=codeerreur.objects.get(id=1))
+        #e.delete()
+    #else:
+    #    e = Erreur()
+    #    e.save()
 
     err = [e.code_err.description_code for e in Erreur.objects.filter(idcon=con, etat=0)]
 
