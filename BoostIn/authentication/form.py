@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(
             label="Email",
-            required=True,  # Rendez ce champ obligatoire
+            required=True,
             help_text="Entrez une adresse email valide."
         )
 
@@ -17,6 +17,11 @@ class CustomUserCreationForm(UserCreationForm):
         label="Password confirmation", 
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete' : 'new-password'}),
+    )
+
+    cledeconnexion= forms.CharField(
+        label="Clé de connexion",
+        required=True,
     )
 
     class Meta(UserCreationForm.Meta):

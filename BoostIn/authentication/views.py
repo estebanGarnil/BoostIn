@@ -16,14 +16,17 @@ def inscription(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             try:
-                user = form.save()
+                if form.cleaned_data['cledeconnexion'] == '1234':
 
-                print(user.id)
-                cuser = Users(id=user.id)
-                cuser.save()
+                    user = form.save()
 
-                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-                return redirect('campagnes')
+                    cuser = Users(id=user.id)
+                    cuser.save()
+
+                    login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                    return redirect('campagnes')
+                else:
+                    form.add_error('cledeconnexion', 'Clé de connexion incorrecte.')
             except IntegrityError:
                 form.add_error('email', 'Un compte avec cet email existe déjà.')
     else:

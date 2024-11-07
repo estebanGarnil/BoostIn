@@ -60,7 +60,7 @@ class LDManager:
         if cls._instance is None:
             cls._instance = super(LDManager, cls).__new__(cls, *args, **kwargs)
             cls._instance.objets = {}
-            cls._instance.taches = BackgroundScheduler()     
+            cls._instance.taches = BackgroundScheduler() 
 
             DATABASE_URL = f"mysql+pymysql://{settings.DATABASES['default']['USER']}:{settings.DATABASES['default']['PASSWORD']}@" \
                    f"{settings.DATABASES['default']['HOST']}:{settings.DATABASES['default']['PORT']}/{settings.DATABASES['default']['NAME']}"
