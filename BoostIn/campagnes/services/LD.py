@@ -24,36 +24,18 @@ from .email_envoyer import email_sender
 
 from ..models import NomChamp, Prospects, TachesProgrammes, Con, Erreur, ValeurChamp, codeerreur, Message, Manager
 
+from .trace import trace_function_log
+
 lock = threading.Lock()
 
 email = email_sender()
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class LDManager:
-    """
-    Gère toutes les instances de `LDCon`.
 
-    La classe `LDManager` est responsable de la création, du suivi, de la gestion, et de l'exécution d'instances de `LDCon`. 
-    Elle permet d'ajouter, de supprimer, de démarrer, d'arrêter, et de programmer des objets `LDCon` via diverses méthodes. 
-    `LDManager` utilise un gestionnaire de tâches en arrière-plan (`BackgroundScheduler`) pour planifier les exécutions à des moments précis.
-
-    Attributs:
-        objets (dict): Un dictionnaire stockant les instances de `LDCon` gérées par cette classe, avec les identifiants comme clés.
-        __taches (BackgroundScheduler): Un gestionnaire de tâches en arrière-plan utilisé pour programmer les exécutions à des moments précis.
-    
-    Méthodes:
-        __init__(): Initialise l'objet LDManager en créant un dictionnaire d'objets `LDCon` et en lançant la première tâche.
-        started(id): Vérifie si un objet `LDCon` est en cours d'exécution.
-        get(id): Récupère un objet `LDCon` en fonction de son identifiant.
-        supr(id): Supprime un objet `LDCon` du gestionnaire.
-        add(id): Ajoute un nouvel objet `LDCon` au gestionnaire.
-        start(id): Démarre un objet `LDCon`.
-        stop(id): Arrête un objet `LDCon`.
-        programmer_activation(): Programme l'activation de chaque objet `LDCon`.
-        etat(id): Renvoie l'état ou les erreurs en cours pour un objet `LDCon`.
-        message_erreur(id): Renvoie le message d'erreur associé à un objet `LDCon`.
-        prochaine_exec(id): Renvoie la date et l'heure de la prochaine exécution d'un objet `LDCon`.
-        lancement(): Programme l'exécution de la méthode `programmer_activation` à une heure spécifique.
-    """
     _instance = None
 
     def __new__(cls, *args, **kwargs):
@@ -73,7 +55,7 @@ class LDManager:
                 cls._instance.objets[str(m.idcon.id)] = LDCon(m.idcon.id)
 
         return cls._instance 
-
+    @trace_function_log
     def attribution_horaire(self, h1 : int, h2 : int, j1:str, j2:str, _id : str, nb_exec : int=None):
         """
         _id[0] == 'C' : correspond a LDC
@@ -98,26 +80,27 @@ class LDManager:
                 day_of_week=day
                 )
             self.taches.add_job(LDManager._execute_task, trigger=trigger, replace_existing=True, id=_id, args=[str(_id)])
-
+    
+    @trace_function_log
     @staticmethod
     def _execute_task(_id):
-        print('execution tache id: '+_id)
+        logger.info('execution tache id: '+_id)
         m = LDManager()
         if _id[0] == 'C':
-            print('C')
+            logger.info('C')
             _id = _id[-2:]
-            print('lancement')
+            logger.info('lancement')
             ldc = m.objets[_id].get_connexion()
-            print('get_connexion')
+            logger.info('get_connexion')
             ldc.demander_connexion()
-            print('start')
+            logger.info('start')
         elif _id[0:2] == '1CON':
             _id = _id[-2:]
             m.objets[_id].start()
         elif _id[0:2] == '2CON':
             _id = _id[-2:]
             m.objets[_id].stop()
-
+    @trace_function_log
     def prochaine_execution(self, _id : str) -> datetime:
         job = self.taches.get_job(_id)
         if job:
@@ -127,18 +110,21 @@ class LDManager:
         #     return job.next_run_time
         else:
             return None
-    
+    @trace_function_log
     def add(self, _id) -> None:
+        logger.info(f"ajout de l'{_id} dans le dictionaire")
         self.objets[_id] = LDCon(ID=_id)
-
+        logger.info(f"etat du dictionaire apres l'ajout : {self.objets}")
+    @trace_function_log
     def start(self, id, exe=True) -> None:
+        logger.info(f"lancement de la methode start dict : {self.objet}")
         self.objets[id].start_programmer_tache()
         self.objets[id].start(exe)
-
+    @trace_function_log
     def start_demarage(self) -> None:
         for _id in self.objets.keys():
             self.start(_id)
-    
+    @trace_function_log
     def stop(self, _id) -> None:
         job = self.taches.get_job('C'+str(_id))
         if job:
@@ -154,14 +140,15 @@ class LDManager:
             manager = Manager.objects.get(idcon=con)
             manager.delete()
         except Exception as e:
-            print(e)
+            logger.info(e)
 
         self.objets[str(_id)].stop()
         del self.objets[str(_id)]
-
+    @trace_function_log
     def etat_lancement(self, id) -> None:
+        logger.info(f"objet dans manager : {self.objets}")
         return self.objets[id].lancement_reussi()
-
+    @trace_function_log
     def add_manager(self, _id) -> None:
         con = Con.objects.get(id=_id)
         if Manager.objects.filter(idcon=con).count() <= 0:
@@ -202,65 +189,36 @@ class LDCon:
         self.__message : LDM = LDM(self, self.__navigateur)
 
         self.etat = None
-    
+    @trace_function_log
     def __recuperer_token(self) -> str:
         c = Con.objects.get(id=self.ID)
         return str(c.token)[2:-1]
-
+    @trace_function_log
     def get_connexion(self):
-        print('get_connexion')
+        logger.info('get_connexion')
         return self.__connexion
-    
+    @trace_function_log
     def start_programmer_tache(self):
         c = Con.objects.get(id=self.ID)
         m = LDManager()
         m.attribution_horaire(h1=int(c.heureactivite[0:2]), h2=int(c.heureactivite[3:5]), j1=c.jouractivite[0], j2=c.jouractivite[2], _id='1CON'+str(c.id))
         m.attribution_horaire(h1=int(c.heureactivite[3:5]), h2=int(c.heureactivite[3:5]), j1=c.jouractivite[0], j2=c.jouractivite[2], _id='2CON'+str(c.id))
-
+    @trace_function_log
     def start(self, exe=True):
         if exe:
             a = self.__observer.start()
             b = self.__message.start()
         c = self.__connexion.start()
-    
+    @trace_function_log
     def lancement_reussi(self) -> bool:
         return self.__observer.lancement_valide
-    
+    @trace_function_log
     def stop(self):
         del self.__connexion
         del self.__observer
         del self.__message
 
 class LDC:
-    """
-    Gestionnaire des connexions.
-
-    La classe `LDC` est responsable de la gestion des connexions avec des prospects via LinkedIn. 
-    Elle gère les tâches liées à la connexion, telles que la récupération des prospects, la programmation des envois de demandes de connexion, 
-    et la gestion des fréquences d'exécution. Elle utilise un gestionnaire de tâches en arrière-plan pour planifier les exécutions à des moments précis.
-
-    Attributs:
-        __user (LDCon): Instance de l'objet `LDCon` représentant l'utilisateur.
-        __navigateur (LinkedInNavigateur): Instance du navigateur LinkedIn utilisé pour envoyer des demandes de connexion.
-        __taches (BackgroundScheduler): Gestionnaire de tâches en arrière-plan utilisé pour programmer les exécutions.
-        __prospect (list): Liste des prospects récupérés pour l'utilisateur.
-        __CpJ (float): Nombre de connexions par jour calculé.
-        __frequence (timedelta): Fréquence à laquelle les actions doivent se répéter.
-
-    Méthodes:
-        __init__(user: LDCon, bdd: LDDB, navigateur: LinkedInNavigateur) -> None: Initialise l'objet LDC.
-        __exit__() -> None: Arrête le gestionnaire de tâches lors de la destruction de l'objet.
-        start() -> None: Lance l'objet LDC en récupérant les prospects et en programmant les envois.
-        prochaine_exec() -> datetime or None: Renvoie la date et l'heure de la prochaine exécution planifiée.
-        stop() -> None: Arrête tous les processus en cours.
-        __calculer_frequence() -> timedelta: Calcule la fréquence à laquelle l'action doit se répéter.
-        __update_prospect_on_hold() -> None: Change le statut du prospect dans la base de données.
-        __recuperer_prospect() -> None: Récupère la liste des prospects pour les heures d'activités sélectionnées.
-        __programmer_envoi() -> None: Programme l'envoi des tâches pour chaque prospect.
-        __run_in_thread(func) -> callable: Exécute une fonction dans un nouveau thread.
-        tempsProchaineExecution() -> None: Méthode de développement pour voir les prochaines exécutions programmées.
-        __demander_connexion() -> None: Envoie une demande de connexion à un prospect.
-    """
     def __init__(self, user : LDCon, navigateur : LinkedInNavigateur) -> None:
         self.con : LDCon = user  # l'id de con dans la base de donnée
         self.__navigateur : LinkedInNavigateur = navigateur ## le navigateur pour pouvoir lancer des instance de chrome
@@ -268,11 +226,11 @@ class LDC:
         self.lancement_valide = None
 
         self.etat = EtatObj.STOP
-
+    @trace_function_log
     def start(self) -> None:
         self.__programmer_envoi()
         self.etat = EtatObj.RUNNING
-    
+    @trace_function_log
     def __programmer_envoi(self) -> None:
         """
         Programme l'envoi des tâches pour chaque prospect.
@@ -280,19 +238,19 @@ class LDC:
         c = Con.objects.get(id=self.con.ID)
         m = LDManager()
         m.attribution_horaire(h1=int(c.heureactivite[0:2]), h2=int(c.heureactivite[3:5]), j1=c.jouractivite[0], j2=c.jouractivite[2], nb_exec=self.__CpJ, _id='C'+str(c.id))
-
+    @trace_function_log
     def demander_connexion(self) -> None:
 
         p = Prospects.objects.filter(idcon__id=self.con.ID, statutes__statutes='not sent').first()
         if self.__navigateur.start(p.linkedin_profile):
             ## cas de base -> le prospect à été ajouté
             etat : Etat = self.__navigateur.connexion()
-            print(p.statutes.statutes)
+            logger.info(p.statutes.statutes)
             s = p.statutes
             s.statutes = etat.value
             s.save()
             p.save()
-            print(p.statutes.statutes)
+            logger.info(p.statutes.statutes)
             self.__navigateur.close()
         else : 
             c = Con.objects.get(id=self.con.ID)
@@ -307,28 +265,6 @@ class LDC:
                 e.save()
 
 class LDM:
-    """
-    Gestionnaire des messages.
-
-    La classe `LDM` est responsable de la gestion et de l'envoi des messages aux prospects via LinkedIn. Elle interagit avec la base de données pour récupérer les messages et les prospects, 
-    et utilise un navigateur LinkedIn pour envoyer les messages. La classe gère également la planification des tâches d'envoi via un gestionnaire de tâches en arrière-plan.
-
-    Attributs:
-        __user (LDCon): Instance de l'objet `LDCon` représentant l'utilisateur.
-        __navigateur (LinkedInNavigateur): Instance du navigateur LinkedIn utilisé pour envoyer des messages.
-        __taches (BackgroundScheduler): Gestionnaire de tâches en arrière-plan utilisé pour programmer les envois.
-        __prospect (list): Liste des prospects récupérés pour l'utilisateur.
-        __message (list): Liste des messages à envoyer.
-
-    Méthodes:
-        __init__(user: LDCon, bdd: LDDB, navigateur: LinkedInNavigateur): Initialise l'objet LDM avec les attributs nécessaires.
-        start() -> None: Démarre le processus d'envoi de messages.
-        __recuperer_message() -> None: Récupère les messages associés à l'utilisateur depuis la base de données et initialise les objets `Message`.
-        __recuperer_prospect() -> None: Ajoute les prospects à traiter pour chaque message.
-        __envoyer_message() -> None: Envoie les messages prévus à tous les prospects dans la liste pour chaque instance de message.
-        __run_in_thread(func) -> callable: Exécute une fonction dans un nouveau thread.
-    """
-
     def __init__(self, user : LDCon, navigateur : LinkedInNavigateur):
         self.con : LDCon = user 
         self.__navigateur : LinkedInNavigateur = navigateur
@@ -336,13 +272,13 @@ class LDM:
         self.__taches : BackgroundScheduler = BackgroundScheduler()
         self.__prospect : Prospect = []
         self.__message : MessageObj = []
-    
+    @trace_function_log
     def start(self) -> None:
         self.__recuperer_message()
         self.__recuperer_prospect()
 
         self.__envoyer_message()
-    
+    @trace_function_log
     def __recuperer_message(self) -> None:
         """
         Récupère les messages associés à l'utilisateur depuis la base de données et initialise les objets `Message`.
@@ -352,7 +288,7 @@ class LDM:
         for m in message:
             self.__message.append(MessageObj(m[0], m[1], m[2], Etat(m[3])))
             i+=1
-    
+    @trace_function_log
     def __recuperer_prospect(self) -> None:
         """
         Ajoute les prospects à traiter pour chaque message.
@@ -377,7 +313,7 @@ class LDM:
                     corp.replace(f'#{v}#', val.valeur)
         
                 m.prospect.append(Prospect(p[0], p[1], p[2], corp))
-    
+    @trace_function_log
     def __envoyer_message(self):
         """
         Envoie les messages prévus à tous les prospects dans la liste pour chaque instance de message.
@@ -395,7 +331,8 @@ class LDM:
             None
         """
         c = Con.objects.get(id=self.con.ID)
-        if self.con.etat != Etat.FAILURE:
+        codeerr = codeerreur.objects.get(id=2)
+        if Erreur.objects.filter(idcon=c, etat=0, code_err=codeerr).count() == 0:
             if self.__navigateur.start(c.linkedin_lien):
                 for m in self.__message:
                     for p in m.prospect:
@@ -429,35 +366,14 @@ class LDM:
                     e.save()
 
 class LDObserver:
-    """
-    Observe si de nouveaux prospects ont accepté une demande de connexion et met à jour les prospects ayant accepté.
-
-    La classe `LDObserver` est responsable de surveiller les réponses aux demandes de connexion envoyées sur LinkedIn et de mettre à jour la base de données 
-    pour refléter les prospects qui ont accepté la connexion. Elle utilise un gestionnaire de tâches pour planifier les vérifications et les mises à jour.
-
-    Attributs:
-        __user (LDCon): Instance de l'objet `LDCon` représentant l'utilisateur.
-        __navigateur (LinkedInNavigateur): Instance du navigateur LinkedIn utilisé pour surveiller les statuts des prospects.
-        __taches (BackgroundScheduler): Gestionnaire de tâches en arrière-plan utilisé pour programmer les vérifications.
-
-    Méthodes:
-        __init__(user: LDCon, bdd: LDDB, navigateur: LinkedInNavigateur) -> None: Initialise l'objet LDObserver avec les attributs nécessaires.
-        start() -> None: Démarre le processus d'observation des prospects.
-        stop() -> None: Arrête tous les processus d'observation en cours.
-        __programmer_envoi() -> None: Programme les heures d'activation pour vérifier les statuts des prospects.
-        __run_in_thread(func) -> callable: Exécute une fonction dans un nouveau thread.
-        __update_statute_accepted() -> None: Met à jour le statut de chaque prospect qui a accepté la connexion.
-        __comparer_statute() -> list: Renvoie les ID des prospects ayant accepté la connexion.
-    """
-
     def __init__(self, user : LDCon, navigateur : LinkedInNavigateur) -> None:
         self.con : LDCon = user 
         self.__navigateur : LinkedInNavigateur = navigateur
         self.lancement_valide = None
-    
+    @trace_function_log
     def start(self) -> None:
         self.__update_statute_accepted()
-    
+    @trace_function_log
     def __update_statute_accepted(self) -> None:
         """
         Met à jour le statut de chaque prospect.
@@ -470,19 +386,24 @@ class LDObserver:
             None
         """
         tm.sleep(5)
-        if self.con.etat != Etat.FAILURE:    
+        c = Con.objects.get(id=self.con.ID)
+        is_erreur = Erreur.objects.filter(idcon=c, etat=0, code_err=codeerreur.objects.get(id=2)).count() != 0
+        if not is_erreur:    
             l = self.__comparer_statute()
             for e in l:
                 prospect = Prospects.objects.get(id=e)
                 statute = prospect.statutes
-                statute.statutes = Etat.ACCEPTED.value
-                statute.save()
+                if statute == Etat.SENT.value or statute == Etat.ON_HOLD:
+                    statute.statutes = Etat.ACCEPTED.value
+                    statute.save()
 
-            print('lancement_valie True')
+            logger.info('lancement_valide True')
             self.lancement_valide = True
-        print('lancement_valie None')
-
-
+        else:
+            self.lancement_valide = False
+            logger.info('lancement valide = False')
+            
+    @trace_function_log
     def __comparer_statute(self) -> list:
         """
         Renvoie les ID des prospects ayant accepté la connexion.
@@ -502,6 +423,7 @@ class LDObserver:
             list: Liste des ID des prospects ayant accepté la connexion, ou `None` en cas d'échec.
         """
         status_bd = Prospects.objects.filter(idcon_id=self.con.ID).exclude(statutes__statutes='Accepted').values('linkedin_profile', 'id')
+        logger.info(status_bd)
 
         # statuts_navigateur = self.__navigateur.getEtatsProspects()
         # return [e["id"] for e in status_bd if e["linkedin_profile"] in statuts_navigateur]
@@ -510,9 +432,10 @@ class LDObserver:
          
             if self.__navigateur.start(con.linkedin_lien):
                 statuts_navigateur = self.__navigateur.getEtatsProspects()
-                print('etat des prospects')
+                logger.info([e["id"] for e in status_bd if e["linkedin_profile"] in statuts_navigateur])
                 return [e["id"] for e in status_bd if e["linkedin_profile"] in statuts_navigateur]
             else:
+                logger.info('token de connexion invalide')
                 self.lancement_valide = False
                 c = Con.objects.get(id=self.con.ID)
                 codeerr = codeerreur.objects.get(id=2)
@@ -527,8 +450,8 @@ class LDObserver:
 
                 return []
 
-        except:
-            print('erreur - autre')
+        except Exception as e:
+            logger.info('erreur - autre : ' + e)
             self.lancement_valide = False
             c = Con.objects.get(id=self.con.ID)
             ## si n'existe pas deja

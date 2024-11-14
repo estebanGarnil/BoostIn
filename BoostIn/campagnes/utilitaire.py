@@ -1,6 +1,7 @@
 from datetime import date
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from django.db import transaction
 
 from .services.Donnees import Etat
 from .utils import automatisation
@@ -97,53 +98,35 @@ class InsertionForm:
 
     def insert_prospect(self):
         if self.form.cleaned_data['sheet']:
-
             col_principale = self.form.cleaned_data['col_principale']
             col_nom = self.form.cleaned_data['col_nom']
-
             id_sheet = clean_lien(self.form.cleaned_data['sheet'])
             prospect_data = fetch_google_sheet_data(id_sheet)
             id_champ = []
 
-            for k in prospect_data[0].keys():
-                new_champ = NomChamp(
-                    idcon=self.con_instance, 
-                    nom=k
-                )
-                new_champ.save()
+            with transaction.atomic():
+                for k in prospect_data[0].keys():
+                    new_champ = NomChamp(idcon=self.con_instance, nom=k)
+                    new_champ.save()
+                    id_champ.append(new_champ)
 
-                id_champ.append(new_champ)
+                for l in prospect_data:
+                    if not Prospects.objects.filter(linkedin_profile=l[col_principale], idcon=self.con_instance).exists():
+                        statut_prospect = Statutes(statutes='Not sent')
+                        statut_prospect.save()
 
-            for l in prospect_data:
-                if Prospects.objects.filter(linkedin_profile=l[col_principale], idcon=self.con_instance).exists() == False:
-
-                    statut_prospect = Statutes(
-                        statutes='Not sent'
-                    )
-                    statut_prospect.save()
-
-                    prospect_instance = Prospects(
-                        idcon=self.con_instance,
-                        linkedin_profile=l[col_principale],
-                        name=l[col_nom],
-                        statutes=statut_prospect
-                    )
-                    prospect_instance.save()
-
-                    for v in id_champ:
-                        print(v)
-                        val = ValeurChamp(
-                            id_prospect=prospect_instance,
-                            id_champ=v,
-                            valeur=l[v.nom]
+                        prospect_instance = Prospects(
+                            idcon=self.con_instance,
+                            linkedin_profile=l[col_principale],
+                            name=l[col_nom],
+                            statutes=statut_prospect
                         )
-                        val.save()
+                        prospect_instance.save()
 
-                    s = prospect_instance.statutes
-                    s.id_prospect = prospect_instance.id
-                    s.save()
+                        ValeurChamp.objects.bulk_create([
+                            ValeurChamp(id_prospect=prospect_instance, id_champ=v, valeur=l[v.nom])
+                            for v in id_champ
+                        ])
 
-
-
-
-
+                        statut_prospect.id_prospect = prospect_instance.id
+                        statut_prospect.save()

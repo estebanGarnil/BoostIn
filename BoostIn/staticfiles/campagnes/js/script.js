@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Mettre à jour la date lorsque le slider change
   dateSlider.addEventListener('input', updateDate);
 
-    console.log(donnees_stat_mes)
+    console.log(donnees_stat_mes);
+    console.log(donnees_stat_con);
     // graphique nb connexion
     const data = {
         labels: [

@@ -1,8 +1,1509 @@
-INFO objet n13 ajouté
-INFO attribution des horaires
-INFO attribution des horaires
-INFO reset_navigateur
-INFO erreur - autre
-INFO lancement_valie True
-INFO lancement_valie None
-INFO reset_navigateur
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-13T16:34:00+01:00'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwCk0dyAAABkwsf4mUAAAGTLyxmZU4AepgOQ5aLn8I49IUy7_9UGcDacgyogLRM0OtaPM_AnuE5rNw-8oK5XVszZ0wKh9fQnQ7-3Kvbltx1Q5EFD0mRe9Wb1ZKQzS1T0IdI_Is3SxJnWyD-
+INFO Navigateur.start -> setCookie ...
+INFO LinkedInNavigateur.getEtatsProspects -> debut
+INFO __update_statute_accepted -> [3802, 3803]
+INFO __update_statute_accepted -> 3802
+INFO erreur lors de la methode __update_statute_accepted : 'Statutes' object has no attribute 'statute'
+INFO lancement valide = False
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO test_lancement -> false
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-13T16:34:00+01:00'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwCk0dyAAABkwsf4mUAAAGTLyxmZU4AepgOQ5aLn8I49IUy7_9UGcDacgyogLRM0OtaPM_AnuE5rNw-8oK5XVszZ0wKh9fQnQ7-3Kvbltx1Q5EFD0mRe9Wb1ZKQzS1T0IdI_Is3SxJnWyD-
+INFO Navigateur.start -> setCookie ...
+INFO LinkedInNavigateur.getEtatsProspects -> debut
+INFO __update_statute_accepted -> [3802, 3803]
+INFO __update_statute_accepted -> 3802
+INFO LDObserver.__update_statute_accepted -> Not sent
+INFO Etat.SENT.value : SENT | Etat.ON_HOLD : Etat.ON_HOLD
+INFO __update_statute_accepted -> 3803
+INFO LDObserver.__update_statute_accepted -> Not sent
+INFO Etat.SENT.value : SENT | Etat.ON_HOLD : Etat.ON_HOLD
+INFO __update_statute_accepted -> lancement_valide True
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO test_lancement -> on hold
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.add_manager 
+INFO test_lancement -> success
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-13T16:34:00+01:00'}
+INFO Fonction: LDCon.__recuperer_token 
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDCon.__recuperer_token 
+INFO Fonction: LDManager.stop 
+INFO Fonction: LDCon.stop 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwCk0dyAAABkwsf4mUAAAGTLyxmZU4AepgOQ5aLn8I49IUy7_9UGcDacgyogLRM0OtaPM_AnuE5rNw-8oK5XVszZ0wKh9fQnQ7-3Kvbltx1Q5EFD0mRe9Wb1ZKQzS1T0IdI_Is3SxJnWyD-
+INFO Timeout: La page a mis trop de temps à charger.
+INFO token de connexion invalide
+INFO LDObserver.__update_statute_accepted -> lancement valide = False test : if self.lancement_valide != False
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-13T16:34:00+01:00'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-13T16:34:00+01:00'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-13T16:34:00+01:00'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Navigateur.start -> setCookie ...
+INFO LinkedInNavigateur.getEtatsProspects -> debut
+INFO __update_statute_accepted -> [3802, 3803]
+INFO __update_statute_accepted -> 3802
+INFO LDObserver.__update_statute_accepted -> Not sent
+INFO Etat.SENT.value : SENT | Etat.ON_HOLD : Etat.ON_HOLD
+INFO Maj du prospect Not sent -> ACCEPTED 
+INFO __update_statute_accepted -> 3803
+INFO LDObserver.__update_statute_accepted -> Not sent
+INFO Etat.SENT.value : SENT | Etat.ON_HOLD : Etat.ON_HOLD
+INFO Maj du prospect Not sent -> ACCEPTED 
+INFO __update_statute_accepted -> lancement_valide True
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Navigateur.start -> setCookie ...
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.add_manager 
+INFO test_lancement -> success
+INFO test_lancement -> success
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.add_manager 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-13T16:34:00+01:00'}
+INFO Fonction: LDManager.stop 
+INFO Fonction: LDCon.stop 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Navigateur.start -> setCookie ...
+INFO LinkedInNavigateur.getEtatsProspects -> debut
+INFO __update_statute_accepted -> []
+INFO __update_statute_accepted -> lancement_valide True
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Navigateur.start -> setCookie ...
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO test_lancement -> on hold
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO test_lancement -> success
+INFO Fonction: LDManager.add_manager 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-13T17:34:00+01:00'}
+INFO Fonction: LDManager.stop 
+INFO Fonction: LDCon.stop 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO token de connexion invalide
+INFO LDObserver.__update_statute_accepted -> lancement valide = False test : if self.lancement_valide != False
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO test_lancement -> false
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T07:00:00+01:00'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO test_lancement -> false
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T07:00:00+01:00'}
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Erreur navigateurr: Message: unknown error: session deleted because of page crash
+from unknown error: cannot determine loading status
+from tab crashed
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x570487fcd6da <unknown>
+#1 0x570487ae1ddd <unknown>
+#2 0x570487aca282 <unknown>
+#3 0x570487ac835c <unknown>
+#4 0x570487ac8b0f <unknown>
+#5 0x570487ad7fb7 <unknown>
+#6 0x570487aedfc4 <unknown>
+#7 0x570487af331b <unknown>
+#8 0x570487ac921e <unknown>
+#9 0x570487aedb21 <unknown>
+#10 0x570487b71902 <unknown>
+#11 0x570487b52953 <unknown>
+#12 0x570487b2172e <unknown>
+#13 0x570487b2279e <unknown>
+#14 0x570487f98f1b <unknown>
+#15 0x570487f9ceb8 <unknown>
+#16 0x570487f8642c <unknown>
+#17 0x570487f9da37 <unknown>
+#18 0x570487f6afef <unknown>
+#19 0x570487fbbad8 <unknown>
+#20 0x570487fbbca0 <unknown>
+#21 0x570487fcc556 <unknown>
+#22 0x76eb6c0a1e2e <unknown>
+#23 0x76eb6c133a4c <unknown>
+
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Erreur navigateurr: Message: unknown error: cannot determine loading status
+from unknown error: cannot determine loading status
+from disconnected: Unable to receive message from renderer
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x5bb83a98e6da <unknown>
+#1 0x5bb83a4a2f80 <unknown>
+#2 0x5bb83a48b5e3 <unknown>
+#3 0x5bb83a48b2d2 <unknown>
+#4 0x5bb83a48935c <unknown>
+#5 0x5bb83a489b0f <unknown>
+#6 0x5bb83a4b3afb <unknown>
+#7 0x5bb83a4aa4d1 <unknown>
+#8 0x5bb83a4aa3c1 <unknown>
+#9 0x5bb83a499f56 <unknown>
+#10 0x5bb83a49a391 <unknown>
+#11 0x5bb83a48b777 <unknown>
+#12 0x5bb83a48c8fd <unknown>
+#13 0x5bb83a48bc4e <unknown>
+#14 0x5bb83a48b3df <unknown>
+#15 0x5bb83a48b2d2 <unknown>
+#16 0x5bb83a48935c <unknown>
+#17 0x5bb83a489b0f <unknown>
+#18 0x5bb83a498fb7 <unknown>
+#19 0x5bb83a4aefc4 <unknown>
+#20 0x5bb83a4b431b <unknown>
+#21 0x5bb83a48a21e <unknown>
+#22 0x5bb83a4aeb21 <unknown>
+#23 0x5bb83a532902 <unknown>
+#24 0x5bb83a513953 <unknown>
+#25 0x5bb83a4e272e <unknown>
+#26 0x5bb83a4e379e <unknown>
+#27 0x5bb83a959f1b <unknown>
+#28 0x5bb83a95deb8 <unknown>
+#29 0x5bb83a94742c <unknown>
+#30 0x5bb83a95ea37 <unknown>
+#31 0x5bb83a92bfef <unknown>
+#32 0x5bb83a97cad8 <unknown>
+#33 0x5bb83a97cca0 <unknown>
+#34 0x5bb83a98d556 <unknown>
+#35 0x7534caaa1e2e <unknown>
+#36 0x7534cab33a4c <unknown>
+
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Erreur navigateurr: Message: unknown error: session deleted because of page crash
+from unknown error: cannot determine loading status
+from tab crashed
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x65492710b6da <unknown>
+#1 0x654926c1fddd <unknown>
+#2 0x654926c08282 <unknown>
+#3 0x654926c0635c <unknown>
+#4 0x654926c06b0f <unknown>
+#5 0x654926c15fb7 <unknown>
+#6 0x654926c2bfc4 <unknown>
+#7 0x654926c3131b <unknown>
+#8 0x654926c0721e <unknown>
+#9 0x654926c2bb21 <unknown>
+#10 0x654926caf902 <unknown>
+#11 0x654926c90953 <unknown>
+#12 0x654926c5f72e <unknown>
+#13 0x654926c6079e <unknown>
+#14 0x6549270d6f1b <unknown>
+#15 0x6549270daeb8 <unknown>
+#16 0x6549270c442c <unknown>
+#17 0x6549270dba37 <unknown>
+#18 0x6549270a8fef <unknown>
+#19 0x6549270f9ad8 <unknown>
+#20 0x6549270f9ca0 <unknown>
+#21 0x65492710a556 <unknown>
+#22 0x75f7ed0a1e2e <unknown>
+#23 0x75f7ed133a4c <unknown>
+
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Erreur navigateurr: Message: unknown error: session deleted because of page crash
+from unknown error: cannot determine loading status
+from tab crashed
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x57fc9875d6da <unknown>
+#1 0x57fc98271ddd <unknown>
+#2 0x57fc9825a282 <unknown>
+#3 0x57fc9825835c <unknown>
+#4 0x57fc98258b0f <unknown>
+#5 0x57fc98267fb7 <unknown>
+#6 0x57fc9827dfc4 <unknown>
+#7 0x57fc9828331b <unknown>
+#8 0x57fc9825921e <unknown>
+#9 0x57fc9827db21 <unknown>
+#10 0x57fc98301902 <unknown>
+#11 0x57fc982e2953 <unknown>
+#12 0x57fc982b172e <unknown>
+#13 0x57fc982b279e <unknown>
+#14 0x57fc98728f1b <unknown>
+#15 0x57fc9872ceb8 <unknown>
+#16 0x57fc9871642c <unknown>
+#17 0x57fc9872da37 <unknown>
+#18 0x57fc986fafef <unknown>
+#19 0x57fc9874bad8 <unknown>
+#20 0x57fc9874bca0 <unknown>
+#21 0x57fc9875c556 <unknown>
+#22 0x7ae4934a1e2e <unknown>
+#23 0x7ae493533a4c <unknown>
+
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Erreur navigateurr: Message: unknown error: session deleted because of page crash
+from unknown error: cannot determine loading status
+from tab crashed
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x622cb5ed06da <unknown>
+#1 0x622cb59e4ddd <unknown>
+#2 0x622cb59cd282 <unknown>
+#3 0x622cb59cb35c <unknown>
+#4 0x622cb59cbb0f <unknown>
+#5 0x622cb59dafb7 <unknown>
+#6 0x622cb59f0fc4 <unknown>
+#7 0x622cb59f631b <unknown>
+#8 0x622cb59cc21e <unknown>
+#9 0x622cb59f0b21 <unknown>
+#10 0x622cb5a74902 <unknown>
+#11 0x622cb5a55953 <unknown>
+#12 0x622cb5a2472e <unknown>
+#13 0x622cb5a2579e <unknown>
+#14 0x622cb5e9bf1b <unknown>
+#15 0x622cb5e9feb8 <unknown>
+#16 0x622cb5e8942c <unknown>
+#17 0x622cb5ea0a37 <unknown>
+#18 0x622cb5e6dfef <unknown>
+#19 0x622cb5ebead8 <unknown>
+#20 0x622cb5ebeca0 <unknown>
+#21 0x622cb5ecf556 <unknown>
+#22 0x704a8e0a1e2e <unknown>
+#23 0x704a8e133a4c <unknown>
+
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Erreur navigateurr: Message: unknown error: session deleted because of page crash
+from unknown error: cannot determine loading status
+from tab crashed
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x62c80ec6a6da <unknown>
+#1 0x62c80e77eddd <unknown>
+#2 0x62c80e767282 <unknown>
+#3 0x62c80e76535c <unknown>
+#4 0x62c80e765b0f <unknown>
+#5 0x62c80e774fb7 <unknown>
+#6 0x62c80e78afc4 <unknown>
+#7 0x62c80e79031b <unknown>
+#8 0x62c80e76621e <unknown>
+#9 0x62c80e78ab21 <unknown>
+#10 0x62c80e80e902 <unknown>
+#11 0x62c80e7ef953 <unknown>
+#12 0x62c80e7be72e <unknown>
+#13 0x62c80e7bf79e <unknown>
+#14 0x62c80ec35f1b <unknown>
+#15 0x62c80ec39eb8 <unknown>
+#16 0x62c80ec2342c <unknown>
+#17 0x62c80ec3aa37 <unknown>
+#18 0x62c80ec07fef <unknown>
+#19 0x62c80ec58ad8 <unknown>
+#20 0x62c80ec58ca0 <unknown>
+#21 0x62c80ec69556 <unknown>
+#22 0x7e5d5f4a1e2e <unknown>
+#23 0x7e5d5f533a4c <unknown>
+
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Erreur navigateurr: Message: unknown error: session deleted because of page crash
+from unknown error: cannot determine loading status
+from tab crashed
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x60384415d6da <unknown>
+#1 0x603843c71ddd <unknown>
+#2 0x603843c5a282 <unknown>
+#3 0x603843c5835c <unknown>
+#4 0x603843c58b0f <unknown>
+#5 0x603843c67fb7 <unknown>
+#6 0x603843c7dfc4 <unknown>
+#7 0x603843c8331b <unknown>
+#8 0x603843c5921e <unknown>
+#9 0x603843c7db21 <unknown>
+#10 0x603843d01902 <unknown>
+#11 0x603843ce2953 <unknown>
+#12 0x603843cb172e <unknown>
+#13 0x603843cb279e <unknown>
+#14 0x603844128f1b <unknown>
+#15 0x60384412ceb8 <unknown>
+#16 0x60384411642c <unknown>
+#17 0x60384412da37 <unknown>
+#18 0x6038440fafef <unknown>
+#19 0x60384414bad8 <unknown>
+#20 0x60384414bca0 <unknown>
+#21 0x60384415c556 <unknown>
+#22 0x7f5aba4a1e2e <unknown>
+#23 0x7f5aba533a4c <unknown>
+
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Fonction: str._execute_task 
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwDd5K6AAABkyYiYDwAAAGTSi7kPE4Akmg61pV3Rz1byJ_Glx2kG96SsAAblPmmonGd_D-iu1GTc8gs6qeUUbZoFwHeQvqCf6Dj4CNMUaNelsufW4WPA8CYxj2srBIGaoxkTk0LPQuE246g
+INFO Timeout: La page a mis trop de temps à charger.
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T14:34:00+01:00'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T14:34:00+01:00'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO process_message -> erreur : 'LDManager' object has no attribute 'existing_times'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T14:34:00+01:00'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO process_message -> erreur : unsupported operand type(s) for *: 'NoneType' and 'int'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO process_message -> erreur : unsupported operand type(s) for *: 'NoneType' and 'int'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO process_message -> erreur : unsupported operand type(s) for *: 'NoneType' and 'int'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO process_message -> erreur : unsupported operand type(s) for *: 'NoneType' and 'int'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO time slot : [datetime.datetime(2024, 11, 14, 16, 27), datetime.datetime(2024, 11, 14, 10, 49), datetime.datetime(2024, 11, 14, 15, 15), datetime.datetime(2024, 11, 14, 18, 48), datetime.datetime(2024, 11, 14, 17, 47), datetime.datetime(2024, 11, 14, 16, 54), datetime.datetime(2024, 11, 14, 11, 33), datetime.datetime(2024, 11, 14, 13, 47), datetime.datetime(2024, 11, 14, 7, 33), datetime.datetime(2024, 11, 14, 15, 48), datetime.datetime(2024, 11, 14, 17, 20), datetime.datetime(2024, 11, 14, 7, 28), datetime.datetime(2024, 11, 14, 18, 11), datetime.datetime(2024, 11, 14, 18, 38), datetime.datetime(2024, 11, 14, 12, 52), datetime.datetime(2024, 11, 14, 9, 40), datetime.datetime(2024, 11, 14, 12, 34), datetime.datetime(2024, 11, 14, 17, 53), datetime.datetime(2024, 11, 14, 11, 56), datetime.datetime(2024, 11, 14, 11, 2)]
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO time slot : [datetime.datetime(2024, 11, 14, 19, 0)]
+WARNING Impossible de planifier toutes les tâches sans chevauchement.
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwB8XUAAAABkyegGEAAAAGTS6ycQE4AGdZtWKr-hdduQRwTtreWfuv01zdoNKw2XG7Lg03f-2nFCi2vMqoedKOgCg9QIp0JSkGyrKopMf6uTvpXaAC1m5uZhzqAC7FRe0fPvayTI7QqDNvZ
+INFO Erreur navigateurr: Message: unknown error: session deleted because of page crash
+from unknown error: cannot determine loading status
+from tab crashed
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x624e667506da <unknown>
+#1 0x624e66264ddd <unknown>
+#2 0x624e6624ea5b <unknown>
+#3 0x624e6624dc4e <unknown>
+#4 0x624e6624d3df <unknown>
+#5 0x624e6624d2d2 <unknown>
+#6 0x624e6624b35c <unknown>
+#7 0x624e6624bb0f <unknown>
+#8 0x624e6625afb7 <unknown>
+#9 0x624e66270fc4 <unknown>
+#10 0x624e6627631b <unknown>
+#11 0x624e6624c21e <unknown>
+#12 0x624e66270b21 <unknown>
+#13 0x624e662f4902 <unknown>
+#14 0x624e662d5953 <unknown>
+#15 0x624e662a472e <unknown>
+#16 0x624e662a579e <unknown>
+#17 0x624e6671bf1b <unknown>
+#18 0x624e6671feb8 <unknown>
+#19 0x624e6670942c <unknown>
+#20 0x624e66720a37 <unknown>
+#21 0x624e666edfef <unknown>
+#22 0x624e6673ead8 <unknown>
+#23 0x624e6673eca0 <unknown>
+#24 0x624e6674f556 <unknown>
+#25 0x7d6ec24a1e2e <unknown>
+#26 0x7d6ec2533a4c <unknown>
+
+INFO token de connexion invalide
+INFO LDObserver.__update_statute_accepted -> lancement valide = False test : if self.lancement_valide != False
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO test_lancement -> false
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T14:34:00+01:00'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO heure aleatoire generée : 2024-11-14 12:12:00
+INFO heure aleatoire generée : 2024-11-14 09:45:00
+INFO heure aleatoire generée : 2024-11-14 13:50:00
+INFO heure aleatoire generée : 2024-11-14 10:23:00
+INFO heure aleatoire generée : 2024-11-14 15:12:00
+INFO heure aleatoire generée : 2024-11-14 16:17:00
+INFO heure aleatoire generée : 2024-11-14 08:15:00
+INFO heure aleatoire generée : 2024-11-14 18:15:00
+INFO heure aleatoire generée : 2024-11-14 16:08:00
+INFO heure aleatoire generée : 2024-11-14 11:00:00
+INFO heure aleatoire generée : 2024-11-14 09:19:00
+INFO heure aleatoire generée : 2024-11-14 07:34:00
+INFO heure aleatoire generée : 2024-11-14 07:28:00
+INFO heure aleatoire generée : 2024-11-14 16:47:00
+INFO heure aleatoire generée : 2024-11-14 11:41:00
+INFO heure aleatoire generée : 2024-11-14 17:00:00
+INFO heure aleatoire generée : 2024-11-14 16:27:00
+INFO heure aleatoire generée : 2024-11-14 18:41:00
+INFO heure aleatoire generée : 2024-11-14 14:59:00
+INFO heure aleatoire generée : 2024-11-14 07:43:00
+INFO time slot : [datetime.datetime(2024, 11, 14, 12, 12), datetime.datetime(2024, 11, 14, 9, 45), datetime.datetime(2024, 11, 14, 13, 50), datetime.datetime(2024, 11, 14, 10, 23), datetime.datetime(2024, 11, 14, 15, 12), datetime.datetime(2024, 11, 14, 16, 17), datetime.datetime(2024, 11, 14, 8, 15), datetime.datetime(2024, 11, 14, 18, 15), datetime.datetime(2024, 11, 14, 16, 8), datetime.datetime(2024, 11, 14, 11, 0), datetime.datetime(2024, 11, 14, 9, 19), datetime.datetime(2024, 11, 14, 7, 34), datetime.datetime(2024, 11, 14, 7, 28), datetime.datetime(2024, 11, 14, 16, 47), datetime.datetime(2024, 11, 14, 11, 41), datetime.datetime(2024, 11, 14, 17, 0), datetime.datetime(2024, 11, 14, 16, 27), datetime.datetime(2024, 11, 14, 18, 41), datetime.datetime(2024, 11, 14, 14, 59), datetime.datetime(2024, 11, 14, 7, 43)]
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO heure aleatoire generée : 2024-11-14 19:00:00
+INFO time slot : [datetime.datetime(2024, 11, 14, 19, 0)]
+WARNING Impossible de planifier toutes les tâches sans chevauchement.
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir EDAUnwyLwB8XUAAAABkyegGEAAAAGTS6ycQE4AGdZtWKr-hdduQRwTtreWfuv01zdoNKw2XG7Lg03f-2nFCi2vMqoedKOgCg9QIp0JSkGyrKopMf6uTvpXaAC1m5uZhzqAC7FRe0fPvayTI7QqDNv
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO heure aleatoire generée : 2024-11-14 08:29:00
+INFO heure aleatoire generée : 2024-11-14 08:57:00
+INFO heure aleatoire generée : 2024-11-14 16:50:00
+INFO heure aleatoire generée : 2024-11-14 18:25:00
+INFO heure aleatoire generée : 2024-11-14 16:07:00
+INFO heure aleatoire generée : 2024-11-14 12:44:00
+INFO heure aleatoire generée : 2024-11-14 16:29:00
+INFO heure aleatoire generée : 2024-11-14 18:15:00
+INFO heure aleatoire generée : 2024-11-14 16:55:00
+INFO heure aleatoire generée : 2024-11-14 15:25:00
+INFO heure aleatoire generée : 2024-11-14 15:37:00
+INFO heure aleatoire generée : 2024-11-14 09:05:00
+INFO heure aleatoire generée : 2024-11-14 09:49:00
+INFO heure aleatoire generée : 2024-11-14 17:10:00
+INFO heure aleatoire generée : 2024-11-14 11:12:00
+INFO heure aleatoire generée : 2024-11-14 18:51:00
+INFO heure aleatoire generée : 2024-11-14 12:35:00
+INFO heure aleatoire generée : 2024-11-14 07:56:00
+INFO heure aleatoire generée : 2024-11-14 14:49:00
+INFO heure aleatoire generée : 2024-11-14 14:46:00
+INFO time slot : [datetime.datetime(2024, 11, 14, 8, 29), datetime.datetime(2024, 11, 14, 8, 57), datetime.datetime(2024, 11, 14, 16, 50), datetime.datetime(2024, 11, 14, 18, 25), datetime.datetime(2024, 11, 14, 16, 7), datetime.datetime(2024, 11, 14, 12, 44), datetime.datetime(2024, 11, 14, 16, 29), datetime.datetime(2024, 11, 14, 18, 15), datetime.datetime(2024, 11, 14, 16, 55), datetime.datetime(2024, 11, 14, 15, 25), datetime.datetime(2024, 11, 14, 15, 37), datetime.datetime(2024, 11, 14, 9, 5), datetime.datetime(2024, 11, 14, 9, 49), datetime.datetime(2024, 11, 14, 17, 10), datetime.datetime(2024, 11, 14, 11, 12), datetime.datetime(2024, 11, 14, 18, 51), datetime.datetime(2024, 11, 14, 12, 35), datetime.datetime(2024, 11, 14, 7, 56), datetime.datetime(2024, 11, 14, 14, 49), datetime.datetime(2024, 11, 14, 14, 46)]
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO heure aleatoire generée : 2024-11-14 19:00:00
+INFO time slot : [datetime.datetime(2024, 11, 14, 19, 0)]
+WARNING Impossible de planifier toutes les tâches sans chevauchement.
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir EDAUnwyLwB8XUAAAABkyegGEAAAAGTS6ycQE4AGdZtWKr-hdduQRwTtreWfuv01zdoNKw2XG7Lg03f-2nFCi2vMqoedKOgCg9QIp0JSkGyrKopMf6uTvpXaAC1m5uZhzqAC7FRe0fPvayTI7QqDNv
+INFO Erreur navigateurr: Message: unknown error: session deleted because of page crash
+from unknown error: cannot determine loading status
+from tab crashed
+  (Session info: chrome=130.0.6723.116)
+Stacktrace:
+#0 0x62108e24c6da <unknown>
+#1 0x62108dd60ddd <unknown>
+#2 0x62108dd49282 <unknown>
+#3 0x62108dd4735c <unknown>
+#4 0x62108dd47b0f <unknown>
+#5 0x62108dd56fb7 <unknown>
+#6 0x62108dd6cfc4 <unknown>
+#7 0x62108dd7231b <unknown>
+#8 0x62108dd4821e <unknown>
+#9 0x62108dd6cb21 <unknown>
+#10 0x62108ddf0902 <unknown>
+#11 0x62108ddd1953 <unknown>
+#12 0x62108dda072e <unknown>
+#13 0x62108dda179e <unknown>
+#14 0x62108e217f1b <unknown>
+#15 0x62108e21beb8 <unknown>
+#16 0x62108e20542c <unknown>
+#17 0x62108e21ca37 <unknown>
+#18 0x62108e1e9fef <unknown>
+#19 0x62108e23aad8 <unknown>
+#20 0x62108e23aca0 <unknown>
+#21 0x62108e24b556 <unknown>
+#22 0x76e7378a1e2e <unknown>
+#23 0x76e737933a4c <unknown>
+
+INFO token de connexion invalide
+INFO LDObserver.__update_statute_accepted -> lancement valide = False test : if self.lancement_valide != False
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.etat_lancement 
+INFO test_lancement -> on hold
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO test_lancement -> false
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T15:00:00+01:00'}
+INFO test_lancement -> on hold
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO heure aleatoire generée : 2024-11-14 11:48:00
+INFO heure aleatoire generée : 2024-11-14 11:08:00
+INFO heure aleatoire generée : 2024-11-14 10:22:00
+INFO heure aleatoire generée : 2024-11-14 08:12:00
+INFO heure aleatoire generée : 2024-11-14 13:05:00
+INFO heure aleatoire generée : 2024-11-14 18:50:00
+INFO heure aleatoire generée : 2024-11-14 18:31:00
+INFO heure aleatoire generée : 2024-11-14 11:53:00
+INFO heure aleatoire generée : 2024-11-14 09:20:00
+INFO heure aleatoire generée : 2024-11-14 16:37:00
+INFO heure aleatoire generée : 2024-11-14 17:02:00
+INFO heure aleatoire generée : 2024-11-14 09:47:00
+INFO heure aleatoire generée : 2024-11-14 09:15:00
+INFO heure aleatoire generée : 2024-11-14 11:43:00
+INFO heure aleatoire generée : 2024-11-14 12:55:00
+INFO heure aleatoire generée : 2024-11-14 07:23:00
+INFO heure aleatoire generée : 2024-11-14 11:24:00
+INFO heure aleatoire generée : 2024-11-14 11:35:00
+INFO heure aleatoire generée : 2024-11-14 16:30:00
+INFO heure aleatoire generée : 2024-11-14 09:39:00
+INFO time slot : [datetime.datetime(2024, 11, 14, 11, 48), datetime.datetime(2024, 11, 14, 11, 8), datetime.datetime(2024, 11, 14, 10, 22), datetime.datetime(2024, 11, 14, 8, 12), datetime.datetime(2024, 11, 14, 13, 5), datetime.datetime(2024, 11, 14, 18, 50), datetime.datetime(2024, 11, 14, 18, 31), datetime.datetime(2024, 11, 14, 11, 53), datetime.datetime(2024, 11, 14, 9, 20), datetime.datetime(2024, 11, 14, 16, 37), datetime.datetime(2024, 11, 14, 17, 2), datetime.datetime(2024, 11, 14, 9, 47), datetime.datetime(2024, 11, 14, 9, 15), datetime.datetime(2024, 11, 14, 11, 43), datetime.datetime(2024, 11, 14, 12, 55), datetime.datetime(2024, 11, 14, 7, 23), datetime.datetime(2024, 11, 14, 11, 24), datetime.datetime(2024, 11, 14, 11, 35), datetime.datetime(2024, 11, 14, 16, 30), datetime.datetime(2024, 11, 14, 9, 39)]
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO heure aleatoire generée : 2024-11-14 19:00:00
+INFO time slot : [datetime.datetime(2024, 11, 14, 19, 0)]
+WARNING Impossible de planifier toutes les tâches sans chevauchement.
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwB8XUAAAABkyegGEAAAAGTS6ycQE4AGdZtWKr-hdduQRwTtreWfuv01zdoNKw2XG7Lg03f-2nFCi2vMqoedKOgCg9QIp0JSkGyrKopMf6uTvpXaAC1m5uZhzqAC7FRe0fPvayTI7QqDNvZ
+INFO Navigateur.start -> setCookie ...
+INFO LinkedInNavigateur.getEtatsProspects -> debut
+INFO Erreur navigateurr: Message: no such element: Unable to locate element: {"method":"css selector","selector":".display-flex.align-items-center.justify-space-between.pl5.pr2.cursor-pointer"}
+  (Session info: chrome=130.0.6723.116); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x572453cb16da <unknown>
+#1 0x5724537c5f80 <unknown>
+#2 0x572453812b46 <unknown>
+#3 0x572453812de1 <unknown>
+#4 0x572453858174 <unknown>
+#5 0x572453836bdd <unknown>
+#6 0x57245385569d <unknown>
+#7 0x572453836953 <unknown>
+#8 0x57245380572e <unknown>
+#9 0x57245380679e <unknown>
+#10 0x572453c7cf1b <unknown>
+#11 0x572453c80eb8 <unknown>
+#12 0x572453c6a42c <unknown>
+#13 0x572453c81a37 <unknown>
+#14 0x572453c4efef <unknown>
+#15 0x572453c9fad8 <unknown>
+#16 0x572453c9fca0 <unknown>
+#17 0x572453cb0556 <unknown>
+#18 0x71a589ca1e2e <unknown>
+#19 0x71a589d33a4c <unknown>
+
+INFO erreur lors de la methode __update_statute_accepted : can only concatenate str (not "TypeError") to str
+INFO lancement valide = False
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Erreur navigateurr: Message: session not created: Chrome failed to start: exited normally.
+  (session not created: DevToolsActivePort file doesn't exist)
+  (The process started from chrome location /opt/google/chrome/chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
+Stacktrace:
+#0 0x5cc4284bc6da <unknown>
+#1 0x5cc427fd0f80 <unknown>
+#2 0x5cc428006db1 <unknown>
+#3 0x5cc4280026c5 <unknown>
+#4 0x5cc42804dcf9 <unknown>
+#5 0x5cc42804d346 <unknown>
+#6 0x5cc428041953 <unknown>
+#7 0x5cc42801072e <unknown>
+#8 0x5cc42801179e <unknown>
+#9 0x5cc428487f1b <unknown>
+#10 0x5cc42848beb8 <unknown>
+#11 0x5cc42847542c <unknown>
+#12 0x5cc42848ca37 <unknown>
+#13 0x5cc428459fef <unknown>
+#14 0x5cc4284aaad8 <unknown>
+#15 0x5cc4284aaca0 <unknown>
+#16 0x5cc4284bb556 <unknown>
+#17 0x77d1c8aa1e2e <unknown>
+#18 0x77d1c8b33a4c <unknown>
+
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO Fonction: LDManager.stop 
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO job supression : LDManager._execute_task (trigger: cron[day_of_week='mon-fri', hour='7-18', minute='*/34'], next run at: 2024-11-14 15:00:00 CET)
+INFO job supression 1CON : None
+INFO job supression 2CON : None
+INFO Manager matching query does not exist.
+INFO Fonction: LDCon.stop 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO test_lancement -> on hold
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwB8XUAAAABkyegGEAAAAGTS6ycQE4AGdZtWKr-hdduQRwTtreWfuv01zdoNKw2XG7Lg03f-2nFCi2vMqoedKOgCg9QIp0JSkGyrKopMf6uTvpXaAC1m5uZhzqAC7FRe0fPvayTI7QqDNvZ
+INFO Navigateur.start -> setCookie ...
+INFO LinkedInNavigateur.getEtatsProspects -> debut
+INFO Erreur navigateurr: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="global-nav"]/div/nav/ul/li[2]/a"}
+  (Session info: chrome=131.0.6778.69); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x5d0f791394ca <unknown>
+#1 0x5d0f78c4c620 <unknown>
+#2 0x5d0f78c9b306 <unknown>
+#3 0x5d0f78c9b5a1 <unknown>
+#4 0x5d0f78ce0a04 <unknown>
+#5 0x5d0f78cbf39d <unknown>
+#6 0x5d0f78cddde0 <unknown>
+#7 0x5d0f78cbf113 <unknown>
+#8 0x5d0f78c8dbe0 <unknown>
+#9 0x5d0f78c8ebbe <unknown>
+#10 0x5d0f79105e4b <unknown>
+#11 0x5d0f79109de2 <unknown>
+#12 0x5d0f790f2d2c <unknown>
+#13 0x5d0f7910a957 <unknown>
+#14 0x5d0f790d84bf <unknown>
+#15 0x5d0f79128348 <unknown>
+#16 0x5d0f79128510 <unknown>
+#17 0x5d0f79138346 <unknown>
+#18 0x7ee3294a1e2e <unknown>
+#19 0x7ee329533a4c <unknown>
+
+INFO erreur lors de la methode __update_statute_accepted : can only concatenate str (not "TypeError") to str
+INFO lancement valide = False
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO heure aleatoire generée : 2024-11-14 18:13:00
+INFO heure aleatoire generée : 2024-11-14 16:43:00
+INFO heure aleatoire generée : 2024-11-14 17:23:00
+INFO heure aleatoire generée : 2024-11-14 09:42:00
+INFO heure aleatoire generée : 2024-11-14 08:36:00
+INFO heure aleatoire generée : 2024-11-14 17:16:00
+INFO heure aleatoire generée : 2024-11-14 11:47:00
+INFO heure aleatoire generée : 2024-11-14 09:45:00
+INFO heure aleatoire generée : 2024-11-14 17:36:00
+INFO heure aleatoire generée : 2024-11-14 12:03:00
+INFO heure aleatoire generée : 2024-11-14 18:46:00
+INFO heure aleatoire generée : 2024-11-14 15:45:00
+INFO heure aleatoire generée : 2024-11-14 12:08:00
+INFO heure aleatoire generée : 2024-11-14 11:27:00
+INFO heure aleatoire generée : 2024-11-14 13:36:00
+INFO heure aleatoire generée : 2024-11-14 09:59:00
+INFO heure aleatoire generée : 2024-11-14 16:04:00
+INFO heure aleatoire generée : 2024-11-14 17:58:00
+INFO heure aleatoire generée : 2024-11-14 17:25:00
+INFO heure aleatoire generée : 2024-11-14 14:17:00
+INFO Nombre d'horaire dans la journée: 20
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO Fonction: LDManager.stop 
+INFO job supression : None
+INFO job supression 1CON : LDManager._execute_task (trigger: cron[day_of_week='mon-fri', hour='7', minute='0'], next run at: 2024-11-15 07:00:00 CET)
+INFO job supression 2CON : LDManager._execute_task (trigger: cron[day_of_week='mon-fri', hour='7', minute='0'], next run at: 2024-11-15 07:00:00 CET)
+INFO Manager matching query does not exist.
+INFO Fonction: LDCon.stop 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'False'}
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO process_message -> erreur : '14'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO test_lancement -> on hold

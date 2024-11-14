@@ -22,6 +22,10 @@ from datetime import date
 
 from django.db import connection
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 @login_required
 def redirect_message(request, id_campagne, id_con, step_message, nombre_message):
     request.session['form_step'] = step_message
@@ -120,7 +124,8 @@ def suivi_campagne(request, id_campagne):
     request.session['page'] = 'campagne/'+str(id_campagne) 
     request.session['form_step'] = 0
 
-    # 
+    #
+
     con = Con.objects.get(id=id_campagne)
     campagne = con.idcampagne
 
@@ -299,6 +304,7 @@ def lancement_campagne(request):
             p = request.session['page']
             id_con = p[p.index('/')+1:]
 
+            logger.info(f"lancement_campagne -> {id_con}")
             automatisation.add(id_con)
             automatisation.start(id_con)
 
@@ -313,6 +319,7 @@ def test_lancement(request):
     if request.method == 'POST':
         p = request.session['page']
         id_con = p[p.index('/')+1:]
+        logger.info(f"objet : {automatisation.objets}")
         f = automatisation.etat_lancement(id_con)
 
         if f == True:
@@ -320,11 +327,11 @@ def test_lancement(request):
             if Erreur.objects.filter(idcon=id_con, code_err=codeerreur.objects.get(id=2)).count() > 0:
                 o = Erreur.objects.get(idcon=id_con, code_err=codeerreur.objects.get(id=2))
                 o.delete()
-            print('succes')
+            logger.info('succes')
 
             return JsonResponse({'status': 'success'})
         else:
-            print('on hold')
+            logger.info('on hold')
             return JsonResponse({'status': 'on_hold'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
@@ -345,13 +352,13 @@ def get_stat_connexion(con):
     stat = {"ACC" : 0, "REF" : 0, "ATT" : 0, "NENV" : 0, "SUC" : 0}
     
     for p in all_prospect:
-        if p.statutes.statutes in ["ACCEPTED", "1ST", "2ND", "3RD"]:
+        if p.statutes.statutes.upper() in ["ACCEPTED", "1ST", "2ND", "3RD"]:
             stat["ACC"] += 1
-        elif p.statutes.statutes == "ON HOLD":
+        elif p.statutes.statutes.upper() == "ON HOLD":
             stat["ATT"] += 1
-        elif p.statutes.statutes == "NOT SENT":
+        elif p.statutes.statutes.upper() == "NOT SENT":
             stat["NENV"] += 1
-        elif p.statutes.statutes == "SUCCESS":
+        elif p.statutes.statutes.upper() == "SUCCESS":
             stat["SUC"] += 1
         else :
             stat["REF"] += 1
@@ -364,11 +371,11 @@ def get_stat_message(con):
     
 
     for p in all_prospect:
-        if p.statutes.statutes == "1ST":
+        if p.statutes.statutes.upper() == "1ST":
             stat["M1ST"] += 1
-        elif p.statutes.statutes == "2ND":
+        elif p.statutes.statutes.upper() == "2ND":
             stat["M2ND"] += 1
-        elif p.statutes.statutes == "3RD":
+        elif p.statutes.statutes.upper() == "3RD":
             stat["M3RD"] += 1
         else:
             stat["NENV"] += 1
@@ -422,22 +429,22 @@ def get_stat_by_day(request):
         
 
         for s in all_statut_by_day:
-            if s.statutes in ["ACCEPTED", "1ST", "2ND", "3RD"]:
+            if s.statutes.upper() in ["ACCEPTED", "1ST", "2ND", "3RD"]:
                 stat[0] += 1
-            elif s.statutes == "ON HOLD":
+            elif s.statutes.upper() == "ON HOLD":
                 stat[1] += 1
-            elif s.statutes == "NOT SENT":
+            elif s.statutes.upper() == "NOT SENT":
                 stat[2] += 1
-            elif s.statutes == "SUCCESS":
+            elif s.statutes.upper() == "SUCCESS":
                 stat[3] += 1
             else :
                 stat[4] += 1
 
-            if s.statutes == "1ST":
+            if s.statutes.upper() == "1ST":
                 stat_mes[0] += 1
-            elif s.statutes == "2ND":
+            elif s.statutes.upper() == "2ND":
                 stat_mes[1] += 1
-            elif s.statutes == "3RD":
+            elif s.statutes.upper() == "3RD":
                 stat_mes[2] += 1
             else:
                 stat_mes[3] += 1

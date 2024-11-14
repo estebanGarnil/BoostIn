@@ -15,10 +15,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException
 
-
+import logging
 
 import time as tm
 from .Donnees import Etat
+
+logger = logging.getLogger(__name__)
 
 class Navigateur:
     def __init__(self, token : str) -> None:
@@ -45,10 +47,17 @@ class Navigateur:
         """
         chrome_options = Options()
         chrome_options.add_argument("--headless")  # Mode headless activé
-        chrome_options.add_argument("--disable-gpu")  # Recommandé pour le mode headless
-        chrome_options.add_argument("--start-maximized")  # Définit la taille de la fenêtre
+        chrome_options.add_argument("--headless")  # Exécute Chrome en mode headless
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        #chrome_options.add_argument("--start-maximized")  # Définit la taille de la fenêtre
+
+        logger.info("reset_navigateur")
 
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        logger.info("ChromeDriver Version:", self.driver.capabilities['chrome']['chromedriverVersion'])
+        logger.info("Browser Version:", self.driver.capabilities['browserVersion'])
+
         self.driver.set_page_load_timeout(5)
 
     def getElement(self, selecteur : str, tps : int = 2, parent=None) -> selenium.webdriver.remote.webelement.WebElement:
@@ -91,10 +100,10 @@ class Navigateur:
             self.setCookie('li_at', self.token, '.linkedin.com', '/')
             return True
         except TimeoutException:
-            print("Timeout: La page a mis trop de temps à charger.")
+            logger.info("Timeout: La page a mis trop de temps à charger.")
             return False
         except Exception as e:
-            print(f"Erreur navigateurr: {e}")
+            logger.info(f"Erreur navigateurr: {e}")
             return False
 
     def setCookie(self, name, value, domain, path='/') -> None:
@@ -121,7 +130,7 @@ class LinkedInNavigateur(Navigateur):
         Envoi une demande de connexion a un Prospect
         """                       
         tm.sleep(10)
-        print('debut')
+        logger.info('debut')
         div = self.getElement('.gcGTCzCIvipxmcCliFpucHQrjcAuIXmk          ', 10)
         children = div.find_elements(By.XPATH, "./*")  # ./* récupère les enfants directs
 
@@ -180,7 +189,7 @@ class LinkedInNavigateur(Navigateur):
 
             return [e.get_attribute('href') for e in prospects]
         except Exception as e:
-            print(f"Erreur navigateurr: {e}")
+            logger.info(f"Erreur navigateurr: {e}")
             return False
 
 
