@@ -199,6 +199,10 @@ async function waiting_loading(url) {
             location.reload(true);
             etatapp = false;
           }
+          else if (data.status === 'unsuccess') {
+            location.reload(true);
+            etatapp = false;
+          }
       })
       .catch(error => {
           console.error('Il y a eu un problème avec la requête fetch:', error);

@@ -91,8 +91,8 @@ border-radius: 50%;
 }
 
 #nombre-connexion, #nombre-message {
-    width: 40% !important;
-    height: 40% !important;
+    width: 25vw !important;
+    height: 25vw !important;
 }
 
 .graph-container {
@@ -295,3 +295,6 @@ input[type=range] {
   .hidden {
     display: none;
   }
+
+
+

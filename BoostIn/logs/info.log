@@ -1507,3 +1507,200 @@ INFO test_lancement -> on hold
 INFO Fonction: LDManager.prochaine_execution 
 INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
 INFO test_lancement -> on hold
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.add 
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.start 
+INFO Fonction: LDCon.start_programmer_tache 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDCon.start 
+INFO Fonction: LDObserver.start 
+INFO Fonction: LDObserver.__update_statute_accepted 
+INFO __update_statute_accepted -> nb erreur : False
+INFO __update_statute_accepted -> pas d'erreur
+INFO Fonction: LDObserver.__comparer_statute 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwBmMiSAAABkysJNxQAAAGTTxW7FE4AbDqJhkR8HJLiGFvYeMlnWIUzw5b2UFbL0Sc1EeRpOaCiknW6LQas8W7sCMfOkClIHkEI-8axpqYcQT8bhsPrAlac_Qcb3-brtYWG7Js7ond91NuE
+INFO Navigateur.start -> setCookie ...
+INFO LinkedInNavigateur.getEtatsProspects -> debut
+INFO different de false : ['https://www.linkedin.com/in/charles-devaux-459430256/', 'https://www.linkedin.com/in/axel-duz%C3%A8s-48a857254/', 'https://www.linkedin.com/in/olivier-scrooge/', 'https://www.linkedin.com/in/tom-ertzscheid-616858254/', 'https://www.linkedin.com/in/geraldine-scrooge/']
+INFO __update_statute_accepted -> []
+INFO __update_statute_accepted -> lancement_valide True
+INFO Fonction: LDM.start 
+INFO Fonction: LDM.__recuperer_message 
+INFO Fonction: LDM.__recuperer_prospect 
+INFO Fonction: LDM.__envoyer_message 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwBmMiSAAABkysJNxQAAAGTTxW7FE4AbDqJhkR8HJLiGFvYeMlnWIUzw5b2UFbL0Sc1EeRpOaCiknW6LQas8W7sCMfOkClIHkEI-8axpqYcQT8bhsPrAlac_Qcb3-brtYWG7Js7ond91NuE
+INFO Navigateur.start -> setCookie ...
+INFO Fonction: LDC.start 
+INFO Fonction: LDC.__programmer_envoi 
+INFO Fonction: LDManager.attribution_horaire 
+INFO Fonction: LDManager.generate_non_overlapping_times 
+INFO heure aleatoire generée : 2024-11-14 08:45:00
+INFO heure aleatoire generée : 2024-11-14 17:26:00
+INFO heure aleatoire generée : 2024-11-14 15:24:00
+INFO heure aleatoire generée : 2024-11-14 08:37:00
+INFO heure aleatoire generée : 2024-11-14 10:19:00
+INFO heure aleatoire generée : 2024-11-14 09:48:00
+INFO heure aleatoire generée : 2024-11-14 07:24:00
+INFO heure aleatoire generée : 2024-11-14 11:22:00
+INFO heure aleatoire generée : 2024-11-14 09:52:00
+INFO heure aleatoire generée : 2024-11-14 14:22:00
+INFO heure aleatoire generée : 2024-11-14 11:03:00
+INFO heure aleatoire generée : 2024-11-14 09:38:00
+INFO heure aleatoire generée : 2024-11-14 10:54:00
+INFO heure aleatoire generée : 2024-11-14 17:44:00
+INFO heure aleatoire generée : 2024-11-14 14:16:00
+INFO heure aleatoire generée : 2024-11-14 11:01:00
+INFO heure aleatoire generée : 2024-11-14 18:43:00
+INFO heure aleatoire generée : 2024-11-14 11:10:00
+INFO heure aleatoire generée : 2024-11-14 11:58:00
+INFO heure aleatoire generée : 2024-11-14 15:38:00
+INFO Nombre d'horaire dans la journée: 20
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO test_lancement -> on hold
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO test_lancement -> success
+INFO Fonction: LDManager.add_manager 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO test_lancement -> on hold
+INFO Fonction: LDManager.etat_lancement 
+INFO test_lancement -> on hold
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.etat_lancement 
+INFO Fonction: LDCon.lancement_reussi 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'True'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO process_message -> erreur : 'list' object has no attribute 'items'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO [<Job (id=C14_2024-11-14 15:38:00 name=LDManager._execute_task)>, <Job (id=C14_2024-11-14 17:26:00 name=LDManager._execute_task)>, <Job (id=C14_2024-11-14 17:44:00 name=LDManager._execute_task)>, <Job (id=C14_2024-11-14 18:43:00 name=LDManager._execute_task)>, <Job (id=2CON14 name=LDManager._execute_task)>, <Job (id=1CON14 name=LDManager._execute_task)>]
+INFO process_message -> erreur : 'list' object has no attribute 'items'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO process_message -> erreur : 'list' object has no attribute 'items'
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : [datetime.datetime(2024, 11, 14, 15, 38, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO heure triés : [datetime.datetime(2024, 11, 14, 15, 38, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO process_message -> erreur : can't compare offset-naive and offset-aware datetimes
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: str._execute_task 
+INFO Fonction: LDCon.get_connexion 
+INFO Fonction: LDC.demander_connexion 
+INFO Navigateur.start
+INFO Navigateur.reset_navigateur
+INFO Navigateur.reset_navigateur -> self.driver defini
+INFO Navigateur.start -> reset_navigateur ...
+INFO Navigateur.start -> get ...
+INFO Navigateur.start -> token a definir AQEDAUnwyLwBmMiSAAABkysJNxQAAAGTTxW7FE4AbDqJhkR8HJLiGFvYeMlnWIUzw5b2UFbL0Sc1EeRpOaCiknW6LQas8W7sCMfOkClIHkEI-8axpqYcQT8bhsPrAlac_Qcb3-brtYWG7Js7ond91NuE
+INFO Navigateur.start -> setCookie ...
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO En attente de messages sur le canal 'request_channel'...
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : [datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO heure triés : [datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T17:26:00+01:00'}
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : [datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO heure triés : [datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T17:26:00+01:00'}
+INFO Fonction: LDCon.__recuperer_token 
+INFO token : {c.token}
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : [datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO heure triés : [datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T17:26:00+01:00'}
+INFO Fonction: LDManager.stop 
+INFO job supression : None
+INFO job supression 1CON : LDManager._execute_task (trigger: cron[day_of_week='mon-fri', hour='7', minute='0'], next run at: 2024-11-15 07:00:00 CET)
+INFO job supression 2CON : LDManager._execute_task (trigger: cron[day_of_week='mon-fri', hour='7', minute='0'], next run at: 2024-11-15 07:00:00 CET)
+INFO Fonction: LDCon.stop 
+INFO run_scheduler.process_response = {'etat': 'succes'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : [datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO heure triés : [datetime.datetime(2024, 11, 14, 17, 26, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 17, 44, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris')), datetime.datetime(2024, 11, 14, 18, 43, tzinfo=zoneinfo.ZoneInfo(key='Europe/Paris'))]
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': '2024-11-14T17:26:00+01:00'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO process_message -> erreur : (pymysql.err.OperationalError) (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+[SQL: SELECT apscheduler_jobs.id, apscheduler_jobs.job_state 
+FROM apscheduler_jobs ORDER BY apscheduler_jobs.next_run_time]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : []
+INFO heure triés : []
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO process_message -> erreur : (pymysql.err.OperationalError) (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+[SQL: SELECT apscheduler_jobs.id, apscheduler_jobs.job_state 
+FROM apscheduler_jobs ORDER BY apscheduler_jobs.next_run_time]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : []
+INFO heure triés : []
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO process_message -> erreur : (pymysql.err.OperationalError) (2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+[SQL: SELECT apscheduler_jobs.id, apscheduler_jobs.job_state 
+FROM apscheduler_jobs ORDER BY apscheduler_jobs.next_run_time]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO run_scheduler.process_response = {'etat': 'erreur', 'message': 'erreur renvoyé'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : []
+INFO heure triés : []
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}
+INFO Fonction: LDManager.prochaine_execution 
+INFO heures trouvées : []
+INFO heure triés : []
+INFO run_scheduler.process_response = {'etat': 'succes', 'message': 'None'}

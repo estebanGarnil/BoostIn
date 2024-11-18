@@ -1,3 +1,4 @@
+import datetime
 import json
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
@@ -18,13 +19,27 @@ from .utilitaire import fetch_google_sheet_data, clean_lien, InsertionForm
 
 from .utils import automatisation
 
-from datetime import date
+from datetime import datetime
 
 from django.db import connection
+
+from django_redis import get_redis_connection
+
+from .pubsub import subscribe_to_channel, publish_message
 
 import logging
 
 logger = logging.getLogger(__name__)
+
+def send_message_and_wait_response(request):
+    # Publier le message
+    publish_message('request_channel', json.dumps({"action": "NONE"}))
+
+    # Attendre la réponse sur le canal de réponse
+    response = subscribe_to_channel('response_channel')
+
+    # Retourner la réponse dès réception
+    return JsonResponse({'response': response.decode('utf-8')})
 
 @login_required
 def redirect_message(request, id_campagne, id_con, step_message, nombre_message):
@@ -163,13 +178,23 @@ def suivi_campagne(request, id_campagne):
 
     date_creation = con.date_creation
 
-    pro_exe = automatisation.prochaine_execution('C'+str(id_campagne))
+    #pro_exe = automatisation.prochaine_execution('C'+str(id_campagne))
 
-    #test
-    # if pro_exe != None:
-    #     LDManager._execute_task('C'+str(id_campagne))
-    # else:
-    #     print('pas lancé')
+    ## automatisation.prochaine_execution('C'+str(id_campagne))
+    message = {
+        'action': 'PROCHAINE_EXECUTION',
+        'object_id': 'C'+str(id_campagne)
+    }
+    publish_message('request_channel', json.dumps(message))
+
+    # Attendre la réponse sur le canal de réponse
+    pro_exe = subscribe_to_channel('response_channel')
+    exe_dict = json.loads(pro_exe)
+    if exe_dict["message"] != "None":
+        pro_exe = datetime.fromisoformat(exe_dict["message"])
+    else:
+        pro_exe = "None"
+
 
     return render(request, 'campagnes/suivi.html', {'con' : con, 'campagne' : campagne, 'prospect' : prospect_item, 'stat_con' : nb_acc, 'stat_mes' : nb_mes, "error" : err, "pro" : pro_exe, 'date_creation' : date_creation})
 
@@ -304,11 +329,19 @@ def lancement_campagne(request):
             p = request.session['page']
             id_con = p[p.index('/')+1:]
 
-            logger.info(f"lancement_campagne -> {id_con}")
-            automatisation.add(id_con)
-            automatisation.start(id_con)
-
-
+            ## LDManager.add(id_con)
+            message = {
+                'action': 'ADD',
+                'object_id': id_con
+            }
+            publish_message('request_channel', json.dumps(message))
+            ## LDManager.start(id_con)
+            message = {
+                'action': 'START',
+                'object_id': id_con
+            }
+            
+            publish_message('request_channel', json.dumps(message))
             return JsonResponse({'status': 'success'})
         except KeyError:
             return JsonResponse({'status': 'error', 'message': 'Session key missing'}, status=400)
@@ -316,33 +349,67 @@ def lancement_campagne(request):
 
 @login_required
 def test_lancement(request):
-    if request.method == 'POST':
-        p = request.session['page']
-        id_con = p[p.index('/')+1:]
-        logger.info(f"objet : {automatisation.objets}")
-        f = automatisation.etat_lancement(id_con)
+    try:
+        if request.method == 'POST':
+            p = request.session.get('page', '')
+            if '/' in p:
+                id_con = p.split('/')[-1]
+            else:
+                logger.error("Caractère '/' non trouvé dans p")
+                id_con = None
 
-        if f == True:
-            automatisation.add_manager(id_con)
-            if Erreur.objects.filter(idcon=id_con, code_err=codeerreur.objects.get(id=2)).count() > 0:
-                o = Erreur.objects.get(idcon=id_con, code_err=codeerreur.objects.get(id=2))
-                o.delete()
-            logger.info('succes')
+            message = {
+                'action': 'ETAT_LANCEMENT',
+                'object_id': id_con
+            }
+            publish_message('request_channel', json.dumps(message))
+            response = subscribe_to_channel('response_channel')
+            
+            decoded_str = response.decode('utf-8')
 
-            return JsonResponse({'status': 'success'})
-        else:
-            logger.info('on hold')
-            return JsonResponse({'status': 'on_hold'})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+            try:
+                response_dict = json.loads(decoded_str)
+            except json.JSONDecodeError as e:
+                logger.error(f"Erreur de décodage JSON : {e}")
+                response_dict = {}
+
+            f = response_dict.get("message")
+
+            # Handle the response based on 'f'
+            if f == "True":
+                message = {
+                    'action': 'ADD_MANAGER',
+                    'object_id': id_con
+                }
+                publish_message('request_channel', json.dumps(message))
+                # Additional logic...
+                logger.info('test_lancement -> success')
+                return JsonResponse({'status': 'success'})
+            elif f == "False":
+                logger.info('test_lancement -> false')
+                return JsonResponse({'status': 'unsuccess'})
+            else:
+                logger.info('test_lancement -> on hold')
+                return JsonResponse({'status': 'on_hold'})
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+    except Exception as e:
+        logger.error(f"test_lancement -> erreur : {e}")
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
 
 @login_required
 def arret_campagne(request):
-    print('arret')
     p = request.session['page']
     id_con = p[p.index('/')+1:]
 
-    automatisation.stop(id_con)
+    #automatisation.stop(id_con)
 
+    ## automatisation.stop(id_con)
+    message = {
+        'action': 'STOP',
+        'object_id': id_con
+    }
+    publish_message('request_channel', json.dumps(message))
     return JsonResponse({'status': 'success'})
 
 # ------------------------------

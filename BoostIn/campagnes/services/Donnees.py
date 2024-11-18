@@ -13,6 +13,7 @@ class Etat(Enum):
     END = "END"
     SENT = "SENT"
     SUCCESS = "SUCCESS"
+    NOT_SENT = "NOT SENT"
 
     def __init__(self, value):
         self._value_ = value

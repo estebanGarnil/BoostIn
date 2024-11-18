@@ -4,6 +4,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from apscheduler.triggers.date import DateTrigger
 from django.conf import settings
 
 from datetime import datetime, timedelta, timezone
@@ -13,6 +14,7 @@ import time as tm  # Utiliser un alias pour éviter les conflits
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+import zoneinfo
 
 from .navigateur import LinkedInNavigateur
 
@@ -43,6 +45,7 @@ class LDManager:
             cls._instance = super(LDManager, cls).__new__(cls, *args, **kwargs)
             cls._instance.objets = {}
             cls._instance.taches = BackgroundScheduler() 
+            cls._instance.existing_times = set()
 
             DATABASE_URL = f"mysql+pymysql://{settings.DATABASES['default']['USER']}:{settings.DATABASES['default']['PASSWORD']}@" \
                    f"{settings.DATABASES['default']['HOST']}:{settings.DATABASES['default']['PORT']}/{settings.DATABASES['default']['NAME']}"
@@ -58,20 +61,35 @@ class LDManager:
     @trace_function_log
     def attribution_horaire(self, h1 : int, h2 : int, j1:str, j2:str, _id : str, nb_exec : int=None):
         """
-        _id[0] == 'C' : correspond a LDC
-        _id[1:4] == 'CON' : correspond a LDCon
+        _id[0] == 'C' : correspond a LDC -> manager
+        _id[1:4] == 'CON' : correspond a LDCon -> conexion
         """
-        JOUR = {'1' : 'mon', '2' : 'tue', '3' : 'wed', '4' : 'thu', '5' : 'fri', '6' : 'sat', '7' : 'sun'}
+        if nb_exec is None:
+            nb_exec = 20
+
+        if self.existing_times is None:
+            self.existing_times = set()
+
+        JOUR = {'1': 'mon', '2': 'tue', '3': 'wed', '4': 'thu', '5': 'fri', '6': 'sat', '7': 'sun'}
+        days = [JOUR[str(i)] for i in range(int(j1), int(j2) + 1)]
         day = JOUR[j1]+'-'+JOUR[j2]
+
         if _id[0] == 'C':            
-            f = (h2*60 - h1*60) / (nb_exec + 1)
-    
-            trigger = CronTrigger(
-                day_of_week=day,  # Exécuter du lundi au vendredi
-                hour=f"{h1}-{int(h2) - 1}",  # Exclure la dernière heure (fin exclue)
-                minute=f'*/{int(f)}'  # Exécuter tous les "f" minutes
-            )
-            self.taches.add_job(LDManager._execute_task, trigger, id=_id, replace_existing=True, args=[str(_id)])
+            start_time = datetime.now().replace(hour=h1, minute=0, second=0, microsecond=0)
+            end_time = datetime.now().replace(hour=h2, minute=0, second=0, microsecond=0)
+            
+            time_slots = self.generate_non_overlapping_times(start_time, end_time, nb_exec)
+            
+            for exec_time in time_slots:
+                if exec_time.strftime('%a').lower() in days:
+                    trigger = DateTrigger(run_date=exec_time)
+                    self.taches.add_job(
+                        LDManager._execute_task,
+                        trigger,
+                        id=f"{_id}_{exec_time}",
+                        replace_existing=True,
+                        args=[str(_id)]
+                    )
 
         elif _id[1:4] == 'CON':
             trigger = CronTrigger(
@@ -80,20 +98,52 @@ class LDManager:
                 day_of_week=day
                 )
             self.taches.add_job(LDManager._execute_task, trigger=trigger, replace_existing=True, id=_id, args=[str(_id)])
+
+        # JOUR = {'1' : 'mon', '2' : 'tue', '3' : 'wed', '4' : 'thu', '5' : 'fri', '6' : 'sat', '7' : 'sun'}
+        # day = JOUR[j1]+'-'+JOUR[j2]
+        # if _id[0] == 'C':            
+        #     f = (h2*60 - h1*60) / (nb_exec + 1)
     
+        #     trigger = CronTrigger(
+        #         day_of_week=day,  # Exécuter du lundi au vendredi
+        #         hour=f"{h1}-{int(h2) - 1}",  # Exclure la dernière heure (fin exclue)
+        #         minute=f'*/{int(f)}'  # Exécuter tous les "f" minutes
+        #     )
+        #     self.taches.add_job(LDManager._execute_task, trigger, id=_id, replace_existing=True, args=[str(_id)])
+
+        # elif _id[1:4] == 'CON':
+        #     trigger = CronTrigger(
+        #         hour=h1, 
+        #         minute=0, 
+        #         day_of_week=day
+        #         )
+        #     self.taches.add_job(LDManager._execute_task, trigger=trigger, replace_existing=True, id=_id, args=[str(_id)])
+    @trace_function_log
+    def generate_non_overlapping_times(self, start_time, end_time, nb_exec):
+        time_slots = []
+        attempts = 0
+        max_attempts = nb_exec * 50  # Éviter les boucles infinies
+        while len(time_slots) < nb_exec and attempts < max_attempts:
+            random_minutes = random.randint(0, int((end_time - start_time).total_seconds() // 60))
+            exec_time = start_time + timedelta(minutes=random_minutes)
+            if exec_time not in self.existing_times:
+                logger.info(f"heure aleatoire generée : {exec_time}")
+                time_slots.append(exec_time)
+                self.existing_times.add(exec_time)
+            attempts += 1
+        logger.info(f"Nombre d'horaire dans la journée: {len(time_slots)}")
+        if len(time_slots) < nb_exec:
+            logger.warning("Impossible de planifier toutes les tâches sans chevauchement.")
+        return time_slots
+
     @trace_function_log
     @staticmethod
     def _execute_task(_id):
-        logger.info('execution tache id: '+_id)
         m = LDManager()
         if _id[0] == 'C':
-            logger.info('C')
             _id = _id[-2:]
-            logger.info('lancement')
             ldc = m.objets[_id].get_connexion()
-            logger.info('get_connexion')
             ldc.demander_connexion()
-            logger.info('start')
         elif _id[0:2] == '1CON':
             _id = _id[-2:]
             m.objets[_id].start()
@@ -102,6 +152,21 @@ class LDManager:
             m.objets[_id].stop()
     @trace_function_log
     def prochaine_execution(self, _id : str) -> datetime:
+        matching_tasks = []
+        for job in self.taches.get_jobs():
+            if _id in str(job.id) :
+                matching_tasks.append(job.next_run_time)
+        logger.info(f"heures trouvées : {matching_tasks}")
+        heures_triees = sorted(matching_tasks)
+        logger.info(f"heure triés : {heures_triees}")
+        paris_tz = zoneinfo.ZoneInfo("Europe/Paris")
+        for d in heures_triees:
+            if datetime.now(paris_tz) < d:
+                return d
+        return None
+
+            
+
         job = self.taches.get_job(_id)
         if job:
             return job.next_run_time
@@ -112,12 +177,9 @@ class LDManager:
             return None
     @trace_function_log
     def add(self, _id) -> None:
-        logger.info(f"ajout de l'{_id} dans le dictionaire")
         self.objets[_id] = LDCon(ID=_id)
-        logger.info(f"etat du dictionaire apres l'ajout : {self.objets}")
     @trace_function_log
     def start(self, id, exe=True) -> None:
-        logger.info(f"lancement de la methode start dict : {self.objet}")
         self.objets[id].start_programmer_tache()
         self.objets[id].start(exe)
     @trace_function_log
@@ -127,11 +189,14 @@ class LDManager:
     @trace_function_log
     def stop(self, _id) -> None:
         job = self.taches.get_job('C'+str(_id))
+        logger.info(f'job supression : {job}')
         if job:
             self.taches.remove_job('C'+str(_id))
         job = self.taches.get_job('1CON'+str(_id))
+        logger.info(f'job supression 1CON : {job}')
         if job:
             self.taches.remove_job('1CON'+str(_id))
+        logger.info(f'job supression 2CON : {job}')
         job = self.taches.get_job('2CON'+str(_id))
         if job:
             self.taches.remove_job('2CON'+str(_id))
@@ -146,7 +211,6 @@ class LDManager:
         del self.objets[str(_id)]
     @trace_function_log
     def etat_lancement(self, id) -> None:
-        logger.info(f"objet dans manager : {self.objets}")
         return self.objets[id].lancement_reussi()
     @trace_function_log
     def add_manager(self, _id) -> None:
@@ -192,10 +256,10 @@ class LDCon:
     @trace_function_log
     def __recuperer_token(self) -> str:
         c = Con.objects.get(id=self.ID)
-        return str(c.token)[2:-1]
+        logger.info("token : {c.token}")
+        return str(c.token)
     @trace_function_log
     def get_connexion(self):
-        logger.info('get_connexion')
         return self.__connexion
     @trace_function_log
     def start_programmer_tache(self):
@@ -245,12 +309,10 @@ class LDC:
         if self.__navigateur.start(p.linkedin_profile):
             ## cas de base -> le prospect à été ajouté
             etat : Etat = self.__navigateur.connexion()
-            logger.info(p.statutes.statutes)
             s = p.statutes
             s.statutes = etat.value
             s.save()
             p.save()
-            logger.info(p.statutes.statutes)
             self.__navigateur.close()
         else : 
             c = Con.objects.get(id=self.con.ID)
@@ -385,24 +447,38 @@ class LDObserver:
         Returns:
             None
         """
-        tm.sleep(5)
-        c = Con.objects.get(id=self.con.ID)
-        is_erreur = Erreur.objects.filter(idcon=c, etat=0, code_err=codeerreur.objects.get(id=2)).count() != 0
-        if not is_erreur:    
-            l = self.__comparer_statute()
-            for e in l:
-                prospect = Prospects.objects.get(id=e)
-                statute = prospect.statutes
-                if statute == Etat.SENT.value or statute == Etat.ON_HOLD:
-                    statute.statutes = Etat.ACCEPTED.value
-                    statute.save()
-
-            logger.info('lancement_valide True')
-            self.lancement_valide = True
-        else:
+        try:    
+            tm.sleep(5)
+            c = Con.objects.get(id=self.con.ID)
+            is_erreur = Erreur.objects.filter(idcon=c, etat=0, code_err=codeerreur.objects.get(id=1)).count() != 0
+            logger.info(f'__update_statute_accepted -> nb erreur : {is_erreur}')
+            if not is_erreur:  
+                logger.info("__update_statute_accepted -> pas d'erreur")  
+                l = self.__comparer_statute()
+                if self.lancement_valide != False:
+                    logger.info(f"__update_statute_accepted -> {l}")
+                    for e in l:
+                        logger.info(f'__update_statute_accepted -> {e}')
+                        prospect = Prospects.objects.get(id=e)
+                        statute = prospect.statutes
+                        logger.info(f'LDObserver.__update_statute_accepted -> {statute.statutes}')
+                        logger.info(f'Etat.SENT.value : {Etat.SENT.value} | Etat.ON_HOLD : {Etat.ON_HOLD}')
+                        if statute.statutes.upper() == Etat.ON_HOLD.value.upper() or statute.statutes.upper() == Etat.NOT_SENT.value.upper():
+                            logger.info(f"Maj du prospect {statute.statutes} -> {Etat.ACCEPTED.value} ")
+                            statute.statutes = Etat.ACCEPTED.value
+                            statute.save()
+                    logger.info('__update_statute_accepted -> lancement_valide True')
+                    self.lancement_valide = True
+                else:
+                    logger.info("LDObserver.__update_statute_accepted -> lancement valide = False test : if self.lancement_valide != False")
+            else:
+                self.lancement_valide = False
+                logger.info('LDObserver.__update_statute_accepted -> lancement valide = False test : if not is_erreur')
+        except Exception as e:
+            logger.info(f'erreur lors de la methode __update_statute_accepted : {e}')
             self.lancement_valide = False
             logger.info('lancement valide = False')
-            
+
     @trace_function_log
     def __comparer_statute(self) -> list:
         """
@@ -423,7 +499,6 @@ class LDObserver:
             list: Liste des ID des prospects ayant accepté la connexion, ou `None` en cas d'échec.
         """
         status_bd = Prospects.objects.filter(idcon_id=self.con.ID).exclude(statutes__statutes='Accepted').values('linkedin_profile', 'id')
-        logger.info(status_bd)
 
         # statuts_navigateur = self.__navigateur.getEtatsProspects()
         # return [e["id"] for e in status_bd if e["linkedin_profile"] in statuts_navigateur]
@@ -432,23 +507,24 @@ class LDObserver:
          
             if self.__navigateur.start(con.linkedin_lien):
                 statuts_navigateur = self.__navigateur.getEtatsProspects()
-                logger.info([e["id"] for e in status_bd if e["linkedin_profile"] in statuts_navigateur])
-                return [e["id"] for e in status_bd if e["linkedin_profile"] in statuts_navigateur]
-            else:
-                logger.info('token de connexion invalide')
-                self.lancement_valide = False
-                c = Con.objects.get(id=self.con.ID)
-                codeerr = codeerreur.objects.get(id=2)
-                if Erreur.objects.filter(idcon=c, etat=0, code_err=codeerr).count() == 0:
-                    e = Erreur(
-                        idcon = c,
-                        etat = False,
-                        date_err = datetime.now(),
-                        code_err = codeerr
-                    )
-                    e.save()
+                if statuts_navigateur != False:
+                    logger.info(f"different de false : {statuts_navigateur}")
+                    return [e["id"] for e in status_bd if e["linkedin_profile"] in statuts_navigateur]
+            
+            logger.info('token de connexion invalide')
+            self.lancement_valide = False
+            c = Con.objects.get(id=self.con.ID)
+            codeerr = codeerreur.objects.get(id=2)
+            if Erreur.objects.filter(idcon=c, etat=0, code_err=codeerr).count() == 0:
+                e = Erreur(
+                    idcon = c,
+                    etat = False,
+                    date_err = datetime.now(),
+                    code_err = codeerr
+                )
+                e.save()
 
-                return []
+            return []
 
         except Exception as e:
             logger.info('erreur - autre : ' + e)

@@ -46,15 +46,23 @@ class Navigateur:
         créé une nouvelle instance de navigateur
         """
         chrome_options = Options()
+        chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
         chrome_options.add_argument("--headless")  # Mode headless activé
         chrome_options.add_argument("--headless")  # Exécute Chrome en mode headless
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--window-size=1920,1080")
+        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option('useAutomationExtension', False)
+
+
         #chrome_options.add_argument("--start-maximized")  # Définit la taille de la fenêtre
 
-        logger.info("reset_navigateur")
+        logger.info("Navigateur.reset_navigateur")
 
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        logger.info("Navigateur.reset_navigateur -> self.driver defini")
         logger.info("ChromeDriver Version:", self.driver.capabilities['chrome']['chromedriverVersion'])
         logger.info("Browser Version:", self.driver.capabilities['browserVersion'])
 
@@ -94,10 +102,15 @@ class Navigateur:
         False sinon
         """
         try:
+            logger.info("Navigateur.start")
             self.reset_navigateur()
+            logger.info("Navigateur.start -> reset_navigateur ...")
             self.get(l)
+            logger.info("Navigateur.start -> get ...")
             self.driver.set_page_load_timeout(20)
+            logger.info(f"Navigateur.start -> token a definir {self.token}")
             self.setCookie('li_at', self.token, '.linkedin.com', '/')
+            logger.info("Navigateur.start -> setCookie ...")
             return True
         except TimeoutException:
             logger.info("Timeout: La page a mis trop de temps à charger.")
@@ -130,7 +143,6 @@ class LinkedInNavigateur(Navigateur):
         Envoi une demande de connexion a un Prospect
         """                       
         tm.sleep(10)
-        logger.info('debut')
         div = self.getElement('.gcGTCzCIvipxmcCliFpucHQrjcAuIXmk          ', 10)
         children = div.find_elements(By.XPATH, "./*")  # ./* récupère les enfants directs
 
@@ -169,6 +181,7 @@ class LinkedInNavigateur(Navigateur):
         return Etat.FAILURE
     
     def getEtatsProspects(self) -> Etat:
+        logger.info('LinkedInNavigateur.getEtatsProspects -> debut')
         try : 
             a = self.driver.find_element(By.XPATH, '//*[@id="global-nav"]/div/nav/ul/li[2]/a')
             tm.sleep(random.randint(0, 3))

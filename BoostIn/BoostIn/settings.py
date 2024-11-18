@@ -21,6 +21,8 @@ load_dotenv(dotenv_path)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,7 +35,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['boostin.scrooge.finance', 'localhost', '127.0.0.1', '46.101.19.31']
+ALLOWED_HOSTS = ['boostin.scrooge.finance', 'www.boostin.scrooge.finance', 'localhost', '127.0.0.1', '46.101.19.31']
 
 LOGIN_URL = 'connexion'
 
@@ -60,6 +62,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",  # Le '/1' indique la base de données Redis à utiliser
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
 
 ROOT_URLCONF = 'BoostIn.urls'
 
