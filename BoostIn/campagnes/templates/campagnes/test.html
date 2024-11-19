@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-Sent Events</title>
+</head>
+<body>
+    <h1>Server-Sent Events avec Django</h1>
+    <div id="updates">En attente de mises à jour...</div>
+
+    <script>
+        const eventSource = new EventSource('https://boostin.scrooge.finance/campagnes/sse/');
+
+        eventSource.onmessage = (event) => {
+            console.log("Mise à jour reçue : ", event.data);
+            document.getElementById("updates").textContent = event.data;
+        };
+
+        eventSource.onerror = (error) => {
+            console.error("Erreur SSE : ", error);
+        };    
+    </script>
+</body>
+</html>

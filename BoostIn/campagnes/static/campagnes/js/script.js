@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [{
           data: [donnees_stat_con.ACC, donnees_stat_con.ATT, donnees_stat_con.NENV, donnees_stat_con.REF, donnees_stat_con.SUC],
           backgroundColor: [
-            'rgb(51, 204, 51)',
-            'rgb(255, 153, 51)',
-            'rgb(196, 196, 196)',
-            'rgb(255, 0, 0)',
-            'rgb(0, 153, 255)'
+            'rgb(67, 56, 202)',
+            'rgb(165, 180, 252)',
+            'rgb(224, 231, 255)',
+            'rgb(49, 46, 129)',
+            'rgb(55, 48, 163)'
           ],
           hoverOffset: 4
         }]
@@ -121,10 +121,10 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [{
           data: [donnees_stat_mes.M1ST, donnees_stat_mes.M2ND, donnees_stat_mes.M3RD, donnees_stat_mes.NENV],
           backgroundColor: [
-            'rgb(0, 153, 255)',
-            'rgb(255, 153, 51)',
-            'rgb(255, 255, 0)',
-            'rgb(196, 196, 196)'
+            'rgb(199, 210, 254)',
+            'rgb(165, 180, 252)',
+            'rgb(129, 140, 248)',
+            'rgb(224, 231, 255)'
           ],
           hoverOffset: 4
         }]

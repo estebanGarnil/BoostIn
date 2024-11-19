@@ -38,26 +38,91 @@ HEURE_ACTIVITE = [
 ]
 
 class NouvelleCampagne(forms.Form):
-    nom_campagne = forms.CharField(label="Nom de la campagne", max_length=100)
+    separation_0 = forms.CharField(
+        required=False,
+        label='',
+        widget=forms.TextInput(attrs={
+            'class': 'w-full border-none bg-gray-100 text-gray-500 text-center font-semibold my-4',
+            'value': 'Informations de base',
+            'readonly': 'readonly',
+        })
+    )
+        
+    nom_campagne = forms.CharField(label="Nom de la campagne", max_length=100, widget=forms.TextInput(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
     type = forms.ChoiceField(
         choices=[
             (1, "Message 1-5-5"),
         ],
         label="Selectionez le type de campagne souhaité",
-        initial=1,  # Option par défaut
+        initial=1,  
+        widget=forms.Select(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        })
     )
-    token = forms.CharField(label="Token de connexion", max_length=1000)
-    compte_linkedin = forms.CharField(label="Compte linkedin associé", max_length=300)
 
-    sheet = forms.CharField(label="Google sheet des prospects", max_length=1000, required=False)
-    col_principale = forms.CharField(label="Colonne des profils linkedin", max_length=1000, required=False)
-    col_nom = forms.CharField(label='Colonne des nom-prenom des prospect', max_length=1000, required=False)
+    separation_1 = forms.CharField(
+        required=False,
+        label='',
+        widget=forms.TextInput(attrs={
+            'class': 'w-full border-none bg-gray-100 text-gray-500 text-center font-semibold my-4',
+            'value': 'Connexion et paramètres associés',
+            'readonly': 'readonly',
+        })
+    )
 
-    jour_debut = forms.ChoiceField(choices=JOURS_SEMAINE, label="Jour de début", initial=JOURS_SEMAINE[0])
-    jour_fin = forms.ChoiceField(choices=JOURS_SEMAINE, label="Jour de fin", initial=JOURS_SEMAINE[4])
+    token = forms.CharField(label="Token de connexion", max_length=1000, widget=forms.TextInput(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        })
+)
+    compte_linkedin = forms.CharField(label="Compte linkedin associé", max_length=300, widget=forms.TextInput(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
 
-    heure_debut = forms.ChoiceField(choices=HEURE_ACTIVITE, label="Heure de début", initial=HEURE_ACTIVITE[7])
-    heure_fin = forms.ChoiceField(choices=HEURE_ACTIVITE[1:], label="Heure de fin", initial=HEURE_ACTIVITE[19])
+    separation_2 = forms.CharField(
+        required=False,
+        label='',
+        widget=forms.TextInput(attrs={
+            'class': 'w-full border-none bg-gray-100 text-gray-500 text-center font-semibold my-4',
+            'value': 'Base de prospects',
+            'readonly': 'readonly',
+        })
+    )
+
+    sheet = forms.CharField(label="Google sheet des prospects", max_length=1000, required=False, widget=forms.TextInput(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
+    col_principale = forms.CharField(label="Colonne des profils linkedin", max_length=1000, required=False, widget=forms.TextInput(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
+    col_nom = forms.CharField(label='Colonne des nom-prenom des prospect', max_length=1000, required=False, widget=forms.TextInput(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
+
+    separation_3 = forms.CharField(
+        required=False,
+        label='',
+        widget=forms.TextInput(attrs={
+            'class': 'w-full border-none bg-gray-100 text-gray-500 text-center font-semibold my-4',
+            'value': 'Jours de fonctionnement',
+            'readonly': 'readonly',
+        })
+    )
+
+    jour_debut = forms.ChoiceField(choices=JOURS_SEMAINE, label="Jour de début", initial=JOURS_SEMAINE[0],         widget=forms.Select(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
+    jour_fin = forms.ChoiceField(choices=JOURS_SEMAINE, label="Jour de fin", initial=JOURS_SEMAINE[4],         widget=forms.Select(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
+
+    heure_debut = forms.ChoiceField(choices=HEURE_ACTIVITE, label="Heure de début", initial=HEURE_ACTIVITE[7],         widget=forms.Select(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
+    heure_fin = forms.ChoiceField(choices=HEURE_ACTIVITE[1:], label="Heure de fin", initial=HEURE_ACTIVITE[19], widget=forms.Select(attrs={
+            'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500'
+        }))
 
 
     def clean(self):
@@ -75,20 +140,23 @@ class NouvelleCampagne(forms.Form):
 
         return cleaned_data
 
+from django import forms
+
 class MessageForm(forms.Form):
     corp = forms.CharField(
-        max_length=900, 
+        max_length=900,
         widget=forms.Textarea(attrs={
-            'rows': 10,  # Nombre de lignes du textarea
-            'cols': 80   # Nombre de colonnes du textarea
+            'class': 'block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-0',  # Styles pour Tailwind
+            'placeholder': 'Écrivez votre message ici...',  # Ajout d'un placeholder
+            'rows': 6,  # Nombre de lignes du textarea
         })
     )
     instruction = forms.CharField(
-        required=False,  # Le champ n'est pas obligatoire
+        required=False,
         widget=forms.Textarea(attrs={
+            'class': 'block w-full p-3 bg-gray-100 text-gray-500 border border-transparent rounded-md cursor-not-allowed',  # Styles pour un champ non éditable
             'rows': 3,
-            'cols': 80,
-            'style': 'border:none; background-color:transparent;'  # Style pour ressembler à un label
+            'readonly': 'readonly',  # Rendre le champ non éditable
         })
     )
 
@@ -97,6 +165,5 @@ class MessageForm(forms.Form):
         super(MessageForm, self).__init__(*args, **kwargs)
         # Définir l'instruction spécifique à l'utilisateur
         self.fields['instruction'].initial = instruction_text
-        self.fields['instruction'].widget.attrs['readonly'] = 'readonly'
 
 

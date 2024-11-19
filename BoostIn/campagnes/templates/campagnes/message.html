@@ -1,6 +1,6 @@
 {% extends "campagnes/navbar.html" %}
 
-{% block title %} reglages {% endblock %}
+{% block title %} Réglages {% endblock %}
 {% load filtre %}
 {% load static %}
 
@@ -9,22 +9,37 @@
 {% endblock %}
 
 {% block content-container %}
-
-{% for m_item in message_item %}
-<div class="content-container">
-    <div class="message-item">
-        {% if m_item.0 is not None %}
-        <h3>Message n°{{ m_item.1 }}</h3>
-        <p>{{ m_item.0.corp }}</p>
-        <a href="{% url 'maj_message_edit' step=m_item.1 id_campagne=m_item.0.idcon.id id_message=m_item.0.id%}">Modifier ce message</a>
-        {% else %}
-        <h3>Message n°{{ m_item.1 }}</h3>
-        <p>Ce message n'existe pas encore</p>
-        <a href="{% url 'maj_campagne_edit' step=m_item.2.step_message id_campagne=m_item.2.id_con %}">Creer le message</a>
-        {% endif %}
+<div class="bg-white p-6 rounded-lg shadow mb-6 flex justify-between">
+    <div class="w-1/3 flex flex-col place-content-center">
+        <h1 class="text-xl font-bold mb-4 text-gray-800">Liste des messages</h1>
+        <img src="{% static 'campagnes/image/message_affiche.svg' %}" class="">
+    </div>
+    <div class="w-1/2">
+        
+        <div class="space-y-4">
+            {% for m_item in message_item %}
+                <div class="bg-gray-50 p-4 rounded-md shadow-md border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-700">
+                        Message n°{{ m_item.1 }}
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        {% if m_item.0 is not None %}
+                            {{ m_item.0.corp }}
+                        {% else %}
+                            Ce message n'existe pas encore
+                        {% endif %}
+                    </p>
+                    <a href="{% if m_item.0 is not None %}
+                                {% url 'maj_message_edit' step=m_item.1 id_campagne=m_item.0.idcon.id id_message=m_item.0.id %}
+                             {% else %}
+                                {% url 'maj_campagne_edit' step=m_item.2.step_message id_campagne=m_item.2.id_con %}
+                             {% endif %}"
+                       class="text-blue-600 hover:text-blue-800 font-medium">
+                        {% if m_item.0 is not None %}Modifier ce message{% else %}Créer le message{% endif %}
+                    </a>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-    
+    </div>
 </div>
-
 {% endblock %}

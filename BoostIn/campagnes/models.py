@@ -121,3 +121,21 @@ class Erreur(models.Model):
 
     class Meta:
         db_table = 'erreur_con'
+
+class ActionErreur(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
+    action = models.CharField(db_column='action', max_length=300)
+
+    class Meta:
+        db_table = 'actionerreur'
+
+class ListAction(models.Model):
+    idcode = models.ForeignKey(codeerreur, models.CASCADE, db_column='idcode')
+    idaction = models.ForeignKey(ActionErreur, models.CASCADE, db_column='idaction')
+
+    class Meta:
+        # Déclare l'unicité de la paire (idcode, idaction)
+        constraints = [
+            models.UniqueConstraint(fields=['idcode', 'idaction'], name='unique_listaction')
+        ]
+        db_table = 'listaction'

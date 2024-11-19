@@ -1,21 +1,35 @@
 {% extends "campagnes/base.html" %}
+{% load static %}
 
-{% block title %} nouvelle campagne {% endblock %}
+{% block title %} Nouvelle Campagne {% endblock %}
 
 {% block content %}
+<div class="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-lg shadow-md">
+    {% if titre == "Creez une nouvelle campagne" %}
+    <img src="{% static 'campagnes/image/form.svg' %}" class="w-1/2 h-auto mx-auto">
+    {% elif titre == "Ajouter le message n°1" %}
+    <img src="{% static 'campagnes/image/message1.svg' %}" class="w-1/2 h-auto mx-auto">
+    {% elif "Modifiez le message n°" in titre %}
+    <img src="{% static 'campagnes/image/edit.svg' %}" class="w-1/2 h-auto mx-auto">
+    {% else %}
+    <img src="{% static 'campagnes/image/message3.svg' %}" class="w-1/2 h-auto mx-auto">
+    {% endif %}
 
-<div class="container">
-    <div class="container-form">
+    <!-- Titre -->
+    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">{{ titre }}</h1>
 
-        <h1>{{ titre }}</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">{{ validation }}</button>
-        </form>
-    </div>
+    <!-- Formulaire -->
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        <!-- Champs du formulaire -->
+        <div class="space-y-4">
+            {{ form.as_p|safe }}
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            {{ validation }}
+        </button>
+    </form>
 </div>
-
-
-
 {% endblock %}

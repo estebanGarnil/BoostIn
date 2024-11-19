@@ -1,79 +1,137 @@
 {% extends 'campagnes/navbar.html' %}
 
-{% block title %} suivi {% endblock %}
+{% block title %} Suivi {% endblock %}
 {% load filtre %}
 {% load static %}
 
-
 {% block header %}
-<link rel="stylesheet" href="{% static 'campagnes/css/suivi.css' %}">
 {% endblock %}
 
 {% block content-container %}
-<div class='container'>
-    <div class="titre-suivi">
-        <div class="info-suivi">
-            <h1>{{ con.name }}</h1>
-            <h2>{{ campagne.name }}</h2>
-            <p id="h-exe">prochaine execution le : {{ pro }}</p>
+    <!-- Titre de la campagne -->
+    <div class="bg-white p-6 rounded-lg shadow mb-6 flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">{{ con.name }}</h1>
+            <h2 class="text-lg text-gray-500">{{ campagne.name }}</h2>
+            <p class="text-sm text-gray-400 mt-2">Prochaine exécution : <span class="font-semibold">{{ pro }}</span></p>
         </div>
-
-        
         <label class="switch">
             <input type="checkbox" id="startbutton">
             <span class="slider round"></span>
         </label>
-        <div id="loader" class="loader hidden"></div>
-
     </div>
 
-    {% for err in error %}
-    <div class="error-container">
-        <p>{{ err }}</p>
-    </div>
-    {% endfor %}
-
-    <div class="stat-container">
-        <div class="graph-container">
-            <canvas id="nombre-connexion"></canvas>
-            <canvas id="nombre-message"></canvas>    
+    <!-- Erreurs -->
+    {% if error %}
+    <div class="bg-white p-6 rounded-lg shadow mb-6">
+        <div class="container mx-auto">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Erreurs</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+                    <thead class="bg-gray-100 text-gray-600">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-medium">Code</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium">Description</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium">Actions Possibles</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium">Suprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        {% for err in error %}
+                        <tr class="hover:bg-gray-100">
+                            <td class="px-6 py-4 border-t text-sm">ERR00{{ err.0 }}</td>
+                            <td class="px-6 py-4 border-t text-sm">{{ err.1 }}</td>
+                            <td class="px-6 py-4 border-t text-sm">
+                                <ul class="list-disc pl-4">
+                                    {% for el in err.2 %}
+                                    <li>{{ el }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td class="px-6 py-4 border-t text-sm"><a href="{% url 'delete_error' err.0 con.id %}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
+    </div>
+    {% endif %}
 
-        <div class="slider-container">
-            <input type="range" id="dateSlider" min="0" max="0" step="1" value="0">
-            <p>Date sélectionnée : <span id="selectedDate"></span></p>
+    <!-- Statistiques -->
+    <div class="bg-white p-6 rounded-lg shadow mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Statistiques</h3>
+        <div class="flex flex-row justify-evenly w-full h-96">
+            <canvas id="nombre-connexion" class="w-1/3 h-full"></canvas>
+            <canvas id="nombre-message" class="w-1/3 h-full"></canvas>
+        </div>        
+        <div class="mt-6">
+            <label for="dateSlider" class="block text-sm text-gray-600">Date sélectionnée :</label>
+            <input type="range" id="dateSlider" min="0" max="0" step="1" value="0" class="w-full mt-2">
+            <p class="text-sm text-gray-500 mt-2">Date : <span id="selectedDate"></span></p>
         </div>
-    
     </div>
 
-    <div class="list-prospect">
-        <table>
-            <tr>
-                <th class="p-name">nom</th>
-                <th class="p-link">profil linkedin</th>
-                <th class="p-statutes">statut</th>
-                <th class="delete">effacer</th>
-            </tr>
-            {% for p_item in prospect %}
-            <tr>
-                <td class="p-name">{{p_item.name}}</td>
-                <td class="p-link">{{p_item.linkedin_profile}}</td>
-                <td class="p-statutes">{{p_item.statutes.statutes}}</td>
-                <td class="delete"><a href="{% url 'delete_prospect' p_item.id %}" class="i4"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></a></td>
-            </tr>
-            {% endfor %}
-        </table>
+    <!-- Liste des prospects -->
+    <div class="bg-white p-6 rounded-lg shadow flex flex-col space-x-4">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Liste des Prospects</h3>
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <label for="statusFilter" class="block text-sm font-medium text-gray-700">Filtrer par statut</label>
+                <select id="statusFilter" class="mt-1 block w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <option value="">Tous</option>
+                    <option value="Not sent">Not sent</option>
+                    <option value="On hold">On hold</option>
+                    <option value="Accepted">Accepted</option>
+                </select>
+            </div>
+            <div>
+                <label for="rowsPerPage" class="block text-sm font-medium text-gray-700">Lignes par page</label>
+                <select id="rowsPerPage" class="mt-1 block w-40 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="250">250</option>
+                    <option value="500">500</option>
+                </select>
+            </div>
+        </div>
+        <div class="overflow-x-auto pb-4">
+            <table class="min-w-full border-collapse border border-gray-200" id="dynamicTable">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-600">Nom</th>
+                        <th class="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-600">Profil LinkedIn</th>
+                        <th class="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-600">Statut</th>
+                        <th class="border border-gray-200 px-4 py-2 text-left text-sm font-semibold text-gray-600">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les lignes seront ajoutées ici dynamiquement -->
+                </tbody>
+            </table>
+        </div>
+        <div class="flex place-content-around">
+            <button onclick="previousPage()" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded">Précédent</button>
+            <span id="currentPage" class="text-gray-700 font-medium">Page 1</span>
+            <button onclick="nextPage()" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded">Suivant</button>
+        </div>
     </div>
     
-</div>
-
 <script type="text/javascript">var donnees_stat_con = {{ stat_con|safe }};</script>
 <script type="text/javascript">var donnees_stat_mes = {{ stat_mes|safe }};</script>
 <script type="text/javascript">
-    // Récupération de la date passée par Django au format ISO 8601
     const startDate = new Date("{{ date_creation }}");
 </script>
 <script src="{% static 'campagnes/js/script.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
+
+{{ prospect|json_script:"prospectData" }}
+
+<script src="{% static 'campagnes/js/tableau.js' %}"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}

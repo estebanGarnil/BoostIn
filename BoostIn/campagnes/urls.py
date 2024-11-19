@@ -17,6 +17,7 @@ urlpatterns = [
     path('a/message/<int:id_campagne>', views.message_campagne, name='message'),
     path('loading/', views.test_lancement, name='loading'),
     path('stat', views.get_stat_by_day, name='stat_by_day'),
+    path('d/erreur/<int:id_error>/<int:id_campagne>', views.delete_error, name='delete_error'),
     
     path('test/envoi_message', views.send_message_and_wait_response, name='envoi_message_test'),
     path('nouvelle_campagne/', views.nouvelle_campagne, name='nouvelle_campagne'),
@@ -25,4 +26,6 @@ urlpatterns = [
     path('nouvelle_campagne/<int:step>/<int:id_campagne>/edit/', views.nouvelle_campagne, {'edit': True}, name='maj_campagne_edit'),
     path('nouvelle_campagne/<int:step>/<int:id_campagne>/edit/<int:id_message>/', views.nouvelle_campagne, {'edit': True}, name='maj_message_edit'),
 
+    path('sse/', views.sse_view, name='sse'),
+    path('test_sse/', views.vue_sse, name='vue_sse')
 ]

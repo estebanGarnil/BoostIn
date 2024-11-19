@@ -1,6 +1,7 @@
 import datetime
 import json
-from django.http import HttpResponseRedirect, JsonResponse
+import time as tm
+from django.http import HttpResponseRedirect, JsonResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
 
 from django.contrib.auth.decorators import login_required
@@ -8,7 +9,7 @@ from django.urls import reverse
 
 from .form import NouvelleCampagne, MessageForm
 
-from .models import Con, Users, Campagne, Fonctionement, Message, Manager, Prospects, Statutes, NomChamp, ValeurChamp, Erreur, TachesProgrammes, codeerreur
+from .models import Con, Users, Campagne, Fonctionement, Message, Manager, Prospects, Statutes, NomChamp, ValeurChamp, Erreur, TachesProgrammes, codeerreur, ActionErreur, ListAction
 
 from .services.LD import LDManager
 
@@ -25,7 +26,7 @@ from django.db import connection
 
 from django_redis import get_redis_connection
 
-from .pubsub import subscribe_to_channel, publish_message
+from .pubsub import subscribe_to_channel, publish_message, subscribe_to_channel_continu
 
 import logging
 
@@ -163,13 +164,23 @@ def suivi_campagne(request, id_campagne):
     #    e = Erreur()
     #    e.save()
 
-    err = [e.code_err.description_code for e in Erreur.objects.filter(idcon=con, etat=0)]
+    # err = [e.code_err.description_code for e in Erreur.objects.filter(idcon=con, etat=0)]
 
     # if 2 in [e.code_err.id for e in Erreur.objects.filter(idcon=con, etat=0)]:
     #     if automatisation.etat_db(con.id):
     #         automatisation.stop(con.id)
 
-    prospect_item = Prospects.objects.filter(idcon=con)
+    err = [[e.code_err.id, e.code_err.description_code, []] for e in Erreur.objects.filter(idcon=con, etat=0)]
+
+    for e in err:
+        e[2] = [a.idaction.action for a in ListAction.objects.filter(idcode=e[0])]
+        
+    logger.info(f'erreur : {err}')
+    
+
+    prospect_item = Prospects.objects.filter(idcon=con).values(
+    'name', 'linkedin_profile', 'statutes__statutes', 'id')
+    prospect = list(prospect_item)
 
     nb_acc = get_stat_connexion(con)
     nb_mes = get_stat_message(con)
@@ -190,13 +201,25 @@ def suivi_campagne(request, id_campagne):
     # Attendre la réponse sur le canal de réponse
     pro_exe = subscribe_to_channel('response_channel')
     exe_dict = json.loads(pro_exe)
+    logger.info(f"pro_exe : {exe_dict}")
     if exe_dict["message"] != "None":
         pro_exe = datetime.fromisoformat(exe_dict["message"])
     else:
         pro_exe = "None"
 
 
-    return render(request, 'campagnes/suivi.html', {'con' : con, 'campagne' : campagne, 'prospect' : prospect_item, 'stat_con' : nb_acc, 'stat_mes' : nb_mes, "error" : err, "pro" : pro_exe, 'date_creation' : date_creation})
+    return render(request, 'campagnes/suivi.html', {'con' : con, 'campagne' : campagne, 'prospect' : prospect, 'stat_con' : nb_acc, 'stat_mes' : nb_mes, "error" : err, "pro" : pro_exe, 'date_creation' : date_creation})
+
+@login_required
+def delete_error(request, id_error, id_campagne):
+    con = Con.objects.get(id=id_campagne)
+    err = [e.code_err.id for e in Erreur.objects.filter(idcon=con, etat=0)]
+    if id_error in err:
+        codeerr = codeerreur.objects.get(id=id_error)
+        supr = Erreur.objects.filter(idcon=con, code_err=codeerr)
+        supr.delete()
+
+    return redirect('suivi_campagne', con.id)
 
 @login_required
 def message_campagne(request, id_campagne):
@@ -346,6 +369,63 @@ def lancement_campagne(request):
         except KeyError:
             return JsonResponse({'status': 'error', 'message': 'Session key missing'}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+@login_required
+def vue_sse(request):
+    return render(request, 'campagnes/test.html')
+
+def sse_view(request):
+    def event_stream():
+        try:
+            # Envoie la demande pour démarrer le suivi
+            message = {
+                'action': 'SUIVI',
+                'object_id': 'None'
+            }
+
+            publish_message('request_channel', json.dumps(message))
+            response = subscribe_to_channel('response_channel')
+            
+            decoded_str = response.decode('utf-8')
+
+            try:
+                response_dict = json.loads(decoded_str)
+            except json.JSONDecodeError as e:
+                logger.error(f"Erreur de décodage JSON : {e}")
+                response_dict = {}
+
+            suivi_channel = response_dict.get("suivi_channel")
+
+            logger.info(f'canal de suivi reçu : {suivi_channel}')
+
+            # Si aucun canal de suivi n'est reçu, on arrête ici
+            if not suivi_channel:
+                logger.error("Impossible d'obtenir un canal de suivi.")
+                yield "data: Erreur lors de l'obtention du canal de suivi\n\n"
+                return
+
+            logger.info(f"Écoute des messages sur le canal : {suivi_channel}")
+            suivi_generator = subscribe_to_channel_continu(suivi_channel)
+
+            for message in suivi_generator:
+                logger.info("Message reçu du canal de suivi")
+                decoded_message = message.decode('utf-8')
+                yield f"data: {decoded_message}\n\n"
+                logger.info("Message envoyé au client SSE")
+
+        except GeneratorExit:
+            logger.info("Client déconnecté")
+            return
+        except Exception as e:
+            logger.error(f"Erreur dans le flux SSE : {e}")
+            yield f"data: Erreur : {str(e)}\n\n"
+
+    # Configure la réponse HTTP pour le SSE
+    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
+    response['Cache-Control'] = 'no-cache'
+    response['Transfer-Encoding'] = 'chunked'
+    return response
+
 
 @login_required
 def test_lancement(request):

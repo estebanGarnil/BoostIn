@@ -1,6 +1,6 @@
 {% extends "campagnes/navbar.html" %}
 
-{% block title %} reglages {% endblock %}
+{% block title %} Réglages {% endblock %}
 {% load filtre %}
 {% load static %}
 
@@ -8,22 +8,37 @@
 <link rel="stylesheet" href="{% static 'campagnes/css/suivi.css' %}">
 {% endblock %}
 
-
 {% block content-container %}
+<div class="bg-white p-6 rounded-lg shadow mb-6 flex items-center justify-between">
 
-<div class="container">
-    <div class="container-form">
 
-        <h1>{{ titre }}</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">{{ validation }}</button>
-            <a href="{% url 'delete_campagne' con.id %}">Supprimer la campagne</a>
-        </form>
+    <!-- Formulaire -->
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Champs du formulaire -->
+        <div class="space-y-6">
+            {{ form.as_p|safe }}
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="flex justify-between items-center mt-6">
+            <!-- Bouton de soumission -->
+            <button type="submit" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                {{ validation }}
+            </button>
+
+            <!-- Bouton de suppression -->
+            <a href="{% url 'delete_campagne' con.id %}" class="text-red-600 hover:text-red-800 font-semibold">
+                Supprimer la campagne
+            </a>
+        </div>
+    </form>
+        <!-- Titre -->
+    <div class="flex flex-col max-h-fit justify-around">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">{{ titre }}</h1>
+        <img src="{% static 'campagnes/image/edit_form.svg' %}" class="w-1/2 h-auto mx-auto">
     </div>
+        
 </div>
-
-
-
 {% endblock %}
