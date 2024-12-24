@@ -25,7 +25,15 @@ urlpatterns = [
     path('nouvelle_campagne/<int:step>/<int:id_campagne>', views.nouvelle_campagne, name='nouvelle_campagne_step_id'),
     path('nouvelle_campagne/<int:step>/<int:id_campagne>/edit/', views.nouvelle_campagne, {'edit': True}, name='maj_campagne_edit'),
     path('nouvelle_campagne/<int:step>/<int:id_campagne>/edit/<int:id_message>/', views.nouvelle_campagne, {'edit': True}, name='maj_message_edit'),
+    path('nouveau_type/', views.nouveau_type_campagne, name='nouveau_type_campagne'),
+    path('nouveau_type/<int:step>', views.nouveau_type_campagne, name='nouveau_type_campagne'),
 
-    path('sse/', views.sse_view, name='sse'),
-    path('test_sse/', views.vue_sse, name='vue_sse')
+    path('sse/<str:canal>', views.sse_view, name='sse'),
+    path('test_sse/', views.vue_sse, name='vue_sse'),
+    path('demande_connexion/', views.demande_connexion_test, name='demande_connexion'),
+    path('envoye_email/', views.envoyer_email, name='envoyer_mail'),
+    path('envoye_message/', views.envoi_message_test, name='envoyer_message'),
+
+    path('connexion_linkedin/', views.connexion_linkedin_part1, name='connexion_linkedin'),
+    path('recuperation_code/<str:canal>', views.connexion_linkedin_part2, name='code_linkedin'),
 ]

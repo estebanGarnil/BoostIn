@@ -1,7 +1,7 @@
 import json
 import time
 import redis
-from .services.LD import LDManager
+from .services.LD import LDManager, LDCon
 from django_redis import get_redis_connection
 from django.conf import settings
 import os
@@ -45,11 +45,14 @@ def process_message(client, ld_manager, message_data):
         action = message_data.get('action')
         object_id = message_data.get('object_id')
         
-        if action == 'ADD':
-            ld_manager.add(object_id)
-            return {'etat': 'succes'}
+        if action == 'ADD': 
+            numchanel = uuid4()
+            suivi_channel = f"suivi_channel_{numchanel}" 
+            ld_manager.add(object_id, suivi_channel) 
+            return {'etat': 'succes', 'suivi_channel' : suivi_channel}
         elif action == 'START':
             ld_manager.start(object_id)
+            # suivi_channel = f"suivi_channel_{uuid4()}" 
             return {'etat': 'succes'}
         elif action == 'PROCHAINE_EXECUTION':
             pro = ld_manager.prochaine_execution(object_id)
@@ -67,6 +70,7 @@ def process_message(client, ld_manager, message_data):
             ld_manager.add_manager(object_id)
             return {'etat': 'succes'}
         elif action == 'STOP':
+            
             ld_manager.stop(object_id)
             return {'etat': 'succes'}
         elif action == 'SUIVI':
@@ -82,8 +86,30 @@ def process_message(client, ld_manager, message_data):
             start_suivi_channel(suivi_channel, object_id)
 
             return {'etat': 'succes', 'message': 'Publication terminée'}
+        
+        elif action == "TEST_DEMANDE":
+            ld_manager.ajouter_tache_10_seconde(object_id)
+            return {'etat': 'succes', 'message': 'Publication terminée'}
+        
+        elif action == "DELETE":
+            ld_manager.suppression_campagne(object_id)
+            return {'etat': 'succes', 'message': 'Publication terminée'}
+        
+        elif action == "CONNEXION_ETAPE_1":
+            try:
+                logger.info("connexion_etape_1")
+                user = message_data.get('user')
+                mdp = message_data.get('mdp')
+                ld_manager.connexion_linkedin(object_id, user, mdp)
+                logger.info("fini")
+                time.sleep(1)
+                return {'etat': 'succes', 'message': 'Publication terminée'}
+            except Exception as e:
+                logger.info(f"exception {e}")
+                return {}
         else:
             return {'etat': 'succes', 'message': 'réponse envoyée'}
+
     except Exception as e:
         logger.info(f'process_message -> erreur : {e}')
         return {'etat': 'erreur', 'message': 'erreur renvoyée'}

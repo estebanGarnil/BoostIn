@@ -3,17 +3,17 @@ from enum import Enum
 from typing import List
 
 class Etat(Enum):
-    ACCEPTED = "ACCEPTED"
+    ACCEPTED = "Accepted"
     MESSAGE1 = "1ST"
     MESSAGE2 = "2ND"
     MESSAGE3 = "3RD"
-    ON_HOLD = "ON HOLD"
-    FAILURE = "FAILURE"
-    REFUSED = "REFUSED"
-    END = "END"
-    SENT = "SENT"
-    SUCCESS = "SUCCESS"
-    NOT_SENT = "NOT SENT"
+    ON_HOLD = "On hold"
+    FAILURE = "Failure"
+    REFUSED = "Refused"
+    END = "End"
+    SENT = "Sent"
+    SUCCESS = "Success"
+    NOT_SENT = "Not sent"
 
     def __init__(self, value):
         self._value_ = value

@@ -93,7 +93,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'BoostIn.wsgi.application'
-
+ASGI_APPLICATION = 'BoostIn.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -109,7 +109,7 @@ DATABASES = {
 	'CONN_MAX_AGE': 600,
         'OPTIONS': {
             'charset': 'utf8mb4',
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'init_command': "SET NAMES 'utf8mb4' COLLATE 'utf8mb4_0900_ai_ci'; SET sql_mode='STRICT_TRANS_TABLES';",
         },
 
     }
@@ -178,6 +178,19 @@ if not os.path.exists(LOG_DIR):
 if not os.path.exists(LOG_FILE):
     with open(LOG_FILE, 'w'):  # Crée un fichier vide
         pass
+
+
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.office365.com'  # Serveur SMTP d'Outlook
+EMAIL_PORT = 587  # Port SMTP pour STARTTLS
+EMAIL_USE_TLS = True  # Utilisation de STARTTLS
+EMAIL_USE_SSL = False  # Désactivez SSL pour éviter les conflits avec TLS
+EMAIL_HOST_USER = 'assistance.boostin@outlook.fr'  # Votre adresse e-mail Outlook
+EMAIL_HOST_PASSWORD = 'Ab42gF3cHKz6b'  # Mot de passe de votre compte Outlook
+DEFAULT_FROM_EMAIL = 'assistance.boostin@outlook.fr'
+
 
 import os
 import logging

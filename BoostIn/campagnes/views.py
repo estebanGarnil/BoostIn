@@ -1,5 +1,6 @@
 import datetime
 import json
+import math
 import time as tm
 from django.http import HttpResponseRedirect, JsonResponse, StreamingHttpResponse
 from django.shortcuts import redirect, render
@@ -7,30 +8,49 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
-from .form import NouvelleCampagne, MessageForm
+from .form import NouvelleCampagne, MessageForm, NouveauTypeCampagne, FonctionnementForm, connexion_linkedin_form, code_connexion_linkedin_form
 
-from .models import Con, Users, Campagne, Fonctionement, Message, Manager, Prospects, Statutes, NomChamp, ValeurChamp, Erreur, TachesProgrammes, codeerreur, ActionErreur, ListAction
+from .models import Con, Users, Campagne, Fonctionement, Message, Manager, Prospects, Statutes, NomChamp, ValeurChamp, Erreur, TachesProgrammes, codeerreur, ActionErreur, ListAction, StatistiquesCampagne
 
 from .services.LD import LDManager
+from .services.navigateur import LinkedInNavigateur
 
 from .services.Donnees import Etat
 from django.core.exceptions import ObjectDoesNotExist
 
 from .utilitaire import fetch_google_sheet_data, clean_lien, InsertionForm
 
-from .utils import automatisation
-
-from datetime import datetime
+from datetime import date, datetime
 
 from django.db import connection
 
 from django_redis import get_redis_connection
 
 from .pubsub import subscribe_to_channel, publish_message, subscribe_to_channel_continu
+import asyncio
+
+from django.core.mail import send_mail
+from django.http import HttpResponse
+
+import redis.asyncio as redis
+
+
 
 import logging
 
 logger = logging.getLogger(__name__)
+
+def envoyer_email(request):
+    subject = "Sujet de l'e-mail"
+    message = "Ceci est un test d'envoi d'e-mail avec Django et Outlook."
+    recipient_list = ['esteb.garnil@gmail.com']  # Liste des destinataires
+
+    try:
+        send_mail(subject, message, 'assistance.boostin@outlook.fr', recipient_list)
+        return HttpResponse("E-mail envoyé avec succès.")
+    except Exception as e:
+        return HttpResponse(f"Erreur lors de l'envoi de l'e-mail : {e}")
+
 
 def send_message_and_wait_response(request):
     # Publier le message
@@ -58,41 +78,30 @@ def update_message(request, id_message, step_message, nombre_message):
     
 @login_required
 def delete_campagne(request, id_con):
-
-    etat_response = etat_campagne(request)
-    etat_data = etat_response.content.decode('utf-8')
-    etat_data = json.loads(etat_data)
+    try:
+        etat_response = etat_campagne(request)
+        etat_data = etat_response.content.decode('utf-8')
+        etat_data = json.loads(etat_data)
+        
+        if etat_data.get('status') == 'started':
+            arret_campagne(request)
     
-    if etat_data.get('status') == 'started':
-        arret_campagne(request)
+        message = {
+        'action': 'DELETE',
+        'object_id': str(id_con)
+        }
+        publish_message('request_channel', json.dumps(message))
+
+        
+        return redirect('campagnes')
+    except Exception as e:
+        logger.info(f"erreur durant la supression : {e}")
+
     
-    con = Con.objects.get(id=id_con)
-
-    message = Message.objects.filter(idcon=con)
-    for m in message:
-        m.delete()
-
-    nchamp = NomChamp.objects.filter(idcon=con)
-    vchamp = ValeurChamp.objects.filter(id_champ__in=nchamp)
-
-    for v in vchamp:
-        v.delete()
-    
-    for n in nchamp:
-        n.delete()
-
-    prospect = Prospects.objects.filter(idcon=con)
-    for p in prospect:
-        s = p.statutes
-        p.delete()
-        s.delete()
-
-    con.delete()
-
-    return redirect('campagnes')
 
 @login_required
 def delete_prospect(request, id_prospect):
+    logger.info("message reçu")
     p = Prospects.objects.get(id=id_prospect)
 
     v = ValeurChamp.objects.filter(id_prospect=p)
@@ -103,10 +112,8 @@ def delete_prospect(request, id_prospect):
     s = p.statutes
     p.delete()
     s.delete()
-
-    next_url = request.GET.get('next', request.META.get('HTTP_REFERER', '/'))
     
-    return redirect(next_url)
+    return JsonResponse({'response' : "validé"}) 
 
 @login_required
 def campagnes(request):
@@ -123,8 +130,13 @@ def campagnes(request):
         err = Erreur.objects.filter(idcon=c)
         for e in err:
             error += e.code_err.description_code
+
+        started = "Arret"
+        
+        if Manager.objects.filter(idcon=c).count() > 0:
+            started = "Lancé"
             
-        t.append({"titre_campagne" : c.name, "type_campagne" : c.idcampagne.name, "id_campagne" : c.id, "error" : error})
+        t.append({"titre_campagne" : c.name, "type_campagne" : c.idcampagne.name, "id_campagne" : c.id, "error" : error, 'started' : started})
     
     step = request.session.get('form_step', 0)
     if step != 0:
@@ -149,6 +161,41 @@ def suivi_campagne(request, id_campagne):
 
     nb_message = len(f)
 
+
+    ## taux d'acceptation
+    taux_reponse_global = 0
+    taux_acceptation = 0
+
+    try:
+        stat = StatistiquesCampagne.objects.get(idcon=con, date=date.today())
+        on_hold_value = stat.on_hold
+        accepted_value = stat.accepted
+
+        success = stat.success
+        message_envoye = stat.message1st
+        message_envoye+= stat.message2nd
+        message_envoye+= stat.message3rd
+
+        if message_envoye == 0:
+            taux_reponse_global = 0
+        else:
+            taux_reponse_global = math.floor((success/message_envoye)*100)
+
+        demande_envoye = on_hold_value+accepted_value
+        if demande_envoye == 0:
+            taux_acceptation = 0
+        else:
+            taux_acceptation = math.floor((accepted_value/demande_envoye)*100)
+
+        logger.info(f"taux acceptation : {taux_acceptation}")
+        logger.info(f"taux reponse global {taux_reponse_global}")
+
+    except Exception as e:
+        logger.info(f"erreur suivi campagne :  {e}")
+
+    stroke_dashoffset_acceptation = 252 * (1 - taux_acceptation / 100)  # Calcul du décalage
+    stroke_dashoffset_reponse = 252 * (1 - taux_reponse_global / 100)  # Calcul du décalage
+
     message_reel = 0
     i = 1
     for f_item in f:
@@ -157,26 +204,14 @@ def suivi_campagne(request, id_campagne):
         except ObjectDoesNotExist:
             pass
         i+=1
-    #if message_reel == nb_message and 1 in [e.code_err.id for e in Erreur.objects.filter(idcon=con, etat=0)]:
-        #e = Erreur.objects.get(idcon=con, code_err=codeerreur.objects.get(id=1))
-        #e.delete()
-    #else:
-    #    e = Erreur()
-    #    e.save()
-
-    # err = [e.code_err.description_code for e in Erreur.objects.filter(idcon=con, etat=0)]
-
-    # if 2 in [e.code_err.id for e in Erreur.objects.filter(idcon=con, etat=0)]:
-    #     if automatisation.etat_db(con.id):
-    #         automatisation.stop(con.id)
 
     err = [[e.code_err.id, e.code_err.description_code, []] for e in Erreur.objects.filter(idcon=con, etat=0)]
 
     for e in err:
         e[2] = [a.idaction.action for a in ListAction.objects.filter(idcode=e[0])]
+
         
     logger.info(f'erreur : {err}')
-    
 
     prospect_item = Prospects.objects.filter(idcon=con).values(
     'name', 'linkedin_profile', 'statutes__statutes', 'id')
@@ -185,13 +220,8 @@ def suivi_campagne(request, id_campagne):
     nb_acc = get_stat_connexion(con)
     nb_mes = get_stat_message(con)
 
-    # etat_campagne = automatisation.etat(id_campagne)
-
     date_creation = con.date_creation
 
-    #pro_exe = automatisation.prochaine_execution('C'+str(id_campagne))
-
-    ## automatisation.prochaine_execution('C'+str(id_campagne))
     message = {
         'action': 'PROCHAINE_EXECUTION',
         'object_id': 'C'+str(id_campagne)
@@ -202,13 +232,26 @@ def suivi_campagne(request, id_campagne):
     pro_exe = subscribe_to_channel('response_channel')
     exe_dict = json.loads(pro_exe)
     logger.info(f"pro_exe : {exe_dict}")
+    logger.info(f"dictionnaire contenant message : {exe_dict}")
+    active_button = False
+    if Manager.objects.filter(idcon=id_campagne).count() == 1:
+        active_button = True
+
     if exe_dict["message"] != "None":
         pro_exe = datetime.fromisoformat(exe_dict["message"])
+        if active_button == False:
+            message = {
+                'action': 'STOP',
+                'object_id': str(id_campagne)
+            }
+            publish_message('request_channel', json.dumps(message))    
+            pro_exe = "None"
     else:
         pro_exe = "None"
+    
+    is_connected = con.is_active
 
-
-    return render(request, 'campagnes/suivi.html', {'con' : con, 'campagne' : campagne, 'prospect' : prospect, 'stat_con' : nb_acc, 'stat_mes' : nb_mes, "error" : err, "pro" : pro_exe, 'date_creation' : date_creation})
+    return render(request, 'campagnes/suivi.html', {'is_connected' : is_connected, 'taux_acceptation' : taux_acceptation, 'taux_reponse' : taux_reponse_global, 'stroke_acceptation' : stroke_dashoffset_acceptation, 'stroke_reponse' : stroke_dashoffset_reponse, 'active_button' : active_button, 'con' : con, 'campagne' : campagne, 'prospect' : prospect, 'stat_con' : nb_acc, 'stat_mes' : nb_mes, "error" : err, "pro" : pro_exe, 'date_creation' : date_creation})
 
 @login_required
 def delete_error(request, id_error, id_campagne):
@@ -253,7 +296,7 @@ def nouvelle_campagne(request, step=0, id_campagne=None, edit=False, id_message=
         referer = request.session['referer']
 
         if step == 0:
-            form = NouvelleCampagne(request.POST)
+            form = NouvelleCampagne(request.POST, id_user=request.user.id)
             if form.is_valid():
                 f = InsertionForm(form, id_campagne, id_message, edit)
 
@@ -290,11 +333,11 @@ def nouvelle_campagne(request, step=0, id_campagne=None, edit=False, id_message=
             if edit:
                 titre = "Modifiez votre campagne : "+con_instance.name
                 initial_data = {'nom_campagne': con_instance.name, 'token': str(con_instance.token)[2:-1], 'compte_linkedin' : con_instance.linkedin_lien,'jour_debut' : int(str(con_instance.jouractivite)[0]), 'jour_fin' : int(str(con_instance.jouractivite[2])), 'heure_debut' : int(str(con_instance.heureactivite[:2])), 'heure_fin' : int(str(con_instance.heureactivite[3:]))}
-                form = NouvelleCampagne(initial=initial_data)
+                form = NouvelleCampagne(initial=initial_data, id_user=request.user.id)
                 validation = "valider les modification"
             else:
                 titre = "Creez une nouvelle campagne"
-                form = NouvelleCampagne()
+                form = NouvelleCampagne(id_user=request.user.id)
                 validation = "etape suivante"
         elif step > 0:
 
@@ -317,12 +360,46 @@ def nouvelle_campagne(request, step=0, id_campagne=None, edit=False, id_message=
                 validation = "valider les modification"
 
         else:
-            form = NouvelleCampagne()  # Défaut
+            form = NouvelleCampagne(id_user=request.user.id)  # Défaut
         
         if edit and id_message is None and step==0:
             return render(request, 'campagnes/setting_campagne.html', {'form': form, 'step': step, 'titre' : titre, 'validation' : validation, 'con' : con_instance})
 
         return render(request, 'campagnes/nouvelle_campagne.html', {'form': form, 'step': step, 'titre' : titre, 'validation' : validation})
+
+def nouveau_type_campagne(request, step=None):
+    if request.method == 'POST':
+        if step == None:
+            form = NouveauTypeCampagne(request.POST)
+            if form.is_valid():
+                cleaned_data = form.cleaned_data
+                nom = cleaned_data['nom']
+                description = cleaned_data['description']
+                visibilite = cleaned_data['visibilite']
+                nb_message = cleaned_data['nb_message']
+                methode = cleaned_data['methode']
+                logger.info(f"methode : {methode}")
+                if methode == 1:
+                    campagne=Campagne(
+                        iduser=request.user,  # L'utilisateur connecté (ajustez selon votre contexte)
+                        name=nom,
+                        description=description,
+                        visibilite=visibilite
+                    )
+                    campagne.save()
+                return redirect('nouveau_type_campagne', step=1)  
+
+    else:
+        if step == None:
+            form = NouveauTypeCampagne()
+            titre = 'Nouveau type de campagne'
+            validation = 'Parametrage des messages ->'
+        else:
+            form = FonctionnementForm()
+            titre = f"Parametrage de l'envoi du message n°{step}"
+            validation = 'Valider'
+        return render(request, 'campagnes/type_campagne.html', {'form' : form, 'titre' : titre, 'validation' : validation})
+
 
 @login_required
 def etat_campagne(request):
@@ -358,34 +435,8 @@ def lancement_campagne(request):
                 'object_id': id_con
             }
             publish_message('request_channel', json.dumps(message))
-            ## LDManager.start(id_con)
-            message = {
-                'action': 'START',
-                'object_id': id_con
-            }
-            
-            publish_message('request_channel', json.dumps(message))
-            return JsonResponse({'status': 'success'})
-        except KeyError:
-            return JsonResponse({'status': 'error', 'message': 'Session key missing'}, status=400)
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
-@login_required
-def vue_sse(request):
-    return render(request, 'campagnes/test.html')
-
-def sse_view(request):
-    def event_stream():
-        try:
-            # Envoie la demande pour démarrer le suivi
-            message = {
-                'action': 'SUIVI',
-                'object_id': 'None'
-            }
-
-            publish_message('request_channel', json.dumps(message))
             response = subscribe_to_channel('response_channel')
-            
             decoded_str = response.decode('utf-8')
 
             try:
@@ -395,37 +446,224 @@ def sse_view(request):
                 response_dict = {}
 
             suivi_channel = response_dict.get("suivi_channel")
+            ## LDManager.start(id_con)
+            message = {
+                'action': 'START',
+                'object_id': id_con
+            }
+            publish_message('request_channel', json.dumps(message))
+                        
+            return JsonResponse({'status': 'success', 'suivi_channel' : suivi_channel})
+        except KeyError:
+            return JsonResponse({'status': 'error', 'message': 'Session key missing'}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
-            logger.info(f'canal de suivi reçu : {suivi_channel}')
+def connexion_linkedin_part1(request):
+    if request.method == 'POST':
+        form = connexion_linkedin_form(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data['user']
+            mdp = form.cleaned_data['mdp']
 
-            # Si aucun canal de suivi n'est reçu, on arrête ici
-            if not suivi_channel:
-                logger.error("Impossible d'obtenir un canal de suivi.")
-                yield "data: Erreur lors de l'obtention du canal de suivi\n\n"
-                return
+            p = request.session['page']
+            id_con = p[p.index('/')+1:]
 
-            logger.info(f"Écoute des messages sur le canal : {suivi_channel}")
-            suivi_generator = subscribe_to_channel_continu(suivi_channel)
+            logger.info(f"id_con : {id_con}")
 
-            for message in suivi_generator:
-                logger.info("Message reçu du canal de suivi")
-                decoded_message = message.decode('utf-8')
-                yield f"data: {decoded_message}\n\n"
-                logger.info("Message envoyé au client SSE")
+            message = {
+                'action': 'ADD',
+                'object_id': id_con
+            }
+            publish_message('request_channel', json.dumps(message))
 
-        except GeneratorExit:
-            logger.info("Client déconnecté")
-            return
+            response = subscribe_to_channel('response_channel')
+            logger.info("débloqué")
+            decoded_str = response.decode('utf-8')
+
+            try:
+                response_dict = json.loads(decoded_str)
+            except json.JSONDecodeError as e:
+                logger.error(f"Erreur de décodage JSON : {e}")
+                response_dict = {}
+
+            suivi_channel = response_dict.get("suivi_channel")
+            logger.info(f"views : {suivi_channel}, lancement de etape1")
+
+            message = {
+                'action': 'CONNEXION_ETAPE_1',
+                'object_id': id_con,
+                'user' : user,
+                'mdp' : mdp
+            }
+            publish_message('request_channel', json.dumps(message))
+
+            form = code_connexion_linkedin_form()
+            return redirect(reverse("code_linkedin", kwargs={'canal': suivi_channel}))
+    else:
+        form = connexion_linkedin_form()
+    return render(request, 'campagnes/login_linkedin.html', {'form': form})
+
+def connexion_linkedin_part2(request, canal):
+    if request.method == 'POST':
+        form = code_connexion_linkedin_form(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data['code']
+            canal = form.cleaned_data['canal']  
+
+            p = request.session['page']
+            id_con = p[p.index('/')+1:]
+
+            message = {
+                'data': code,
+            }
+            publish_message(canal, json.dumps(message))
+
+            return redirect("suivi_campagne", id_con)
+    else:
+        form = code_connexion_linkedin_form(initial={'canal': canal})  
+    return render(request, 'campagnes/login_code.html', {'form': form})
+
+@login_required
+def vue_sse(request):
+    return render(request, 'campagnes/test.html')
+
+# def sse_view(request, canal):
+#     def event_stream():
+#         try:
+#             logger.info(f"Écoute des messages sur le canal : {canal}")
+#             suivi_generator = subscribe_to_channel_continu(f'{canal}')
+            
+#             for message in suivi_generator:
+#                 logger.info(f"Message JSON reçu du canal : {message}")
+#                 yield f"data: {json.dumps(message)}\n\n"
+
+#                 if message.get("etape") in ["arret", "echec"]:
+#                     tm.sleep(4)
+#                     logger.info("Message d'arrêt reçu. Arrêt du flux SSE.")
+#                     break
+#             logger.info('sortie de la boucle sse')
+#         except GeneratorExit:
+#             logger.info("Client SSE déconnecté.")
+#         except Exception as e:
+#             logger.error(f"Erreur dans le flux SSE : {e}")
+#             yield f"data: {json.dumps({'error': str(e)})}\n\n"
+#         finally:
+#             logger.info("Flux SSE fermé proprement.")
+
+#     # Configuration de la réponse HTTP pour SSE
+#     response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
+#     response['Cache-Control'] = 'no-cache'
+#     return response
+
+import time
+
+import redis.asyncio as redis
+import asyncio
+from django.http import StreamingHttpResponse
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
+from asgiref.sync import sync_to_async
+import redis.asyncio as redis
+import asyncio
+from django.http import StreamingHttpResponse
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
+async def sse_view(request, canal):
+    # logger.info("connecté")
+    # async def event_stream():
+    #     logger.info("demarage")
+    #     for i in range(100):  # Envoie 10 messages
+    #         yield f"data: Message {i}\n\n"  # Chaque message doit suivre le format SSE
+    #         logger.info("message_envoyé")
+    #         await asyncio.sleep(1)  # Attente de 1 seconde entre les messages
+    # response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    # response['Cache-Control'] = 'no-cache'
+    # response['X-Accel-Buffering'] = 'no'  # Désactive le buffering dans Nginx
+    # return response
+
+    logger.info("Connecté au canal : %s", canal)
+    async def event_stream():
+        try:
+            # Connexion au client Redis
+            redis_client = redis.Redis(host="localhost", decode_responses=True)
+            pubsub = redis_client.pubsub()
+            await pubsub.subscribe(f'{canal}')  # S'abonner au canal Redis
+            
+            logger.info(f"Abonné au canal Redis : {canal}")
+            async for message in pubsub.listen():
+                if message["type"] == "message":
+                    data = message["data"]
+                    yield f"data: {json.dumps(message)}\n\n"
+                    logger.info("Message envoyé : %s", data)
         except Exception as e:
-            logger.error(f"Erreur dans le flux SSE : {e}")
-            yield f"data: Erreur : {str(e)}\n\n"
+            logger.info("Erreur détaillée : %s", e, exc_info=True)
+        finally:
+            logger.info("Déconnexion du canal Redis")
+            await pubsub.unsubscribe(canal)
+            await redis_client.close()
 
-    # Configure la réponse HTTP pour le SSE
-    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
+    response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
     response['Cache-Control'] = 'no-cache'
-    response['Transfer-Encoding'] = 'chunked'
+    response['X-Accel-Buffering'] = 'no'  # Désactive le buffering dans Nginx
     return response
+    # async def event_stream():
+    #     logger.info(f"Écoute des messages sur le canal : {canal}")
+    #     suivi_generator = subscribe_to_channel_continu(f'{canal}')
+    #     last_message_time = time.time()
+    #     ping_interval = 5  # Intervalle en secondes pour envoyer un ping
 
+    #     try:
+    #         for message in suivi_generator:
+    #             if not isinstance(message, dict):
+    #                 logger.warning(f"Message inattendu : {message}")
+    #                 continue
+
+    #             logger.info(f"Message JSON reçu du canal : {message}")
+    #             yield f"data: {json.dumps(message)}\n\n"
+
+    #             # Si le message contient une étape d'arrêt, sortez de la boucle
+    #             if message.get("etape") in ["arret", "echec"]:
+    #                 await asyncio.sleep(4)
+    #                 logger.info("Message d'arrêt reçu. Arrêt du flux SSE.")
+    #                 break
+
+    #             # Envoyer un ping si le délai est dépassé
+    #             if time.time() - last_message_time >= ping_interval:
+    #                 logger.info("Envoi d'un message de keep-alive.")
+    #                 yield f"data: {json.dumps({'ping': True})}\n\n"  # Keep-alive
+    #                 last_message_time = time.time()
+
+    #         logger.info("Sortie de la boucle SSE.")
+    #     except GeneratorExit:
+    #         logger.info("Client SSE déconnecté.")
+    #     except Exception as e:
+    #         logger.error(f"Erreur dans le flux SSE : {e}")
+    #         yield f"data: {json.dumps({'error': str(e)})}\n\n"
+    #     finally:
+    #         logger.info("Flux SSE fermé proprement.")
+
+    # response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
+    # response['Cache-Control'] = 'no-cache'
+    # response['X-Accel-Buffering'] = 'no'  # Optionnel : pour Nginx ou serveurs avec buffering
+    # return response
+
+    #     logger.info("connecté")
+    # async def event_stream():
+    #     logger.info("demarage")
+    #     for i in range(100):  # Envoie 10 messages
+    #         yield f"data: Message {i}\n\n"  # Chaque message doit suivre le format SSE
+    #         logger.info("message_envoyé")
+    #         await asyncio.sleep(1)  # Attente de 1 seconde entre les messages
+    # response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    # response['Cache-Control'] = 'no-cache'
+    # response['X-Accel-Buffering'] = 'no'  # Désactive le buffering dans Nginx
+    # return response
 
 @login_required
 def test_lancement(request):
@@ -515,7 +753,6 @@ def get_stat_message(con):
     all_prospect = Prospects.objects.filter(idcon=con)
 
     stat = {"M1ST" : 0, "M2ND" : 0, "M3RD" : 0, "NENV" : 0}
-    
 
     for p in all_prospect:
         if p.statutes.statutes.upper() == "1ST":
@@ -599,4 +836,57 @@ def get_stat_by_day(request):
         return JsonResponse({'stat_mes' : stat_mes, 'stat_con' : stat})
 
 
+import random
 
+
+async def test_flux_sse(request):
+    logger.info("connecté")
+    async def event_stream():
+        logger.info("demarage")
+        for i in range(100):  # Envoie 10 messages
+            yield f"data: Message {i}\n\n"  # Chaque message doit suivre le format SSE
+            logger.info("message_envoyé")
+            await asyncio.sleep(1)  # Attente de 1 seconde entre les messages
+    response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    response['Cache-Control'] = 'no-cache'
+    response['X-Accel-Buffering'] = 'no'  # Désactive le buffering dans Nginx
+    return response
+
+
+
+def demande_connexion_test(request):
+    logger.info("demande reçu")
+
+    p = request.session['page']
+    id_con = p[p.index('/')+1:]
+
+    message = {
+        'action': 'TEST_DEMANDE',
+        'object_id': 'C'+str(id_con)
+    }
+    publish_message('request_channel', json.dumps(message))
+    return JsonResponse({'response' : "validé"}) 
+
+def envoi_message_test(request):
+    logger.info("demande message reçu")
+
+    p = request.session['page']
+    id_con = p[p.index('/')+1:]
+
+    message = {
+        'action': 'TEST_MESSAGE',
+        'object_id': str(id_con)
+    }
+    publish_message('request_channel', json.dumps(message))
+    return JsonResponse({'response' : "validé"}) 
+    
+
+    
+    # logger.info("demarage navigateur")
+    # n = LinkedInNavigateur("AQEDAUnwyLwE1QpHAAABk09RQ2QAAAGTl2eFtU0AcXStF9fTnhrjFHH1jTvjiVBs1B0R8Sv_v59aZ1F-FWIrCcswbgFh2LSAwXGMoeYKhi3n1_alypeTNq4YP4bMmXhFWSE5mNTqMph-eqQCHGdy0HzM")
+    # logger.info("etape2")
+    # n.start("https://www.linkedin.com/in/omar-alhajji-462b64303/")
+    # logger.info("etape3")
+    # n.connexion()
+    # logger.info("fini")
+    # return JsonResponse({'response' : "validé"}) 

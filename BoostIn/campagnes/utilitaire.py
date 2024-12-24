@@ -4,8 +4,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from django.db import transaction
 
 from .services.Donnees import Etat
-from .utils import automatisation
-from .models import Con, Fonctionement, NomChamp, Prospects, Statutes, Users, Campagne, ValeurChamp, Message, Erreur, codeerreur
+from .models import Con, Fonctionement, NomChamp, Prospects, Statutes, Users, Campagne, ValeurChamp, Message, Erreur, codeerreur, StatistiquesCampagne
 
 def fetch_google_sheet_data(sheet_id):
     # Configuration des permissions de l'API
@@ -49,8 +48,6 @@ class InsertionForm:
             if self.con_instance.jouractivite != chaine_jour or self.con_instance.heureactivite != chaine_heure: ## change les heures
                 self.con_instance.jouractivite = chaine_jour
                 self.con_instance.heureactivite = chaine_heure
-                if automatisation.prochaine_execution('C'+str(self.con_instance.id)) != None: ## est deja lancé ou non 
-                    changement_heure = True
 
             if str(self.con_instance.token)[2:-1] != self.form.cleaned_data['token'] and Erreur.objects.filter(idcon=self.con_instance.id, code_err=codeerreur.objects.get(id=2), etat=0).count() > 0:
                 e = Erreur.objects.get(idcon=self.con_instance.id, code_err=codeerreur.objects.get(id=2), etat=0)
@@ -72,12 +69,6 @@ class InsertionForm:
             date_creation = date.today()
             )
         self.con_instance.save()
-
-        if changement_heure:
-            automatisation.stop(str(self.con_instance.id))
-            automatisation.add(str(self.con_instance.id))
-            automatisation.add_manager(str(self.con_instance.id))
-            automatisation.start(str(self.con_instance.id), False)
 
     
         return self.con_instance.id
@@ -106,8 +97,11 @@ class InsertionForm:
 
             with transaction.atomic():
                 for k in prospect_data[0].keys():
-                    new_champ = NomChamp(idcon=self.con_instance, nom=k)
-                    new_champ.save()
+                    if NomChamp.objects.filter(idcon=self.con_instance, nom=k).count() < 1:
+                        new_champ = NomChamp(idcon=self.con_instance, nom=k)
+                        new_champ.save()
+                    else:
+                        new_champ = NomChamp.objects.get(idcon=self.con_instance, nom=k)
                     id_champ.append(new_champ)
 
                 for l in prospect_data:
@@ -130,3 +124,6 @@ class InsertionForm:
 
                         statut_prospect.id_prospect = prospect_instance.id
                         statut_prospect.save()
+
+
+

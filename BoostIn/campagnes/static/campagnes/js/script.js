@@ -1,5 +1,9 @@
 const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+PROCHAINE_EXECUTION = document.getElementById('prochaine_connexion');
+
+// GRAPHIQUES 
+// #######################################################################
 function debounceFunction() {
   let timeout;
 
@@ -7,7 +11,7 @@ function debounceFunction() {
     const executeFunction = () => {
       console.log(date)
 
-      fetch('http://127.0.0.1:8000/campagnes/stat', {
+      fetch('https://boostin.scrooge.finance/campagnes/stat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -52,10 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const timeDiff = currentDate - startDate;
   const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
 
-  // Mettre à jour les attributs min et max du slider
-  const dateSlider = document.getElementById('dateSlider');
-  dateSlider.max = daysDiff;
-
   // Fonction pour formater la date
   function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
@@ -63,31 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
 }
-  // Afficher la date sélectionnée
-  function updateDate() {
-      const selectedDays = parseInt(dateSlider.value, 10);
-      const selectedDate = new Date(startDate.getTime() + selectedDays * 24 * 60 * 60 * 1000);
-      document.getElementById('selectedDate').textContent = formatDate(selectedDate);
 
-      tempo(selectedDate); // Appel initial
-  }
-
-  // Initialiser avec la date actuelle
-  dateSlider.value = daysDiff;
-  updateDate();
-
-  // Mettre à jour la date lorsque le slider change
-  dateSlider.addEventListener('input', updateDate);
-
-    console.log(donnees_stat_mes)
+    console.log(donnees_stat_mes);
+    console.log(donnees_stat_con);
     // graphique nb connexion
     const data = {
         labels: [
           'accepté',
           'en attente',
           'non demandé',
-          'refusé',
-          'succès'
+          'succès',
+          'refusé'
         ],
         datasets: [{
           data: [donnees_stat_con.ACC, donnees_stat_con.ATT, donnees_stat_con.NENV, donnees_stat_con.REF, donnees_stat_con.SUC],
@@ -142,68 +128,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //   ------------------
 
-    fetch('http://127.0.0.1:8000/campagnes/a/etat', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-        },
-        body: JSON.stringify({})
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data.status)
-        if (data.status == 'started') {
-            var checkbox = document.getElementById("startbutton");
-            checkbox.checked = true;
-            checkbox.disabled = false;
-        }
-        else if (data.status == 'error') {
-          var checkbox = document.getElementById("startbutton");
-          checkbox.disabled = true;
-        }
-    })
-    .catch(error => {
-      console.error('Une erreur est survenue:', error); // Gérer les erreurs éventuelles
-    });    
-    
 
 });
+// #######################################################################
+
 
 function attendre(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function waiting_loading(url) {
-  var etatapp = true;
+// async function waiting_loading(url) {
+//   var etatapp = true;
 
-  while (etatapp) { // Boucle infinie, à adapter selon tes besoins
-      await attendre(5000); // Attendre 5 secondes avant de recommencer
-      fetch('http://127.0.0.1:8000/campagnes/loading/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-        },
-        body: JSON.stringify({})
-      })
-      .then(response => {
-          // Si tu veux voir le statut HTTP avant de parser en JSON
-          console.log('HTTP Status:', response.status);
-          return response.json();
-      })
-      .then(data => {
-          if (data.status === 'success') {
-            console.log('Status dans la réponse JSON:', data.status);
-            location.reload(true);
-            etatapp = false;
-          }
-      })
-      .catch(error => {
-          console.error('Il y a eu un problème avec la requête fetch:', error);
-      });
-  }
-}
+//   while (etatapp) { // Boucle infinie, à adapter selon tes besoins
+//       await attendre(5000); // Attendre 5 secondes avant de recommencer
+//       fetch('https://boostin.scrooge.finance/campagnes/loading/', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-CSRFToken': csrftoken
+//         },
+//         body: JSON.stringify({})
+//       })
+//       .then(response => {
+//           // Si tu veux voir le statut HTTP avant de parser en JSON
+//           console.log('HTTP Status:', response.status);
+//           return response.json();
+//       })
+//       .then(data => {
+//           if (data.status === 'success') {
+//             console.log('Status dans la réponse JSON:', data.status);
+//             location.reload(true);
+//             etatapp = false;
+//           }
+//       })
+//       .catch(error => {
+//           console.error('Il y a eu un problème avec la requête fetch:', error);
+//       });
+//   }
+// }
 
 // Appel de la fonction avec l'URL désirée
     
@@ -220,14 +183,10 @@ function start() {
         switchLabel.style.display = "none";
         loader.classList.remove("hidden");
     }
-  
-
-    // dans la fonction fetch -> attendre que le programme se soit bien lancé
-    console.log("bonjour");
-    
+      // dans la fonction fetch -> attendre que le programme se soit bien lancé    
 
     if (checkbox.checked) {
-        fetch('http://127.0.0.1:8000/campagnes/a/start', {
+        fetch('https://boostin.scrooge.finance/campagnes/a/start', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -235,21 +194,23 @@ function start() {
             },
             body: JSON.stringify({})
         })
-        .then(response => {
-            waiting_loading();
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.suivi_channel)
+            if (data.suivi_channel == 'started') {
+                var checkbox = document.getElementById("startbutton");
+                checkbox.checked = true;
+                checkbox.disabled = false;
             }
-            return response.json();
+            else if (data.status == 'error') {
+              var checkbox = document.getElementById("startbutton");
+              checkbox.disabled = true;
+            }
         })
-        .catch(error => {
-            console.error('Il y a eu un problème avec la requête fetch:', error);
-    });
-
 
     } else {
 
-        fetch('http://127.0.0.1:8000/campagnes/a/stop', {
+        fetch('https://boostin.scrooge.finance/campagnes/a/stop', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -258,7 +219,7 @@ function start() {
             body: JSON.stringify({})
         })
         .then(response => {
-            location.reload(true);
+            // location.reload(true);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -267,15 +228,179 @@ function start() {
         .catch(error => {
             console.error('Il y a eu un problème avec la requête fetch:', error);
         });
-
     }
 }
 
+// Fonction pour démarrer le processus
+function startProcess() {
+  fetch('https://boostin.scrooge.finance/campagnes/a/start', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken
+      },
+      body: JSON.stringify({})
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.json(); // Extraction de la réponse JSON
+  })
+  .then(data => {
+      if (data.suivi_channel) {
+          const canal = data.suivi_channel; // Assigner le canal à partir de la réponse JSON
+          const eventSource = new EventSource(`https://boostin.scrooge.finance/campagnes/sse/${canal}`);
+          console.log("ecoute du canal");
 
+          let currentStep = 0;
 
-document.getElementById("startbutton").addEventListener("click", start)
+          function startSteps() {
+          const steps = document.querySelectorAll(".step");
+          const stepLines = document.querySelectorAll(".step-line");
+  
+          // Si une étape précédente existe, marquer comme "complétée"
+          if (currentStep > 0) {
+              steps[currentStep - 1]?.classList.remove("bg-blue-500"); // Enlever l'état actif
+              steps[currentStep - 1]?.classList.add("bg-green-500"); // Marquer comme complétée
+              stepLines[currentStep - 1]?.classList.replace("bg-gray-300", "bg-green-500"); // Ligne complétée
+          }
+  
+          // Si une étape suivante existe, marquer comme "en cours"
+          if (currentStep < steps.length) {
+              steps[currentStep]?.classList.replace("bg-gray-300", "bg-blue-500"); // Étape en cours
+              currentStep++; // Passer à l'étape suivante
+          } else {
+              console.log("Toutes les étapes sont terminées !");
+          }
+          }
+          document.getElementById("updates").textContent = "Attribution des horaires d'execution";
+          startSteps();
 
-// graphiques 
+          // Gestion des messages SSE
+          eventSource.onmessage = (event) => {
+                const data_mess = JSON.parse(event.data); // Convertir le message en JSON
+                const messageData = JSON.parse(data_mess.data);
+                console.log("Mise à jour reçue : ", messageData);
 
+                // Exemple : Affichage d'une description si disponible
+                if (messageData.description && messageData.etape === "info") {
+                  prochaine_execution = document.getElementById('prochaine_connexion');
+                  prochaine_execution.textContent = messageData.description;
+                }
+                else if (messageData.description) {
+                    document.getElementById("updates").textContent = messageData.description;
+                }
 
+                // Avancer dans les étapes si nécessaire
+                if (messageData.etape) {
+                  if (messageData.etape === "suivant") {
+                      startSteps();
+                      console.log('startsteps');
+                  }
 
+                  // Arrêter le flux SSE si un message 'stop' est reçu
+                  if (messageData.etape === "echec") {
+                      console.log("Processus terminé : ", messageData);
+                      eventSource.close();
+                  }
+                  if (messageData.etape === "arret") {
+                    console.log("Processus terminé : ", messageData);
+                    startSteps();
+                    eventSource.close();
+                    hideLoadingPopup();
+                    location.reload(true);
+                  }
+                }
+
+          };
+
+          // Gestion des erreurs SSE
+          eventSource.onerror = (error) => {
+            console.error("Erreur SSE : ", error);
+            eventSource.close();
+          };
+      
+      } else {
+          console.error("Attribut 'suivi_channel' manquant dans la réponse JSON");
+      }
+  })
+  .catch(error => {
+      console.error('Il y a eu un problème avec la requête fetch:', error);
+  });
+}
+
+// Appeler la fonction pour démarrer le processus
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  console.log('attente bouton');
+
+  const toggleButton = document.getElementById("toggle-button");
+  const toggleLabel = document.getElementById("toggle-label");
+  let isActive = false;
+
+  
+  if (toggleLabel.textContent == 'On') {
+    isActive = true;
+  } 
+  console.log(isActive);
+
+  toggleButton.addEventListener("click", () => {
+    isActive = !isActive;
+
+    if (isActive) {
+      toggleButton.classList.replace("bg-gray-300", "bg-indigo-500");
+      toggleButton.firstElementChild.classList.add("translate-x-5");
+      toggleLabel.textContent = "On";
+
+      showLoadingPopup();
+
+      startProcess();
+      
+    } else {
+      toggleButton.classList.replace("bg-indigo-500", "bg-gray-300");
+      toggleButton.firstElementChild.classList.remove("translate-x-5");
+      toggleLabel.textContent = "Off";
+
+      document.getElementById('prochaine_connexion').textContent = "None";
+
+      fetch('https://boostin.scrooge.finance/campagnes/a/stop', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({})
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .catch(error => {
+          console.error('Il y a eu un problème avec la requête fetch:', error);
+      });
+
+    }
+  });
+});
+
+// popup 
+function showLoadingPopup() {
+  document.getElementById('loadingPopup').classList.remove('hidden');
+}
+
+function hideLoadingPopup() {
+  document.getElementById('loadingPopup').classList.add('hidden');
+}
+
+function loadSomething() {
+  showLoadingPopup(); // Affiche le popup
+
+}
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   document.getElementById('toggle-button').addEventListener('click', loadSomething);
+// });

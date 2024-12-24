@@ -13,10 +13,22 @@ class Campagne(models.Model):
     iduser = models.ForeignKey(Users, models.CASCADE, db_column='iduser')  # Field name made lowercase.
     name = models.CharField(db_column='name', max_length=50)  # Field name made lowercase.
     description = models.CharField(db_column='description', max_length=1000)  # Field name made lowercase.
+    
+    VISIBILITE_CHOICES = [
+        ('public', 'Public'),
+        ('prive', 'Privé'),
+        ('team', 'Team'),
+    ]
+
+    visibilite = models.CharField(
+        db_column='visibilite', 
+        max_length=6,  # Longueur maximale basée sur la plus longue valeur ('public', 'prive' ou 'team')
+        choices=VISIBILITE_CHOICES, 
+        default='public'
+    )
 
     class Meta:
         db_table = 'campagne'
-
 
 class Con(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
@@ -29,6 +41,7 @@ class Con(models.Model):
     linkedin_lien = models.CharField(max_length=200, db_column='linkedin_lien')
     google_sheet = models.CharField(max_length=300, blank=True, null=True, db_column='google_sheet')
     date_creation = models.DateField(blank=True, null=True, db_column='date_creation')
+    is_active = models.BooleanField(default=False, db_column='is_active')
 
     class Meta:
         db_table = 'con'
@@ -68,6 +81,7 @@ class Prospects(models.Model):
     linkedin_profile = models.CharField(db_column='linkedin_profile', max_length=100)  # Field name made lowercase.
     name = models.CharField(db_column='name', max_length=50)  # Field name made lowercase.
     statutes = models.ForeignKey(Statutes, models.CASCADE, db_column='statutes')  # Field name made lowercase.
+    complete_name = models.CharField(db_column='complete_name', max_length=200, default=None, null=True, blank=True)
 
     class Meta:
         db_table = 'prospects'
@@ -139,3 +153,21 @@ class ListAction(models.Model):
             models.UniqueConstraint(fields=['idcode', 'idaction'], name='unique_listaction')
         ]
         db_table = 'listaction'
+
+class StatistiquesCampagne(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
+    idcon = models.ForeignKey(Con, models.CASCADE, db_column='idcon')
+    date = models.DateField(db_column='date')
+    not_sent = models.IntegerField(db_column='not_sent')
+    on_hold = models.IntegerField(db_column='on_hold')
+    accepted = models.IntegerField(db_column='accepted')
+    success = models.IntegerField(db_column='success')
+    refused = models.IntegerField(db_column='refused')
+    message1st = models.IntegerField(db_column='message1st')
+    message2nd = models.IntegerField(db_column='message2nd')
+    message3rd = models.IntegerField(db_column='message3rd')
+
+    class Meta:
+        db_table = 'campagnes_statistiquescampagne'
+
+

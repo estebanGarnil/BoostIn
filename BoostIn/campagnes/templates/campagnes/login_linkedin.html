@@ -1,0 +1,23 @@
+{% extends 'campagnes/navbar.html' %}
+
+{% block title %} Suivi {% endblock %}
+{% load filtre %}
+{% load static %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<form method="post" class="space-y-6">
+    {% csrf_token %}
+    <!-- Champs du formulaire -->
+    <div class="space-y-4">
+        {{ form.as_p|safe }}
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+        valider et envoyer
+    </button>
+</form>
+{% endblock %}

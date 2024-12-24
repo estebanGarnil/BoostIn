@@ -1,4 +1,4 @@
-from .services.LD import LDManager
+# from .services.LD import LDManager
 
-automatisation = LDManager()
+# automatisation = LDManager()
 # automatisation.start_demarage()
